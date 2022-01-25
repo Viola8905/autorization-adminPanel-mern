@@ -1,0 +1,4 @@
+.env
+client/my-app/node_modules
+/server/node_modules
+server/config.js
