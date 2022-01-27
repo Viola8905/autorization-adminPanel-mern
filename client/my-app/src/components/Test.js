@@ -4,12 +4,19 @@ import { useEffect, useState } from "react";
 import { deletePost } from "../actions/user";
 
 import axios from "axios";
+import { setUser } from "../reducers/userReducer";
+import { store } from "../reducers";
 
 const Test = () => {
   const [users, setUsers] = useState([]);
   const [bootcamps, setBootcamps] = useState([]);
+  const [role, setRole] = useState([]);
+
+  //
 
   const dispatch = useDispatch();
+
+  
   useEffect(() => {
     const Users = () => {
       return async (dispatch) => {

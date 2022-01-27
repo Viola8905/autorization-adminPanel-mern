@@ -1,11 +1,11 @@
 const Router = require("express");
 const router = new Router();
 const AuthController = require("./authController");
-const BootcampController = require("./bootcampController");
+const PostController = require("./postController");
 const { check } = require("express-validator");
 const authMiddleware = require("./middleware/authMiddleware");
 const roleMiddleware = require("./middleware/roleMiddleware");
-const Bootcamp = require("./models/Bootcamp");
+const Post= require("./models/Posts");
 const User = require("./models/User");
 const { secret } = require("./config");
 
@@ -24,22 +24,23 @@ router.post(
 router.post("/login", AuthController.login);
 router.get("/users", roleMiddleware(["ADMIN"]), AuthController.getUsers);
 router.delete(
-  "/bootcamps/:_id",
-  roleMiddleware(["ADMIN"]),
-  BootcampController.deleteBootcampById
+  "/posts/:_id",
+	roleMiddleware(["ADMIN"]),
+  PostController.deletePostById
 );
 
 
 router
-  .route("/bootcamps", authMiddleware )
-  .get(BootcampController.getAllBootcamps)
-  .post(BootcampController.createNewBootcamp);
+  .route("/posts/", authMiddleware )
+  .get(PostController.getAllPosts)
+  .post(PostController.createNewPost);
 router
-  .route("/bootcamps/:id", authMiddleware)
-  .put(BootcampController.updateBootcampById)
+  .route("/posts/:id", authMiddleware)
+  .put(PostController.updatePostById)
   
 
-router.route("/bootcamps/:mainId", authMiddleware).get(BootcampController.getById);
+router.route("/posts/:mainId", authMiddleware).get(PostController.getById);
+
 
 
 

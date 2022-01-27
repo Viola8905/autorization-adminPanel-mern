@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { setRole } from "../components/PostsPage";
 
 import { setUser } from "../reducers/userReducer";
-
-
 
 export const registration = async (username, password) => {
   try {
@@ -27,9 +26,9 @@ export const login = (username, password) => {
         username,
         password,
       });
-      dispatch(setUser(response.data.user));
       localStorage.setItem("token", response.data.token);
-      console.log(response.data);
+      dispatch(setUser(response.data.user));
+			console.log(response.data.user);
     } catch (e) {
       alert(e.response.data.message);
     }
@@ -52,27 +51,23 @@ export const login = (username, password) => {
 //    };
 //  };
 
+export const deletePost = (id) => {
+  return async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/posts/${id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
 
- export const deletePost = (id) => {
-
-   return async () => {
-     try {
-       const response = await axios.delete(`http://localhost:5000/api/bootcamps/${id}`, {
-         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-       });
-			
-			localStorage.setItem("token", response.data.token);
-       console.log("deleted bootcamp with id"+id)
-     } catch (e) {
-      alert(e.response.data);
-       localStorage.removeItem("token");
-     }
-   };
- };
-
-
- 
-
-
-
- 
+      //localStorage.setItem("token", response.token);
+      console.log("deleted bootcamp with id" + id);
+    } catch (e) {
+      alert("You are not an admin");
+      console.log(e.response.data + "post was not deleted");
+      console.log(JSON.stringify(e.response));
+      localStorage.removeItem("token");
+    }
+  };
+};

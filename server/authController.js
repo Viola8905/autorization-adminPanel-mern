@@ -65,6 +65,9 @@ class authController {
     }
   }
 
+
+	
+
   async getUsers(req, res) {
     try {
        const user = await User.find();
