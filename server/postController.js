@@ -43,7 +43,8 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
 
 
 exports.createNewPost = asyncHandler(async (req, res, next) => {
-  const post = await Post.create(req.body);
+	const {arr} = req.body;
+  const post = await Post.create(arr);
 
   res.status(201).json({
     success: true,

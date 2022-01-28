@@ -99,6 +99,7 @@ const ItemPage = () => {
             <div className="p"> danger: {post.danger}</div>
             <div className="p"> complexity: {post.complexity}</div>
             <div className="p"> links: {post.links}</div>
+						<div className="">hello</div>
           </Grid>
         ))}
       </Grid>

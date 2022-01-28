@@ -71,3 +71,22 @@ export const deletePost = (id) => {
     }
   };
 };
+
+
+
+export const createPost = (arr) => {
+  return async () => {
+    try {
+      const response = await axios.post(`http://localhost:5000/api/posts`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        arr,
+      });
+      //localStorage.setItem("token", response.data.token);
+      //dispatch(setUser(response.data.user));
+      alert("Your post has been added");
+    } catch (e) {
+      alert(e.response.data.message);
+			console.log(JSON.stringify(e.response));
+    }
+  };
+};
