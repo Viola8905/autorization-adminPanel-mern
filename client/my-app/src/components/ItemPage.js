@@ -10,6 +10,7 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import BootcampCard from "../components/BootcampCard";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -87,6 +88,7 @@ const ItemPage = () => {
 
   return (
     <Container className={classes.root}>
+      <Link to="/login">Назад</Link>
       {/* //Filtering and sorting section */}
 
       {/* //Bootcamps listening */}
@@ -99,7 +101,7 @@ const ItemPage = () => {
             <div className="p"> danger: {post.danger}</div>
             <div className="p"> complexity: {post.complexity}</div>
             <div className="p"> links: {post.links}</div>
-						<div className="">hello</div>
+            <div className="">hello</div>
           </Grid>
         ))}
       </Grid>
