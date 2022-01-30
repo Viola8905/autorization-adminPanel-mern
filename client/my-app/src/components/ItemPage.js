@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import {
-  CircularProgress,
+ 
   Container,
   Grid,
   makeStyles,
+	Button
 } from "@material-ui/core";
 import axios from "axios";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-import BootcampCard from "../components/BootcampCard";
+import { useParams } from "react-router-dom";
+
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+ 
 
 const useStyles = makeStyles({
   root: {
@@ -39,17 +41,15 @@ const ItemPage = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // const navigate = useNavigate();
+
   const location = useParams();
-  console.log(location);
+  //console.log(location);
 
   let params = parseInt(location.mainId);
   console.log(typeof params);
 
   //Component state
   const [posts, setPosts] = useState([]);
-
-  //const [loading, setLoading] = useState(false);
 
   const [filter, setFilter] = useState("");
 
@@ -88,10 +88,14 @@ const ItemPage = () => {
 
   return (
     <Container className={classes.root}>
-      <Link to="/login">Назад</Link>
-      {/* //Filtering and sorting section */}
-
-      {/* //Bootcamps listening */}
+      {/* //go to main page button */}
+      <Link to="/login">
+        <Button variant="outlined" size="small">
+          Back
+        </Button>
+      </Link>
+     
+      {/* //Chosen bootcamp listening */}
       <Grid container spacing={2}>
         {posts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={3}>

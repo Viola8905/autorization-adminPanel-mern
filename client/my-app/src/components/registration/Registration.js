@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from '../input/Input'
 import { useState } from 'react'
-import { registration } from '../../actions/user';
+import { registration } from '../../actions/apiRequests';
 
 
 const Registration = () => {

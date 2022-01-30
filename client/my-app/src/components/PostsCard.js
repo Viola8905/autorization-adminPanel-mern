@@ -5,9 +5,8 @@ import {
   CardHeader,
   Typography,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deletePost } from "../actions/user";
+
 
 const PostCard = ({post}) => {
 		const navigate = useNavigate();

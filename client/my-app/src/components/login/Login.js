@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../input/Input";
 import { useState } from "react";
-import { login } from "../../actions/user";
+import { login } from "../../actions/apiRequests";
 import {useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 

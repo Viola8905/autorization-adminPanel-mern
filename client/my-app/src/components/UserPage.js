@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { createPost, deletePost } from "../actions/user";
+import { useDispatch } from "react-redux";
 import {
   Paper,
   Typography,
@@ -12,10 +11,9 @@ import {
 } from "@material-ui/core";
 import PostCard from "./PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
-import Input from "./input/Input";
 
-import { setUser } from "../reducers/userReducer";
-//import { useNavigate, useLocation } from "react-router-dom";
+
+
 const useStyles = makeStyles({
   root: {
     marginTop: 10,
@@ -54,7 +52,7 @@ const PostsPage = () => {
 
   const [filter, setFilter] = useState("");
 
-  const navigate = useNavigate();
+  
   const location = useLocation();
 
   const params = location.search ? location.search : null;
@@ -91,7 +89,9 @@ const PostsPage = () => {
 
  
 
- 
+ //Posts filtering
+
+ const navigate = useNavigate();
 
   const [level, setLevel] = useState();
   const [title, setTitle] = useState();
@@ -158,7 +158,7 @@ const PostsPage = () => {
           </Grid>
         </Paper>
 
-        {/* //Postslistening */}
+        {/* //Posts listening */}
         <Grid container spacing={2}>
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={6} lg={3}>

@@ -2,17 +2,17 @@ import React from 'react';
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { createPost, deletePost } from "../actions/user";
+import { useDispatch} from "react-redux";
+import { createPost, deletePost } from "../actions/apiRequests";
 import {
   Paper,
-  Typography,
+ 
   Container,
   Grid,
   makeStyles,
 } from "@material-ui/core";
 import PostCard from "./PostsCard";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 import Input from "./input/Input";
 
 const useStyles = makeStyles({
@@ -40,17 +40,17 @@ const useStyles = makeStyles({
 
  
 const Admin = () => {
+  const classes = useStyles(); //for css styling
 
-	const [posts, setPosts] = useState([]);
+  //Side effects(loaded posts to frontend network)
+  const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState("");
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const params = location.search ? location.search : null;
 
-  //Side effects(loaded data to frontend network)
   useEffect(() => {
     const Posts = () => {
       return async (dispatch) => {
@@ -80,9 +80,11 @@ const Admin = () => {
     dispatch(Posts());
   }, [params, filter]);
 
-	const dispatch = useDispatch();
-  const classes = useStyles();
 
+
+
+	//For adding new post
+  const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [dangerLevel, setDangerLevel] = useState("");
@@ -104,31 +106,29 @@ const Admin = () => {
     mainId: mainId,
   };
 
+  const addPost = (arr) => {
+    let posts1 = posts.find((item) => item.name === arr.name);
+
+    if (!posts1) {
+      setPosts([...posts, arr]);
+
+      dispatch(createPost(arr));
+      //alert("post was added");
+    } else {
+      //alert("post already exists");
+    }
+  };
 
 
-	const addPost = (arr) => {
-		let posts1 = posts.find((item) => item.name === arr.name);
 
-		if (!posts1) {
-			setPosts([...posts, arr]);
-
-			dispatch(createPost(arr));
-			//alert("post was added");
-		} else {
-			//alert("post already exists");
-		}
-	};
-
-
-	const removePost = (id) => {
-    
+//removing post function
+  const removePost = (id) => {
     dispatch(deletePost(id));
 
     setPosts([...posts.filter((post) => post._id !== id)]);
   };
-		 
 
-	return (
+  return (
     <div>
       <Container className={classes.root}>
         <Paper className={classes.paper}>
@@ -179,7 +179,7 @@ const Admin = () => {
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={6} lg={3}>
               <PostCard post={post} posts={posts} />
-            <button onClick={() => removePost(post._id)}>Delete</button> 
+              <button onClick={() => removePost(post._id)}>Delete</button>
             </Grid>
           ))}
         </Grid>
