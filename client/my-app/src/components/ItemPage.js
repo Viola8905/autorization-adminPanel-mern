@@ -46,7 +46,7 @@ const ItemPage = () => {
   //console.log(location);
 
   let params = parseInt(location.mainId);
-  console.log(typeof params);
+  //console.log(typeof params);
 
   //Component state
   const [posts, setPosts] = useState([]);
@@ -65,7 +65,7 @@ const ItemPage = () => {
             query = filter;
           }
 
-          console.log("query:" + typeof query + "---" + query);
+      
           const response = await axios.get(
             `http://localhost:5000/api/posts/${query}`,
             {
