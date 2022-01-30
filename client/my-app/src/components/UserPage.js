@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost, deletePost } from "../actions/user";
 import {
   Paper,
@@ -13,6 +13,8 @@ import {
 import PostCard from "./PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import Input from "./input/Input";
+
+import { setUser } from "../reducers/userReducer";
 //import { useNavigate, useLocation } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
@@ -38,12 +40,17 @@ const useStyles = makeStyles({
 });
 
 const PostsPage = () => {
+
+
+
+	
   // Material ui styles
   const dispatch = useDispatch();
   const classes = useStyles();
 
   //Component state
   const [posts, setPosts] = useState([]);
+	
 
   const [filter, setFilter] = useState("");
 
@@ -51,7 +58,7 @@ const PostsPage = () => {
   const location = useLocation();
 
   const params = location.search ? location.search : null;
-  console.log(params);
+ 
   //Side effects(loaded data to frontend network)
   useEffect(() => {
     const Posts = () => {
@@ -71,7 +78,7 @@ const PostsPage = () => {
               },
             }
           );
-          console.log(response.data.data);
+          //console.log(response.data.data);
           setPosts(response.data.data);
         } catch (e) {
           console.log(e.response.data);
@@ -82,11 +89,9 @@ const PostsPage = () => {
     dispatch(Posts());
   }, [params, filter]);
 
-  const removePost = (id) => {
-    if (!dispatch(deletePost(id))) {
-      setPosts([...posts.filter((post) => post._id !== id)]);
-    }
-  };
+ 
+
+ 
 
   const [level, setLevel] = useState();
   const [title, setTitle] = useState();
@@ -114,70 +119,12 @@ const PostsPage = () => {
     navigate(``);
   }
 
-  const [name, setName] = useState("");
-  const [dangerLevel, setDangerLevel] = useState("");
-  const [description, setDescription] = useState("");
-  const [complexity, setComplexity] = useState("");
-  const [links, setLinks] = useState("");
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  const mainId = getRandomInt(10, 100);
-
-  let arr = {
-    name: name,
-    danger: dangerLevel,
-    description: description,
-    complexity: complexity,
-    links: links,
-    mainId: mainId,
-  };
+  
 
   return (
     <div>
       <Container className={classes.root}>
-        <Paper className={classes.paper}>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Input
-                value={name}
-                setValue={setName}
-                type="text"
-                placeholder="enter name"
-              />
-              <br />
-              <Input
-                value={dangerLevel}
-                setValue={setDangerLevel}
-                type="text"
-                placeholder="enter danger level"
-              />
-              <br />
-              <Input
-                value={description}
-                setValue={setDescription}
-                type="text"
-                placeholder="enter description"
-              />
-              <br />
-              <Input
-                value={complexity}
-                setValue={setComplexity}
-                type="text"
-                placeholder="enter complexity"
-              />
-              <br />
-              <Input
-                value={links}
-                setValue={setLinks}
-                type="text"
-                placeholder="enter links"
-              />
-              <button onClick={() => dispatch(createPost(arr))}>Push</button>
-            </Grid>
-          </Grid>
-        </Paper>
+        
         {/* //Filtering and sorting section */}
         <Paper className={classes.paper}>
           <Grid container>
@@ -216,7 +163,7 @@ const PostsPage = () => {
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={6} lg={3}>
               <PostCard post={post} posts={posts} />
-              <button onClick={() => removePost(post._id)}>Delete</button>
+              
             </Grid>
           ))}
         </Grid>

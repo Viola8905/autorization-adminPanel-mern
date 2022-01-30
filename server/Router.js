@@ -53,7 +53,7 @@ router.get('/auth',authMiddleware,
 		try{
 		
 			const user = await User.findOne({_id: req.user.id})
-			  const token = jwt.sign({id: user.id, roles: user.roles}, secret, {
+			const token = jwt.sign({id:user.id, roles:user.roles}, secret, {
           expiresIn: "1h",
         });
 			return res.json ({
