@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -11,7 +12,6 @@ import {
 } from "@material-ui/core";
 import PostCard from "./PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
-
 
 
 const useStyles = makeStyles({
@@ -37,94 +37,83 @@ const useStyles = makeStyles({
   },
 });
 
-const UserPage = () => {
+const MainPage = () => {
+	 const dispatch = useDispatch();
+   const classes = useStyles();
 
+   //Component state
+   const [posts, setPosts] = useState([]);
 
+   const [filter, setFilter] = useState("");
 
-	
-  // Material ui styles
-  const dispatch = useDispatch();
-  const classes = useStyles();
+   const location = useLocation();
 
-  //Component state
-  const [posts, setPosts] = useState([]);
-	
+   const params = location.search ? location.search : null;
 
-  const [filter, setFilter] = useState("");
+   //Side effects(loaded data to frontend network)
+   useEffect(() => {
+     const Posts = () => {
+       return async (dispatch) => {
+         try {
+           let query;
+           if (params && !filter) {
+             query = params;
+           } else {
+             query = filter;
+           }
+           const response = await axios.get(
+             `http://localhost:5000/api/posts${query}`,
+             {
+               headers: {
+                 Authorization: `Bearer ${localStorage.getItem("token")}`,
+               },
+             }
+           );
+           //console.log(response.data.data);
+           setPosts(response.data.data);
+         } catch (e) {
+           console.log(e.response.data);
+           localStorage.removeItem("token");
+         }
+       };
+     };
+     dispatch(Posts());
+   }, [params, filter]);
 
-  
-  const location = useLocation();
+   //Posts filtering
 
-  const params = location.search ? location.search : null;
- 
-  //Side effects(loaded data to frontend network)
-  useEffect(() => {
-    const Posts = () => {
-      return async (dispatch) => {
-        try {
-          let query;
-          if (params && !filter) {
-            query = params;
-          } else {
-            query = filter;
-          }
-          const response = await axios.get(
-            `http://localhost:5000/api/posts${query}`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          );
-          //console.log(response.data.data);
-          setPosts(response.data.data);
-        } catch (e) {
-          console.log(e.response.data);
-          localStorage.removeItem("token");
-        }
-      };
-    };
-    dispatch(Posts());
-  }, [params, filter]);
+   const navigate = useNavigate();
 
- 
+   const [level, setLevel] = useState();
+   const [title, setTitle] = useState();
+   const [danger, setDanger] = useState();
 
- //Posts filtering
-
- const navigate = useNavigate();
-
-  const [level, setLevel] = useState();
-  const [title, setTitle] = useState();
-  const [danger, setDanger] = useState();
-
-  const handleChange1 = (event) => {
-    setLevel(event.target.value);
-  };
-  const handleChange2 = (event) => {
-    setTitle(event.target.value);
-  };
-  const handleChange3 = (event) => {
-    setDanger(event.target.value);
-  };
-  function f1() {
-    navigate(`?complexity=${level}`);
-  }
-  function f2() {
-    navigate(`?name[regex]=${title}`);
-  }
-  function f3() {
-    navigate(`?danger[regex]=${danger}`);
-  }
-  function f4() {
-    navigate(``);
-  }
+   const handleChange1 = (event) => {
+     setLevel(event.target.value);
+   };
+   const handleChange2 = (event) => {
+     setTitle(event.target.value);
+   };
+   const handleChange3 = (event) => {
+     setDanger(event.target.value);
+   };
+   function f1() {
+     navigate(`?complexity=${level}`);
+   }
+   function f2() {
+     navigate(`?name[regex]=${title}`);
+   }
+   function f3() {
+     navigate(`?danger[regex]=${danger}`);
+   }
+   function f4() {
+     navigate(``);
+   }
 
   
-
-  return (
+	return (
     <div>
       <Container className={classes.root}>
-        
         {/* //Filtering and sorting section */}
         <Paper className={classes.paper}>
           <Grid container>
@@ -163,7 +152,6 @@ const UserPage = () => {
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={6} lg={3}>
               <PostCard post={post} posts={posts} />
-              
             </Grid>
           ))}
         </Grid>
@@ -172,4 +160,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default MainPage;

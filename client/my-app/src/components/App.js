@@ -1,13 +1,15 @@
 import React from "react";
-import Navbar from "./navbar/Navbar";
+import Navbar from "./navbar/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Registration from "./registration/Registration";
 import Login from "./login/Login";
 import { useSelector } from "react-redux";
 
-import PostsPage from "./UserPage";
+import UserPage from "./UserPage";
 import ItemPage from "./ItemPage";
 import Admin from "./AdminPage";
+import MainPage from "./MainPage";
+import AuthPage from './AuthPage';
 
 function App() {
   
@@ -18,22 +20,25 @@ function App() {
     if (!isAuth) {
       return (
         <Routes>
-          <Route exact path="/registration" element={<Registration />} /> //
+          <Route exact path="/registration" element={<AuthPage />} />
           Ctrl + click on "Main" to reach a code of this page
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/login" element={<AuthPage />} />
+          <Route exact path="/" element={<MainPage />} />
+          <Route exact path="/:mainId" element={<ItemPage />} />
         </Routes>
       );
     } else if (isAuth && role === 1) {
       return (
         <Routes>
-          <Route exact path="/login" element={<Admin />} />
+          <Route exact path="/user" element={<Admin />} />
+          <Route exact path="/:mainId" element={<ItemPage />} />
         </Routes>
       );
     } else if (isAuth && role === 0) {
       return (
         <Routes>
-          <Route exact path="/login" element={<PostsPage />} /> // Ctrl + click
-          on "Main" to reach a code of this page
+          <Route exact path="/user" element={<UserPage />} /> // Ctrl + click on
+          "Main" to reach a code of this page
           <Route exact path="/:mainId" element={<ItemPage />} />
         </Routes>
       );
@@ -49,7 +54,7 @@ function App() {
         <Navbar />
         <div className="wrap">
          
-          {renderElement(isAuth, role)};
+          {renderElement(isAuth, role)}
 
         </div>
       </Router>

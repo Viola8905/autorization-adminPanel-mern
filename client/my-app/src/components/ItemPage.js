@@ -10,8 +10,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
  
 
 const useStyles = makeStyles({
@@ -41,7 +42,7 @@ const ItemPage = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-
+	const role = useSelector((state) => state.user.role);
   const location = useParams();
   //console.log(location);
 
@@ -86,15 +87,25 @@ const ItemPage = () => {
     dispatch(fetchData());
   }, [filter, params]);
 
+
+	
+	
+
+
   return (
     <Container className={classes.root}>
       {/* //go to main page button */}
-      <Link to="/login">
-        <Button variant="outlined" size="small">
-          Back
-        </Button>
-      </Link>
-     
+      {role === 1 || role === 0 ? ( <Link to="/user">
+          <Button variant="outlined" size="small">
+            Back
+          </Button>
+        </Link>):(<Link to="/">
+         <Button variant="outlined" size="small">
+           Back
+         </Button>
+       </Link>) 
+			 }
+
       {/* //Chosen bootcamp listening */}
       <Grid container spacing={2}>
         {posts.map((post) => (

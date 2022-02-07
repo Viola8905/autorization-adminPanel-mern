@@ -20,6 +20,7 @@ const PostCard = ({post}) => {
 
       <CardContent>
         <Typography variant="caption">{post.description}</Typography>
+      
         <Typography variant="h6">{post.danger}</Typography>
         <Typography variant="h6">{post.complexity}</Typography>
         <Typography variant="h6">{post.links}</Typography>

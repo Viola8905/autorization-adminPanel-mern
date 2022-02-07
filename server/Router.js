@@ -30,16 +30,17 @@ router.delete(
 );
 
 
+router.get("/posts/", PostController.getAllPosts);
+
 router
   .route("/posts/", authMiddleware )
-  .get(PostController.getAllPosts)
   .post(PostController.createNewPost);
 router
   .route("/posts/:id", authMiddleware)
   .put(PostController.updatePostById)
   
 
-router.route("/posts/:mainId", authMiddleware).get(PostController.getById);
+router.route("/posts/:mainId").get(PostController.getById);
 
 
 
@@ -48,23 +49,23 @@ router.route("/posts/:mainId", authMiddleware).get(PostController.getById);
 
 
 
-router.get('/auth',authMiddleware,
-	async(req,res) => {
-		try{
+// router.get('/auth',authMiddleware,
+// 	async(req,res) => {
+// 		try{
 		
-			const user = await User.findOne({_id: req.user.id})
-			const token = jwt.sign({id:user.id, roles:user.roles}, secret, {
-          expiresIn: "1h",
-        });
-			return res.json ({
-				token,user
-			})
-		}catch(e){
-			console.log(e)
-			res.send({message:"Error in /auth request"})
+// 			const user = await User.findOne({_id: req.user.id})
+// 			const token = jwt.sign({id:user.id, roles:user.roles}, secret, {
+//           expiresIn: "1h",
+//         });
+// 			return res.json ({
+// 				token,user
+// 			})
+// 		}catch(e){
+// 			console.log(e)
+// 			res.send({message:"Error in /auth request"})
 
-		}
-	}
-)
+// 		}
+// 	}
+// )
 
 module.exports = router;

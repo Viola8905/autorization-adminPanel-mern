@@ -3,35 +3,67 @@ import './navbar.css'
 import {NavLink, useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../reducers/userReducer';
-const Navbar = () => {
+
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+const NavBar = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
 	
 	const dispatch = useDispatch()
 
 
-	const navigate = useNavigate();
-    function Navigate() {
-      navigate(`/posts`);
-    }
+
+   
 	return (
-    <div className="navbar">
-      {!isAuth && (
-        <div className="navbar__login">
-          <NavLink to="/login">login</NavLink>
-        </div>
-      )}
-      {!isAuth && (
-        <div className="navbar__registration">
-          <NavLink to="/registration">registration</NavLink>
-        </div>
-      )}
-      {isAuth  && (
-        <div className="navbar__logout" onClick={() => dispatch(logout())}>
-          logout
-        </div>
-      )}
-    </div>
+    // <div className="navbar">
+    //   {!isAuth && (
+    //     <div className="navbar__login">
+    //       <NavLink to="/login">login</NavLink>
+    //     </div>
+    //   )}
+    //   {!isAuth && (
+    //     <div className="navbar__registration">
+    //       <NavLink to="/registration">registration</NavLink>
+    //     </div>
+    //   )}
+    //   {isAuth  && (
+    //     <div className="navbar__logout" onClick={() => dispatch(logout())}>
+    //       logout
+    //     </div>
+    //   )}
+    // </div>
+
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <NavLink style={{ color: "white" }} to="/">
+          YourToy
+        </NavLink>
+        {isAuth ? (
+          <Nav className="ml-auto" style={{ color: "white" }}>
+            {/* <Button variant={"outline-light"}>Админ панель</Button> */}
+            <Button
+              variant={"outline-light"}
+              className="ml-2"
+              onClick={() => dispatch(logout())}
+            >
+              <NavLink to="/">Выйти</NavLink>
+            </Button>
+          </Nav>
+        ) : (
+          <Nav className="ml-auto" style={{ color: "white" }}>
+            <Button
+              variant={"outline-light"}
+              // onClick={() => user.setIsAuth(true)}
+            >
+              <NavLink to="/registration">Войти</NavLink>
+            </Button>
+          </Nav>
+        )}
+      </Container>
+    </Navbar>
   );
 }
 
-export default Navbar
+export default NavBar

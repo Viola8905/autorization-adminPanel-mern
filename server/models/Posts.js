@@ -8,7 +8,7 @@ const Post = new Schema({
     
   },
 	danger:{
-		type: Number,
+		type:String,
 		required: [true, "Please provide a name to the post"],
 	},
  
