@@ -2,6 +2,7 @@ const Router = require("express");
 const router = new Router();
 const AuthController = require("./authController");
 const PostController = require("./postController");
+const ReqPostController = require('./reqPostsController')
 const { check } = require("express-validator");
 const authMiddleware = require("./middleware/authMiddleware");
 const roleMiddleware = require("./middleware/roleMiddleware");
@@ -43,6 +44,18 @@ router
 router.route("/posts/:mainId").get(PostController.getById);
 
 
+router.get("/reqPosts/", roleMiddleware(["ADMIN"]), ReqPostController.getAllReqPosts);
+
+router.delete(
+  "/reqPosts/:_id",
+  ReqPostController.deleteReqPostById
+);
+router.post("/reqPosts/move", ReqPostController.moveReqPost);
+
+
+router
+  .route("/reqPosts/", authMiddleware)
+  .post(ReqPostController.createNewReqPost);
 
 
 

@@ -10,6 +10,7 @@ import ItemPage from "./ItemPage";
 import Admin from "./AdminPage";
 import MainPage from "./MainPage";
 import AuthPage from './AuthPage';
+import ReqPosts from "./ReqPosts";
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/login" element={<AuthPage />} />
           <Route exact path="/" element={<MainPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
+          <Route exact path="/user" element={<AuthPage />} />
         </Routes>
       );
     } else if (isAuth && role === 1) {
@@ -32,6 +34,7 @@ function App() {
         <Routes>
           <Route exact path="/user" element={<Admin />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
+          <Route exact path="/reqPosts" element={<ReqPosts/>} />
         </Routes>
       );
     } else if (isAuth && role === 0) {

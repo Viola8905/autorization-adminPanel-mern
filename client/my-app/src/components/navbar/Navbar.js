@@ -12,7 +12,7 @@ const NavBar = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
 	
 	const dispatch = useDispatch()
-
+	const role = useSelector((state) => state.user.role);
 
 
    
@@ -50,6 +50,16 @@ const NavBar = () => {
             >
               <NavLink to="/">Выйти</NavLink>
             </Button>
+            {role === 1 ? (
+              <Button
+                variant={"outline-light"}
+                className="ml-2"
+                
+              >
+                <NavLink to="/reqPosts">Подтвердить посты</NavLink>
+              </Button>
+            ) : ( <div className=""></div>
+						)}
           </Nav>
         ) : (
           <Nav className="ml-auto" style={{ color: "white" }}>

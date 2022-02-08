@@ -28,7 +28,9 @@ export const login = (username, password) => {
         username,
         password,
       });
+			
       localStorage.setItem("token", response.data.token);
+			console.log( response.data.token)
 
       //console.log(response.data.user.roles);
       if (response.data.user.roles == "USER") {
@@ -59,7 +61,7 @@ export const deletePost = (id,success,failure) => {
 				failure();
 			}
 
-      alert("deleted bootcamp with id"  );
+      //alert("deleted bootcamp with id"  );
     } catch (e) {
 		
       alert("You are not an admin");
@@ -94,6 +96,67 @@ export const createPost = (arr, success, failure) => {
   };
 };
 
+
+export const createReqPost = (arr) => {
+  return async () => {
+    try {
+      const response = await axios.post(`http://localhost:5000/api/reqPosts`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        arr,
+      });
+     alert("Post is waiting for confirm");
+    } catch (e) {
+      alert("Post was not added");
+      console.log(JSON.stringify(e.response));
+      console.log(e.response.data);
+    }
+  };
+};
+
+
+
+export const moveReqPost = (arr) => {
+  return async () => {
+    try {
+      const response = await axios.post(`http://localhost:5000/api/reqPosts/move`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        arr,
+      });
+      //alert("Post was added into main db");
+    } catch (e) {
+      alert("Post was not added");
+      console.log(JSON.stringify(e.response));
+      console.log(e.response.data);
+    }
+  };
+};
+
+
+
+export const deleteReqPost = (id, success, failure) => {
+  return async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/reqPosts/${id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+
+      if (response.data.success == true) {
+        success();
+      } else {
+        failure();
+      }
+
+      //alert("deleted bootcamp with id");
+    } catch (e) {
+      alert("You are not an admin");
+      console.log(e.response.data + "post was not deleted");
+      console.log(JSON.stringify(e.response));
+    }
+  };
+};
 // export const updatePost = (post,postId) => {
 //   return async () => {
 //     try {
