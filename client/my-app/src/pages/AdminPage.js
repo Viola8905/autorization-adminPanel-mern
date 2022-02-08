@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { createPost, deletePost} from "../actions/apiRequests";
+import { createPost, deletePost} from "../api/apiRequests";
 import { Paper, Container, Grid, makeStyles } from "@material-ui/core";
-import PostCard from "./PostsCard";
+import PostCard from "../components/PostsCard";
 import { useLocation } from "react-router-dom";
-import Input from "./input/Input";
+import Input from "../components/input/Input";
 
 const useStyles = makeStyles({
   root: {
@@ -155,7 +155,9 @@ const Admin = () => {
       body: JSON.stringify(post),
     }).then(() => {
       console.log("post updated");
-    });
+    }).catch((error) => {
+		console.error('Error',error);
+		})
 
     for (let i = 0; i < posts.length; i++) {
       if (posts[i]._id == postId) {

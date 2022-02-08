@@ -106,7 +106,7 @@ export const createReqPost = (arr) => {
       });
      alert("Post is waiting for confirm");
     } catch (e) {
-      alert("Post was not added");
+      alert("Title field must be unique");
       console.log(JSON.stringify(e.response));
       console.log(e.response.data);
     }

@@ -43,6 +43,7 @@ const ItemPage = () => {
   const classes = useStyles();
 
 	const role = useSelector((state) => state.user.role);
+	const isAuth = useSelector((state) => state.user.isAuth);
   const location = useParams();
   //console.log(location);
 
@@ -95,11 +96,11 @@ const ItemPage = () => {
   return (
     <Container className={classes.root}>
       {/* //go to main page button */}
-      {role === 1 || role === 0 ? ( <Link to="/user">
+      { !isAuth ? ( <Link to="/">
           <Button variant="outlined" size="small">
             Back
           </Button>
-        </Link>):(<Link to="/">
+        </Link>):(<Link to="/user">
          <Button variant="outlined" size="small">
            Back
          </Button>

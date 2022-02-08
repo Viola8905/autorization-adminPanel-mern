@@ -9,10 +9,10 @@ import {
   Grid,
   makeStyles,
 } from "@material-ui/core";
-import PostCard from "./PostsCard";
+import PostCard from "../components/PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
-import Input from "./input/Input";
-import { createPost, createReqPost } from "../actions/apiRequests";
+import Input from "../components/input/Input"
+import { createPost, createReqPost } from "../api/apiRequests";
 
 const useStyles = makeStyles({
   root: {
@@ -98,15 +98,11 @@ const UserPage = () => {
   const handleChange3 = (event) => {
     setDanger(event.target.value);
   };
-  function f1() {
-    navigate(`?complexity=${level}`);
+  function Filtering () {
+    navigate(`?complexity[regex]=${level}&&name[regex]=${title}&&danger[regex]=${danger}`);
+		
   }
-  function f2() {
-    navigate(`?name[regex]=${title}`);
-  }
-  function f3() {
-    navigate(`?danger[regex]=${danger}`);
-  }
+  
   function f4() {
     navigate(``);
   }
@@ -149,21 +145,21 @@ const UserPage = () => {
                 onInput={handleChange1}
                 placeholder="type level of complexity"
               />
-              <button onClick={f1}> Push</button>
+              <button onClick={Filtering}> Push</button>
               <br />
               <input
                 type="text"
                 onInput={handleChange2}
                 placeholder="type title"
               />
-              <button onClick={f2}> Push</button>
+              <button onClick={Filtering}> Push</button>
               <br />
               <input
                 type="text"
                 onInput={handleChange3}
                 placeholder="type level of danger"
               />
-              <button onClick={f3}> Push</button>
+              <button onClick={Filtering}> Push</button>
               <br />
 
               <button onClick={f4}> Show All</button>

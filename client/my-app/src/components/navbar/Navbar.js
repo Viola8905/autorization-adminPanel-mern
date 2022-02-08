@@ -37,9 +37,12 @@ const NavBar = () => {
 
     <Navbar bg="dark" variant="dark">
       <Container>
-        <NavLink style={{ color: "white" }} to="/">
-          YourToy
-        </NavLink>
+        <div onClick={() => dispatch(logout())}>
+          <NavLink style={{ color: "white" }} to="/">
+           CVE Posts
+          </NavLink>
+        </div>
+
         {isAuth ? (
           <Nav className="ml-auto" style={{ color: "white" }}>
             {/* <Button variant={"outline-light"}>Админ панель</Button> */}
@@ -51,21 +54,18 @@ const NavBar = () => {
               <NavLink to="/">Выйти</NavLink>
             </Button>
             {role === 1 ? (
-              <Button
-                variant={"outline-light"}
-                className="ml-2"
-                
-              >
+              <Button variant={"outline-light"} className="ml-2">
                 <NavLink to="/reqPosts">Подтвердить посты</NavLink>
               </Button>
-            ) : ( <div className=""></div>
-						)}
+            ) : (
+              <div className=""></div>
+            )}
           </Nav>
         ) : (
           <Nav className="ml-auto" style={{ color: "white" }}>
             <Button
               variant={"outline-light"}
-              // onClick={() => user.setIsAuth(true)}
+              
             >
               <NavLink to="/registration">Войти</NavLink>
             </Button>

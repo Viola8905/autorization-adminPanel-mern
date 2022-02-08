@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { login, registration } from "../actions/apiRequests";
+import { login, registration } from "../api/apiRequests";
 import { useDispatch, useSelector } from "react-redux";
 
 const Auth = () => {
@@ -52,16 +52,17 @@ const Auth = () => {
               </div>
             )}
             {isLogin ? (
-              <div onClick={() => dispatch(login(username, password))}>
+              <div
+                onClick={() => dispatch(login(username, password))}
+               
+              >
                 <Button variant={"outline-dark"}>
                   <NavLink to="/user">Login</NavLink>
                 </Button>
               </div>
             ) : (
               <div onClick={() => registration(username, password)}>
-                <Button variant={"outline-dark"}>
-                  Register
-                </Button>
+                <Button variant={"outline-dark"}>Register</Button>
               </div>
             )}
           </Row>

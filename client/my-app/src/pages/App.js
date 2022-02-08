@@ -1,8 +1,7 @@
 import React from "react";
-import Navbar from "./navbar/NavBar";
+import Navbar from "../components/navbar/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Registration from "./registration/Registration";
-import Login from "./login/Login";
+
 import { useSelector } from "react-redux";
 
 import UserPage from "./UserPage";

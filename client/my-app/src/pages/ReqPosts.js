@@ -11,11 +11,13 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import PostsCard from "./PostsCard";
-import { deleteReqPost, moveReqPost } from "../actions/apiRequests";
+import PostsCard from "../components/PostsCard";
+import { deleteReqPost, moveReqPost } from "../api/apiRequests";
 
 const ReqPosts = () => {
   const [reqPosts, setReqPosts] = useState([]);
+	
+
 
   const [filter, setFilter] = useState("");
 
@@ -55,6 +57,7 @@ const ReqPosts = () => {
   //For adding new post
   const dispatch = useDispatch();
   function confirmPost(post) {
+
     dispatch(moveReqPost(post));
 
     dispatch(
