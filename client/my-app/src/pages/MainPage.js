@@ -84,9 +84,9 @@ const MainPage = () => {
 
    const navigate = useNavigate();
 
-   const [level, setLevel] = useState();
-   const [title, setTitle] = useState();
-   const [danger, setDanger] = useState();
+   const [level, setLevel] = useState("");
+   const [title, setTitle] = useState("");
+   const [danger, setDanger] = useState("");
 
    const handleChange1 = (event) => {
      setLevel(event.target.value);
@@ -97,19 +97,21 @@ const MainPage = () => {
    const handleChange3 = (event) => {
      setDanger(event.target.value);
    };
-   function f1() {
-     navigate(`?complexity=${level}`);
-   }
-   function f2() {
-     navigate(`?name[regex]=${title}`);
-   }
-   function f3() {
-     navigate(`?danger[regex]=${danger}`);
-   }
+  
+   
    function f4() {
      navigate(``);
    }
 
+
+	  function Filtering() {
+      navigate(
+        `?complexity[regex]=${level}&&name[regex]=${title}&&danger[regex]=${danger}`
+      ); 
+    }
+
+
+  
   
 	return (
     <div>
@@ -125,21 +127,21 @@ const MainPage = () => {
                 onInput={handleChange1}
                 placeholder="type level of complexity"
               />
-              <button onClick={f1}> Push</button>
+              <button onClick={Filtering}> Push</button>
               <br />
               <input
                 type="text"
                 onInput={handleChange2}
                 placeholder="type title"
               />
-              <button onClick={f2}> Push</button>
+              <button onClick={Filtering}> Push</button>
               <br />
               <input
                 type="text"
                 onInput={handleChange3}
                 placeholder="type level of danger"
               />
-              <button onClick={f3}> Push</button>
+              <button onClick={Filtering}> Push</button>
               <br />
 
               <button onClick={f4}> Show All</button>

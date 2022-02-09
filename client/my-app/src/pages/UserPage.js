@@ -85,9 +85,10 @@ const UserPage = () => {
 
   const navigate = useNavigate();
 
-  const [level, setLevel] = useState();
-  const [title, setTitle] = useState();
-  const [danger, setDanger] = useState();
+  const [level, setLevel] = useState("");
+  const [title, setTitle] = useState("");
+  const [danger, setDanger] = useState("");
+	
 
   const handleChange1 = (event) => {
     setLevel(event.target.value);
@@ -98,10 +99,16 @@ const UserPage = () => {
   const handleChange3 = (event) => {
     setDanger(event.target.value);
   };
-  function Filtering () {
-    navigate(`?complexity[regex]=${level}&&name[regex]=${title}&&danger[regex]=${danger}`);
+  
+  
+
+	function PostFilter () {
+	
+		 navigate(
+       `?complexity[regex]=${level}&&name[regex]=${title}&&danger[regex]=${danger}`
+     );
 		
-  }
+	}
   
   function f4() {
     navigate(``);
@@ -145,21 +152,21 @@ const UserPage = () => {
                 onInput={handleChange1}
                 placeholder="type level of complexity"
               />
-              <button onClick={Filtering}> Push</button>
+              <button onClick={() => PostFilter()}> Push</button>
               <br />
               <input
                 type="text"
                 onInput={handleChange2}
                 placeholder="type title"
               />
-              <button onClick={Filtering}> Push</button>
+              <button onClick={() => PostFilter()}> Push</button>
               <br />
               <input
                 type="text"
                 onInput={handleChange3}
                 placeholder="type level of danger"
               />
-              <button onClick={Filtering}> Push</button>
+              <button onClick={() => PostFilter()}> Push</button>
               <br />
 
               <button onClick={f4}> Show All</button>
