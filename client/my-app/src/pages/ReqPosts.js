@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 
 import PostsCard from "../components/PostsCard";
-import { deleteReqPost, moveReqPost } from "../api/apiRequests";
+import { deleteReqPost, moveReqPost, moveToRejected } from "../api/apiRequests";
 
 const ReqPosts = () => {
   const [reqPosts, setReqPosts] = useState([]);
@@ -59,6 +59,7 @@ const ReqPosts = () => {
   function confirmPost(post) {
 
     dispatch(moveReqPost(post));
+		
 
     dispatch(
       deleteReqPost(
@@ -78,6 +79,7 @@ const ReqPosts = () => {
         () => alert("ERRRROOOR")
       )
     );
+		dispatch(moveToRejected(post));
 	}
 
   return (

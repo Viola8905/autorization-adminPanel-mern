@@ -45,7 +45,8 @@ router
 router.route("/posts/:mainId").get(PostController.getById);
 
 
-router.get("/reqPosts/", roleMiddleware(["ADMIN"]), ReqPostController.getAllReqPosts);
+router.get("/reqPosts/", authMiddleware, ReqPostController.getAllReqPosts);
+router.get("/rejPosts/", authMiddleware, ReqPostController.getAllRejPosts);
 
 router.delete(
   "/reqPosts/:_id",roleMiddleware(["ADMIN"]),
@@ -55,6 +56,11 @@ router.post(
   "/reqPosts/move",
   
   ReqPostController.moveReqPost
+);
+router.post(
+  "/reqPosts/reject",
+
+  ReqPostController.moveToRejected
 );
 
 

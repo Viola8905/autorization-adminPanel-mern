@@ -132,6 +132,25 @@ export const moveReqPost = (arr) => {
   };
 };
 
+export const moveToRejected = (arr) => {
+  return async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/reqPosts/reject`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          arr,
+        }
+      );
+      //alert("Post was added into main db");
+    } catch (e) {
+      alert("Post was not added");
+      console.log(JSON.stringify(e.response));
+      console.log(e.response.data);
+    }
+  };
+};
+
 
 
 export const deleteReqPost = (id, success, failure) => {
