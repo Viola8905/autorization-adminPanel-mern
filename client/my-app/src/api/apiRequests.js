@@ -14,7 +14,7 @@ export const registration = async (username, password) => {
 		
       alert("User is registered");
     } catch (e) {
-      localStorage.removeItem("token");
+      //localStorage.removeItem("token");
       alert(e.response.data.message);
     }
 	
@@ -62,7 +62,7 @@ export const deletePost = (id,success,failure) => {
 				failure();
 			}
 
-      //alert("deleted bootcamp with id"  );
+     
     } catch (e) {
 		
       alert("You are not an admin");
@@ -202,32 +202,5 @@ export const deleteUser = (id, success, failure) => {
     }
   };
 };
-
-// export const updatePost = (post,postId) => {
-//   return async () => {
-//     try {
-//       const response = await axios.put(
-//         `http://localhost:5000/api/posts/${postId}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem("token")}`,
-//             //Accept: "application/json",
-// 					 'Content-Type': 'application/json'
-
-//           },
-// 					body: JSON.stringify(post)
-//         }
-//       );
-			
-// 			console.log(response.data.data);
-//       alert("Post was updated");
-//     } catch (e) {
-//       alert("Post was not updated");
-//       console.log(JSON.stringify(e.response));
-//       console.log(e.response.data);
-//     }
-//   };
-// };
-
 
 

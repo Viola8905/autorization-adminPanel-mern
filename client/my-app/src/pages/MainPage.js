@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
+import Filter from '../components/Filter';
 
 
 const useStyles = makeStyles({
@@ -82,72 +83,14 @@ const MainPage = () => {
 
    //Posts filtering
 
-   const navigate = useNavigate();
-
-   const [level, setLevel] = useState("");
-   const [title, setTitle] = useState("");
-   const [danger, setDanger] = useState("");
-
-   const handleChange1 = (event) => {
-     setLevel(event.target.value);
-   };
-   const handleChange2 = (event) => {
-     setTitle(event.target.value);
-   };
-   const handleChange3 = (event) => {
-     setDanger(event.target.value);
-   };
-  
    
-   function f4() {
-     navigate(``);
-   }
-
-
-	  function Filtering() {
-      navigate(
-        `?complexity[regex]=${level}&&name[regex]=${title}&&danger[regex]=${danger}`
-      ); 
-    }
-
-
   
   
 	return (
     <div>
       <Container className={classes.root}>
         {/* //Filtering and sorting section */}
-        <Paper className={classes.paper}>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Typography gutterBottom>Filters</Typography>
-
-              <input
-                type="text"
-                onInput={handleChange1}
-                placeholder="type level of complexity"
-              />
-              <button onClick={Filtering}> Push</button>
-              <br />
-              <input
-                type="text"
-                onInput={handleChange2}
-                placeholder="type title"
-              />
-              <button onClick={Filtering}> Push</button>
-              <br />
-              <input
-                type="text"
-                onInput={handleChange3}
-                placeholder="type level of danger"
-              />
-              <button onClick={Filtering}> Push</button>
-              <br />
-
-              <button onClick={f4}> Show All</button>
-            </Grid>
-          </Grid>
-        </Paper>
+        <Filter/>
 
         {/* //Posts listening */}
         <Grid container spacing={2}>

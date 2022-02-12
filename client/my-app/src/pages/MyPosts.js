@@ -121,16 +121,13 @@ const user = useSelector((state) => state.user.currentUser.username);
 		
   }, [params, filter]);
 	
-	function f () {
-			// setAllPosts([...allPosts.filter((post) => post.user == user)]);
-	}
-
+	
 
  
   //For adding new post
   const dispatch = useDispatch();
 	return (
-    <div>
+    <Container>
       <div
         className=""
         style={{ textAlign: "center", fontSize: "20px", padding: "20px 0" ,color: 'red' }}
@@ -163,7 +160,7 @@ const user = useSelector((state) => state.user.currentUser.username);
         style={{ textAlign: "center", fontSize: "20px", padding: "20px 0" ,color: 'red' }}
         className=""
       >
-        waiting for confirm posts
+        Waiting for confirm posts
       </div>
       <Grid container spacing={2}>
         {reqPosts.map((post) => (
@@ -173,7 +170,7 @@ const user = useSelector((state) => state.user.currentUser.username);
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Container>
   );
 }
 

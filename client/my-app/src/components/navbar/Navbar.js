@@ -17,23 +17,7 @@ const NavBar = () => {
 
    
 	return (
-    // <div className="navbar">
-    //   {!isAuth && (
-    //     <div className="navbar__login">
-    //       <NavLink to="/login">login</NavLink>
-    //     </div>
-    //   )}
-    //   {!isAuth && (
-    //     <div className="navbar__registration">
-    //       <NavLink to="/registration">registration</NavLink>
-    //     </div>
-    //   )}
-    //   {isAuth  && (
-    //     <div className="navbar__logout" onClick={() => dispatch(logout())}>
-    //       logout
-    //     </div>
-    //   )}
-    // </div>
+   
 
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -45,7 +29,7 @@ const NavBar = () => {
 
         {isAuth ? (
           <Nav className="ml-auto" style={{ color: "white" }}>
-            {/* <Button variant={"outline-light"}>Админ панель</Button> */}
+           
             <Button
               variant={"outline-light"}
               className="ml-2"

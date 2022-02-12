@@ -13,6 +13,7 @@ import PostCard from "../components/PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import Input from "../components/input/Input"
 import { createPost, createReqPost } from "../api/apiRequests";
+import Filter from "../components/Filter";
 
 const useStyles = makeStyles({
   root: {
@@ -83,36 +84,8 @@ const UserPage = () => {
 
   //Posts filtering
 
-  const navigate = useNavigate();
 
-  const [level, setLevel] = useState("");
-  const [title, setTitle] = useState("");
-  const [danger, setDanger] = useState("");
-	
-
-  const handleChange1 = (event) => {
-    setLevel(event.target.value);
-  };
-  const handleChange2 = (event) => {
-    setTitle(event.target.value);
-  };
-  const handleChange3 = (event) => {
-    setDanger(event.target.value);
-  };
   
-  
-
-	function PostFilter () {
-	
-		 navigate(
-       `?complexity[regex]=${level}&&name[regex]=${title}&&danger[regex]=${danger}`
-     );
-		
-	}
-  
-  function f4() {
-    navigate(``);
-  }
 
   const [name1, setName1] = useState("");
   const [dangerLevel1, setDangerLevel1] = useState("");
@@ -143,37 +116,7 @@ const UserPage = () => {
     <div>
       <Container className={classes.root}>
         {/* //Filtering and sorting section */}
-        <Paper className={classes.paper}>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Typography gutterBottom>Filters</Typography>
-
-              <input
-                type="text"
-                onInput={handleChange1}
-                placeholder="type level of complexity"
-              />
-              <button onClick={() => PostFilter()}> Push</button>
-              <br />
-              <input
-                type="text"
-                onInput={handleChange2}
-                placeholder="type title"
-              />
-              <button onClick={() => PostFilter()}> Push</button>
-              <br />
-              <input
-                type="text"
-                onInput={handleChange3}
-                placeholder="type level of danger"
-              />
-              <button onClick={() => PostFilter()}> Push</button>
-              <br />
-
-              <button onClick={f4}> Show All</button>
-            </Grid>
-          </Grid>
-        </Paper>
+        <Filter/>
 
         <Paper className={classes.paper}>
           <Grid container>
