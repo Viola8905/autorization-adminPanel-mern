@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setAdmin, setUser } from "../reducers/userReducer";
+import { getUser, setAdmin, setUser } from "../reducers/userReducer";
 
 export const registration = async (username, password) => {
 
@@ -30,11 +30,12 @@ export const login = (username, password) => {
       });
 			
       localStorage.setItem("token", response.data.token);
-			console.log( response.data.token)
+			
 
       //console.log(response.data.user.roles);
       if (response.data.user.roles == "USER") {
         dispatch(setUser(response.data.user));
+				
       } else {
         dispatch(setAdmin(response.data.user));
       }
@@ -157,6 +158,32 @@ export const deleteReqPost = (id, success, failure) => {
     }
   };
 };
+
+export const deleteUser = (id, success, failure) => {
+  return async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/users/${id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+
+      if (response.data.success == true) {
+        success();
+      } else {
+        failure();
+      }
+
+      //alert("deleted bootcamp with id"  );
+    } catch (e) {
+      alert("You are not an admin");
+      console.log(e.response.data + "user was not deleted");
+      console.log(JSON.stringify(e.response));
+    }
+  };
+};
+
 // export const updatePost = (post,postId) => {
 //   return async () => {
 //     try {

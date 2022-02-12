@@ -1,7 +1,7 @@
-const ReqPost = require("./models/ReqPosts");
-const Post = require("./models/Posts");
-const asyncHandler = require("./middleware/asyncHandler");
-const ErrorResponse = require("./utils/errorResponse");
+const ReqPost = require("../models/ReqPosts");
+const Post = require("../models/Posts");
+const asyncHandler = require("../middleware/asyncHandler");
+const ErrorResponse = require("../utils/errorResponse");
 
 
 exports.getAllReqPosts = asyncHandler(async (req, res, next) => {

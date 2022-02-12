@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Paper,
   Typography,
@@ -41,7 +41,7 @@ const UserPage = () => {
   // Material ui styles
   const dispatch = useDispatch();
   const classes = useStyles();
-
+	const userName = useSelector((state) => state.user.currentUser.username);
   //Component state
   const [posts, setPosts] = useState([]);
 
@@ -132,6 +132,7 @@ const UserPage = () => {
     complexity: complexity1,
     links: links1,
     mainId: mainId,
+		user: userName,
   };
 
   const addPost = (arr) => {

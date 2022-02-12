@@ -39,7 +39,7 @@ const NavBar = () => {
       <Container>
         <div onClick={() => dispatch(logout())}>
           <NavLink style={{ color: "white" }} to="/">
-           CVE Posts
+            CVE Posts
           </NavLink>
         </div>
 
@@ -54,19 +54,24 @@ const NavBar = () => {
               <NavLink to="/">Выйти</NavLink>
             </Button>
             {role === 1 ? (
-              <Button variant={"outline-light"} className="ml-2">
-                <NavLink to="/reqPosts">Подтвердить посты</NavLink>
-              </Button>
+              <>
+                <Button variant={"outline-light"} className="ml-2">
+                  <NavLink to="/reqPosts">Подтвердить посты</NavLink>
+                </Button>
+
+                <Button variant={"outline-light"} className="ml-2">
+                  <NavLink to="/seeUsers">Пользователи</NavLink>
+                </Button>
+              </>
             ) : (
-              <div className=""></div>
+              <Button variant={"outline-light"} className="ml-2">
+                <NavLink to="/myPosts">Мои посты</NavLink>
+              </Button>
             )}
           </Nav>
         ) : (
           <Nav className="ml-auto" style={{ color: "white" }}>
-            <Button
-              variant={"outline-light"}
-              
-            >
+            <Button variant={"outline-light"}>
               <NavLink to="/registration">Войти</NavLink>
             </Button>
           </Nav>

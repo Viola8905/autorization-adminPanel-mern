@@ -1,8 +1,8 @@
 const Router = require("express");
 const router = new Router();
-const AuthController = require("./authController");
-const PostController = require("./postController");
-const ReqPostController = require('./reqPostsController')
+const AuthController = require("./controllers/authController");
+const PostController = require("./controllers/postController");
+const ReqPostController = require("./controllers/reqPostsController");
 const { check } = require("express-validator");
 const authMiddleware = require("./middleware/authMiddleware");
 const roleMiddleware = require("./middleware/roleMiddleware");
@@ -24,6 +24,7 @@ router.post(
 );
 router.post("/login", AuthController.login);
 router.get("/users", roleMiddleware(["ADMIN"]), AuthController.getUsers);
+router.delete("/users/:_id", roleMiddleware(["ADMIN"]), AuthController.deleteUserById);
 router.delete(
   "/posts/:_id",
 	roleMiddleware(["ADMIN"]),
@@ -34,11 +35,11 @@ router.delete(
 router.get("/posts/", PostController.getAllPosts);
 
 router
-  .route("/posts/", authMiddleware )
+  .route("/posts/", roleMiddleware(["ADMIN"]))
   .post(PostController.createNewPost);
 router
-  .route("/posts/:id", authMiddleware)
-  .put(PostController.updatePostById)
+  .route("/posts/:id", roleMiddleware(["ADMIN"]))
+  .put(PostController.updatePostById);
   
 
 router.route("/posts/:mainId").get(PostController.getById);
@@ -47,10 +48,10 @@ router.route("/posts/:mainId").get(PostController.getById);
 router.get("/reqPosts/", roleMiddleware(["ADMIN"]), ReqPostController.getAllReqPosts);
 
 router.delete(
-  "/reqPosts/:_id",
+  "/reqPosts/:_id",roleMiddleware(["ADMIN"]),
   ReqPostController.deleteReqPostById
 );
-router.post("/reqPosts/move", ReqPostController.moveReqPost);
+router.post("/reqPosts/move",roleMiddleware(["ADMIN"]), ReqPostController.moveReqPost);
 
 
 router
@@ -62,23 +63,6 @@ router
 
 
 
-// router.get('/auth',authMiddleware,
-// 	async(req,res) => {
-// 		try{
-		
-// 			const user = await User.findOne({_id: req.user.id})
-// 			const token = jwt.sign({id:user.id, roles:user.roles}, secret, {
-//           expiresIn: "1h",
-//         });
-// 			return res.json ({
-// 				token,user
-// 			})
-// 		}catch(e){
-// 			console.log(e)
-// 			res.send({message:"Error in /auth request"})
 
-// 		}
-// 	}
-// )
 
 module.exports = router;

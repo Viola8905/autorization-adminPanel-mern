@@ -99,6 +99,7 @@ const ReqPosts = () => {
               <PostsCard post={post} posts={reqPosts} />
               <button onClick={() => confirmPost(post)}>Confirm</button>
               <button onClick={() => rejectPost(post)}>Reject</button>
+							<div className="">{post.user} added this post</div>
             </Grid>
           ))}
         </Grid>

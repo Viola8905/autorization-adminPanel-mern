@@ -18,7 +18,7 @@ export default function userReducer(state = defaultState, action){
 
       return {
         ...state,
-        currentUser: action.payload.user,
+        currentUser: action.payload,
         isAuth: true,
 				role:0
 			
@@ -28,7 +28,7 @@ export default function userReducer(state = defaultState, action){
 		case SET_ADMIN:
       return {
         ...state,
-        currentUser: action.payload.user,
+        currentUser: action.payload,
         isAuth: true,
 				role:1
 			
@@ -51,7 +51,6 @@ export default function userReducer(state = defaultState, action){
 
 export const setUser = user =>({type:SET_USER, payload:user});
 export const setAdmin = user =>({type:SET_ADMIN, payload:user});
-
 
 
 export const logout = () => ({ type: LOGOUT});

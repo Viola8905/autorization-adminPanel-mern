@@ -1,6 +1,6 @@
-const Post = require("./models/Posts");
-const asyncHandler = require("./middleware/asyncHandler");
-const ErrorResponse = require("./utils/errorResponse");
+const Post = require("../models/Posts");
+const asyncHandler = require("../middleware/asyncHandler");
+const ErrorResponse = require("../utils/errorResponse");
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
   //..../api/v1/bootcamps&price[lte]=1000&sort=-price
