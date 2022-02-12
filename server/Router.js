@@ -51,7 +51,11 @@ router.delete(
   "/reqPosts/:_id",roleMiddleware(["ADMIN"]),
   ReqPostController.deleteReqPostById
 );
-router.post("/reqPosts/move",roleMiddleware(["ADMIN"]), ReqPostController.moveReqPost);
+router.post(
+  "/reqPosts/move",
+  
+  ReqPostController.moveReqPost
+);
 
 
 router

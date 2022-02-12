@@ -97,6 +97,8 @@ const Admin = () => {
     complexity: complexity1,
     links: links1,
     mainId: mainId,
+		user:'none',
+
   };
 
   const addPost = (arr) => {
