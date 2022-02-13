@@ -20,23 +20,12 @@ const useStyles = makeStyles({
   root: {
     marginTop: 10,
   },
-  loader: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
+  
   paper: {
     marginBottom: "1rem",
     padding: 20,
   },
-  filters: {
-    padding: " 0 1.5rem",
-  },
-  priceRangeInputs: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
+  
 });
 
 const UserPage = () => {

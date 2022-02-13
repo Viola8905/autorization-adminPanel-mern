@@ -14,30 +14,14 @@ import {
 import PostCard from "../components/PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import Filter from "../components/Filter";
+import Pagination from "./Pagination";
 
 
 const PostGallery = () => {
   const useStyles = makeStyles({
     root: {
       marginTop: 10,
-    },
-    loader: {
-      width: "100%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    paper: {
-      marginBottom: "1rem",
-      padding: 20,
-    },
-    filters: {
-      padding: " 0 1.5rem",
-    },
-    priceRangeInputs: {
-      display: "flex",
-      justifyContent: "space-between",
-    },
+		}
   });
 
   const dispatch = useDispatch();
@@ -82,15 +66,31 @@ const PostGallery = () => {
     dispatch(Posts());
   }, [params, filter]);
 
+	const [currentPage,setCurrentPage] = useState(1);
+	const [postsPerPage] = useState(4);
+	const lastPostIndex = currentPage * postsPerPage; 
+	const firstPostIndex = lastPostIndex-postsPerPage;
+	const currentPost = posts.slice(firstPostIndex, lastPostIndex);
+
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <Grid container spacing={2}>
-      {posts.map((post) => (
-        <Grid item key={post._id} xs={12} sm={6} lg={3}>
-          <PostCard post={post} posts={posts} />
-					
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <Grid container spacing={2}>
+        {currentPost.map((post) => (
+          <Grid item key={post._id} xs={12} sm={6} lg={6}>
+            <PostCard post={post} posts={posts} />
+          </Grid>
+        ))}
+      </Grid>
+      <div className="" style={{ display: "flex" , justifyContent:'center', marginTop:'50px' }}>
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
+      </div>
+    </>
   );
 }
 
