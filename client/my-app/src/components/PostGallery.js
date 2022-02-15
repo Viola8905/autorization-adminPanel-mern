@@ -73,68 +73,7 @@ const PostGallery = () => {
   const [danger9, setDanger9] = useState([]);
   const [danger10, setDanger10] = useState([]);
 
-  // for (let i = 0; i < posts.length; i++){
-  // 	if (posts[i].danger == 1) {
-  //     setDanger1(posts[i]);
-  //   } else if (posts[i].danger == 2) {
-  //     setDanger2(posts[i]);
-  //   } else if (posts[i].danger == 3) {
-  //     setDanger3(posts[i]);
-  //   } else if (posts[i].danger == 4) {
-  //     setDanger4(posts[i]);
-  //   } else if (posts[i].danger == 5) {
-  //     setDanger5(posts[i]);
-  //   } else if (posts[i].danger == 6) {
-  //     setDanger6(posts[i]);
-  //   } else if (posts[i].danger == 7) {
-  //     setDanger7(posts[i]);
-  //   } else if (posts[i].danger == 8) {
-  //     setDanger8(posts[i]);
-  //   } else if (posts[i].danger == 9) {
-  //     setDanger9(posts[i]);
-  //   } else if (posts[i].danger == 10) {
-  //     setDanger10(posts[i]);
-  //   }else{
-
-  // 	}
-
-  // }
-
-  // console.log(danger2);
-  //  function Table (posts){
-
-  // 		let a = 	posts.map((post) => {
-
-  // 			if (post.danger == 1) {
-  // 				setDanger1(post);
-  // 			} else if (post.danger == 2) {
-  // 				setDanger2('hello');
-  // 			} else if (post.danger == 3) {
-  // 				setDanger3(post);
-  // 			} else if (post.danger == 4) {
-  // 				setDanger4(post);
-  // 			} else if (post.danger == 5) {
-  // 				setDanger5(post);
-  // 			} else if (post.danger == 6) {
-  // 				setDanger6(post);
-  // 			} else if (post.danger == 7) {
-  // 				setDanger7(post);
-  // 			} else if (post.danger == 8) {
-  // 				setDanger8(post);
-  // 			} else if (post.danger == 9) {
-  // 				setDanger9(post);
-  // 			} else if (post.danger == 10) {
-  // 				setDanger10(post);
-  // 			}else{
-
-  // 			}
-
-  // 			console.log(post.danger)
-  // 		})
-
-  //  console.log(danger2);
-  // }
-
+  
   //Side effects(loaded data to frontend network)
   useEffect(() => {
     const Posts = () => {
@@ -176,33 +115,7 @@ const PostGallery = () => {
     dispatch(Posts());
   }, [params, filter]);
 
-  // function Table(posts) {
-  //  let a = posts.map((post) => {
-  //    if (post.danger == '1') {
-  //      setDanger1(post);
-  //    } else if (post.danger == 2) {
-  //      setDanger2(post);
-  //    } else if (post.danger == 3) {
-  //      setDanger3(post);
-  //    } else if (post.danger == 4) {
-  //      setDanger4(post);
-  //    } else if (post.danger == 5) {
-  //      setDanger5(post);
-  //    } else if (post.danger == 6) {
-  //      setDanger6(post);
-  //    } else if (post.danger == 7) {
-  //      setDanger7(post);
-  //    } else if (post.danger == 8) {
-  //      setDanger8(post);
-  //    } else if (post.danger == 9) {
-  //      setDanger9(post);
-  //    } else if (post.danger == 10) {
-  //      setDanger10(post);
-  //    } else {
-  //    }
-  //  });
-
-  //setDanger1([...danger1.filter((post) => post._id !== id)]);
+  
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
@@ -212,10 +125,15 @@ const PostGallery = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+	function Percentage(danger, coutOfPosts){
+		return <>{Math.ceil((danger / coutOfPosts) * 100)}%</>;
+		
+	}
+
   return (
     <>
       <TableContainer component={Paper} style={{ margin: "30px 0" }}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{}} aria-label="customized table">
           <TableHead>
             <TableRow style={{ backgroundColor: "#1976d2" }}>
               <StyledTableCell>CVSS danger</StyledTableCell>
@@ -228,52 +146,82 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell align="left">level of danger: 1</StyledTableCell>
             <StyledTableCell align="center">{danger1.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger1.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 2</StyledTableCell>
             <StyledTableCell align="center">{danger2.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger2.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 3</StyledTableCell>
             <StyledTableCell align="center">{danger3.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger3.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 4</StyledTableCell>
             <StyledTableCell align="center">{danger4.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger4.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 5</StyledTableCell>
             <StyledTableCell align="center">{danger5.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger5.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 6</StyledTableCell>
             <StyledTableCell align="center">{danger6.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger6.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 7</StyledTableCell>
             <StyledTableCell align="center">{danger7.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger7.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 8</StyledTableCell>
             <StyledTableCell align="center">{danger8.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger8.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 9</StyledTableCell>
             <StyledTableCell align="center">{danger9.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger9.length, posts.length)}
+            </StyledTableCell>
           </TableBody>
           <TableBody>
             <StyledTableCell align="left">level of danger: 10</StyledTableCell>
             <StyledTableCell align="center">{danger10.length}</StyledTableCell>
-            <StyledTableCell align="right">Hello</StyledTableCell>
+            <StyledTableCell align="right">
+              {Percentage(danger10.length, posts.length)}
+            </StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left"></StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ fontWeight: 900, fontSize: '16px' }}
+            >
+              Total count of posts: {posts.length}
+            </StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableBody>
         </Table>
       </TableContainer>
