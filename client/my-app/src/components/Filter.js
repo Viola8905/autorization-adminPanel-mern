@@ -54,7 +54,7 @@ const Filter = () => {
 
   function Filtering() {
     navigate(
-      `?complexity[regex]=${level}&&name[regex]=${title}&&danger[regex]=${danger}`
+      `?complexity[regex]=${level}&&name[regex]=${title}&&danger=${danger}`
     );
 		
   }

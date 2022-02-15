@@ -56,7 +56,7 @@ const NavBar = () => {
         ) : (
           <Nav className="ml-auto" style={{ color: "white" }}>
             <Button variant={"outline-light"}>
-              <NavLink to="/registration">Войти</NavLink>
+              <NavLink to="/login">Войти</NavLink>
             </Button>
           </Nav>
         )}

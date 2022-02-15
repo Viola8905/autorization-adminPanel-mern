@@ -15,7 +15,35 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Filter from "../components/Filter";
 import Pagination from "./Pagination";
 
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+
 const PostGallery = () => {
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      // backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
+
   const useStyles = makeStyles({
     root: {
       marginTop: 10,
@@ -26,7 +54,7 @@ const PostGallery = () => {
   const classes = useStyles();
   const role = useSelector((state) => state.user.role);
   //Component state
-	const [danger1, setDanger1] = useState([]);
+  const [danger1, setDanger1] = useState([]);
   const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState("");
@@ -35,7 +63,6 @@ const PostGallery = () => {
 
   const params = location.search ? location.search : null;
 
- 
   const [danger2, setDanger2] = useState([]);
   const [danger3, setDanger3] = useState([]);
   const [danger4, setDanger4] = useState([]);
@@ -129,36 +156,27 @@ const PostGallery = () => {
           );
           //console.log(response.data.data);
           setPosts(response.data.data);
-					setDanger1(response.data.data.filter((post) => post.danger == '1'));
-					setDanger2(response.data.data.filter((post) => post.danger == "2"));
-					setDanger3(response.data.data.filter((post) => post.danger == "3"));
-					setDanger4(response.data.data.filter((post) => post.danger == "4"));
-					setDanger5(response.data.data.filter((post) => post.danger == "5"));
-					setDanger6(response.data.data.filter((post) => post.danger == "6"));
-					setDanger7(response.data.data.filter((post) => post.danger == "7"));
-					setDanger8(response.data.data.filter((post) => post.danger == "8"));
-					setDanger9(response.data.data.filter((post) => post.danger == "9"));
-					setDanger10(response.data.data.filter((post) => post.danger == "10"));
-				
-					
-         
-					
+          setDanger1(response.data.data.filter((post) => post.danger == "1"));
+          setDanger2(response.data.data.filter((post) => post.danger == "2"));
+          setDanger3(response.data.data.filter((post) => post.danger == "3"));
+          setDanger4(response.data.data.filter((post) => post.danger == "4"));
+          setDanger5(response.data.data.filter((post) => post.danger == "5"));
+          setDanger6(response.data.data.filter((post) => post.danger == "6"));
+          setDanger7(response.data.data.filter((post) => post.danger == "7"));
+          setDanger8(response.data.data.filter((post) => post.danger == "8"));
+          setDanger9(response.data.data.filter((post) => post.danger == "9"));
+          setDanger10(response.data.data.filter((post) => post.danger == "10"));
         } catch (e) {
           console.log(e.response.data);
           localStorage.removeItem("token");
         }
       };
-
-			
     };
 
-	 dispatch(Posts());
-			
+    dispatch(Posts());
   }, [params, filter]);
 
-
-
- function Table(posts) {
+  // function Table(posts) {
   //  let a = posts.map((post) => {
   //    if (post.danger == '1') {
   //      setDanger1(post);
@@ -183,12 +201,8 @@ const PostGallery = () => {
   //    } else {
   //    }
   //  });
-	
-	 
- }
 
- //setDanger1([...danger1.filter((post) => post._id !== id)]);
-
+  //setDanger1([...danger1.filter((post) => post._id !== id)]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
@@ -200,7 +214,70 @@ const PostGallery = () => {
 
   return (
     <>
-      <button>click</button>
+      <TableContainer component={Paper} style={{ margin: "30px 0" }}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow style={{ backgroundColor: "#1976d2" }}>
+              <StyledTableCell>CVSS danger</StyledTableCell>
+              <StyledTableCell align="center">
+                Number of vulnerabilities
+              </StyledTableCell>
+              <StyledTableCell align="right">Persentage</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 1</StyledTableCell>
+            <StyledTableCell align="center">{danger1.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 2</StyledTableCell>
+            <StyledTableCell align="center">{danger2.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 3</StyledTableCell>
+            <StyledTableCell align="center">{danger3.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 4</StyledTableCell>
+            <StyledTableCell align="center">{danger4.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 5</StyledTableCell>
+            <StyledTableCell align="center">{danger5.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 6</StyledTableCell>
+            <StyledTableCell align="center">{danger6.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 7</StyledTableCell>
+            <StyledTableCell align="center">{danger7.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 8</StyledTableCell>
+            <StyledTableCell align="center">{danger8.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 9</StyledTableCell>
+            <StyledTableCell align="center">{danger9.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+          <TableBody>
+            <StyledTableCell align="left">level of danger: 10</StyledTableCell>
+            <StyledTableCell align="center">{danger10.length}</StyledTableCell>
+            <StyledTableCell align="right">Hello</StyledTableCell>
+          </TableBody>
+        </Table>
+      </TableContainer>
+
       <Grid container spacing={2}>
         {currentPost.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={6}>
