@@ -22,6 +22,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { green } from "@material-ui/core/colors";
 
 const PostGallery = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -144,70 +145,120 @@ const PostGallery = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 1</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#3ca64d" }}
+            >
+              level of danger: 1
+            </StyledTableCell>
             <StyledTableCell align="center">{danger1.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger1.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 2</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#4dd663" }}
+            >
+              level of danger: 2
+            </StyledTableCell>
             <StyledTableCell align="center">{danger2.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger2.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 3</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#5df575" }}
+            >
+              level of danger: 3
+            </StyledTableCell>
             <StyledTableCell align="center">{danger3.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger3.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 4</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#c7f55d" }}
+            >
+              level of danger: 4
+            </StyledTableCell>
             <StyledTableCell align="center">{danger4.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger4.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 5</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#e3f55d" }}
+            >
+              level of danger: 5
+            </StyledTableCell>
             <StyledTableCell align="center">{danger5.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger5.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 6</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#f5e15d" }}
+            >
+              level of danger: 6
+            </StyledTableCell>
             <StyledTableCell align="center">{danger6.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger6.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 7</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#f5cc5d" }}
+            >
+              level of danger: 7
+            </StyledTableCell>
             <StyledTableCell align="center">{danger7.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger7.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 8</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#f5ac5d" }}
+            >
+              level of danger: 8
+            </StyledTableCell>
             <StyledTableCell align="center">{danger8.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger8.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 9</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#f5885d" }}
+            >
+              level of danger: 9
+            </StyledTableCell>
             <StyledTableCell align="center">{danger9.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger9.length, posts.length)}
             </StyledTableCell>
           </TableBody>
           <TableBody>
-            <StyledTableCell align="left">level of danger: 10</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              style={{ backgroundColor: "#f55d5d" }}
+            >
+              level of danger: 10
+            </StyledTableCell>
             <StyledTableCell align="center">{danger10.length}</StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger10.length, posts.length)}
@@ -217,7 +268,7 @@ const PostGallery = () => {
             <StyledTableCell align="left"></StyledTableCell>
             <StyledTableCell
               align="center"
-              style={{ fontWeight: 900, fontSize: '16px' }}
+              style={{ fontWeight: 900, fontSize: "16px" }}
             >
               Total count of posts: {posts.length}
             </StyledTableCell>
