@@ -4,3 +4,4 @@ client/my-app/node_modules
 server/config.js
 .log
 .vscode
+DebugPage.js
