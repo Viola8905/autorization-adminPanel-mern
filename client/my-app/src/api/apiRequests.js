@@ -82,7 +82,7 @@ export const createPost = (arr, success, failure) => {
       });
 			if (response.data.success == true) {
         success();
-				alert("Post was  added");
+				//alert("Post was  added");
       } else {
 				alert("Title must be unique");
         failure();

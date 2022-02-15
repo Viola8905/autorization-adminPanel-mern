@@ -194,9 +194,12 @@ const Admin = () => {
                 placeholder="enter danger level"
               />
               <br />
-              <Input
+              <textarea
                 value={description1}
-                setValue={setDescription1}
+                onChange={(e) => {
+                  setDescription1(e.target.value);
+                }}
+             
                 type="text"
                 placeholder="enter description"
               />

@@ -52,16 +52,21 @@ const Auth = () => {
               </div>
             )}
             {isLogin ? (
-              <div
-                onClick={() => dispatch(login(username, password))}
-               
-              >
-                <Button variant={"outline-dark"}>
-                  <NavLink to="/user">Login</NavLink>
-                </Button>
-              </div>
+							 <div style={{ width: "100%" }}>
+										<Button
+											variant={"outline-dark"}
+											onClick={() => dispatch(login(username, password))}
+										>
+										
+												<NavLink to="/user">Login</NavLink>
+										
+										</Button>
+							 </div>
             ) : (
-              <div onClick={() => registration(username, password)}>
+              <div
+                style={{ width: "100%" }}
+                onClick={() => registration(username, password)}
+              >
                 <Button variant={"outline-dark"}>Register</Button>
               </div>
             )}

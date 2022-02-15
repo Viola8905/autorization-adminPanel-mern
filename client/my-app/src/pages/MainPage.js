@@ -36,7 +36,7 @@ const MainPage = () => {
   
   
 	return (
-    <div >
+    <div className='main-page'>
       <Container className={classes.root}>
         {/* //Filtering and sorting section */}
         <Filter />
