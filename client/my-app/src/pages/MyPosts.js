@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 import axios from "axios";
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -16,20 +16,18 @@ import PostsCard from "../components/PostsCard";
 import { deleteReqPost, moveReqPost, moveToRejected } from "../api/apiRequests";
 
 const MyPosts = () => {
+  const user = useSelector((state) => state.user.currentUser.username);
 
-const user = useSelector((state) => state.user.currentUser.username);
+  const [reqPosts, setReqPosts] = useState([]);
+  const [rejPosts, setRejPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
 
+  const [filter, setFilter] = useState("");
 
- const [reqPosts, setReqPosts] = useState([]);
- const [rejPosts, setRejPosts] = useState([]);
- const [allPosts, setAllPosts] = useState([]);
+  const location = useLocation();
 
- const [filter, setFilter] = useState("");
-
- const location = useLocation();
-
- const params = location.search ? location.search : null;
-	useEffect(() => {
+  const params = location.search ? location.search : null;
+  useEffect(() => {
     function AllPosts() {
       return async (dispatch) => {
         try {
@@ -59,7 +57,7 @@ const user = useSelector((state) => state.user.currentUser.username);
       };
     }
 
-		function ReqPosts() {
+    function ReqPosts() {
       return async (dispatch) => {
         try {
           let query;
@@ -86,7 +84,7 @@ const user = useSelector((state) => state.user.currentUser.username);
         }
       };
     }
-		function RejPosts() {
+    function RejPosts() {
       return async (dispatch) => {
         try {
           let query;
@@ -104,11 +102,9 @@ const user = useSelector((state) => state.user.currentUser.username);
             }
           );
           //console.log(response.data.data);
-           setRejPosts([
-             ...response.data.data.filter((post) => post.user == user),
-           ]);
-						
-					
+          setRejPosts([
+            ...response.data.data.filter((post) => post.user == user),
+          ]);
         } catch (e) {
           console.log(e.response.data);
           localStorage.removeItem("token");
@@ -116,21 +112,22 @@ const user = useSelector((state) => state.user.currentUser.username);
       };
     }
     dispatch(AllPosts());
-		dispatch(ReqPosts());
-		dispatch(RejPosts());
-		
+    dispatch(ReqPosts());
+    dispatch(RejPosts());
   }, [params, filter]);
-	
-	
 
- 
   //For adding new post
   const dispatch = useDispatch();
-	return (
+  return (
     <Container>
       <div
         className=""
-        style={{ textAlign: "center", fontSize: "20px", padding: "20px 0" ,color: 'red' }}
+        style={{
+          textAlign: "center",
+          fontSize: "20px",
+          padding: "20px 0",
+          color: "red",
+        }}
       >
         Confirmed
       </div>
@@ -144,7 +141,12 @@ const user = useSelector((state) => state.user.currentUser.username);
       </Grid>
       <div
         className=""
-        style={{ textAlign: "center", fontSize: "20px", padding: "20px 0" , color: 'red'}}
+        style={{
+          textAlign: "center",
+          fontSize: "20px",
+          padding: "20px 0",
+          color: "red",
+        }}
       >
         Rejected posts
       </div>
@@ -157,7 +159,12 @@ const user = useSelector((state) => state.user.currentUser.username);
         ))}
       </Grid>
       <div
-        style={{ textAlign: "center", fontSize: "20px", padding: "20px 0" ,color: 'red' }}
+        style={{
+          textAlign: "center",
+          fontSize: "20px",
+          padding: "20px 0",
+          color: "red",
+        }}
         className=""
       >
         Waiting for confirm posts
@@ -172,6 +179,6 @@ const user = useSelector((state) => state.user.currentUser.username);
       </Grid>
     </Container>
   );
-}
+};
 
-export default MyPosts
+export default MyPosts;

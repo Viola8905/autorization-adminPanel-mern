@@ -16,8 +16,6 @@ import { deleteReqPost, moveReqPost, moveToRejected } from "../api/apiRequests";
 
 const ReqPosts = () => {
   const [reqPosts, setReqPosts] = useState([]);
-	
-
 
   const [filter, setFilter] = useState("");
 
@@ -57,21 +55,9 @@ const ReqPosts = () => {
   //For adding new post
   const dispatch = useDispatch();
   function confirmPost(post) {
-
     dispatch(moveReqPost(post));
-		
 
     dispatch(
-      deleteReqPost(
-        post._id,
-        () => setReqPosts([...reqPosts.filter((post1) => post1._id !== post._id)]),
-        () => alert("ERRRROOOR")
-      )
-    );
-  }
-
-	function rejectPost (post){
-		dispatch(
       deleteReqPost(
         post._id,
         () =>
@@ -79,8 +65,19 @@ const ReqPosts = () => {
         () => alert("ERRRROOOR")
       )
     );
-		dispatch(moveToRejected(post));
-	}
+  }
+
+  function rejectPost(post) {
+    dispatch(
+      deleteReqPost(
+        post._id,
+        () =>
+          setReqPosts([...reqPosts.filter((post1) => post1._id !== post._id)]),
+        () => alert("ERRRROOOR")
+      )
+    );
+    dispatch(moveToRejected(post));
+  }
 
   return (
     <div className="">
@@ -101,7 +98,7 @@ const ReqPosts = () => {
               <PostsCard post={post} posts={reqPosts} />
               <button onClick={() => confirmPost(post)}>Confirm</button>
               <button onClick={() => rejectPost(post)}>Reject</button>
-							<div className="">{post.user} proposed this post</div>
+              <div className="">{post.user} proposed this post</div>
             </Grid>
           ))}
         </Grid>

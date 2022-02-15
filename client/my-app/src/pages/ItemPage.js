@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
-import {
- 
-  Container,
-  Grid,
-  makeStyles,
-	Button
-} from "@material-ui/core";
+import { Container, Grid, makeStyles, Button } from "@material-ui/core";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
- 
 
 const useStyles = makeStyles({
   root: {
@@ -42,8 +34,8 @@ const ItemPage = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-	const role = useSelector((state) => state.user.role);
-	const isAuth = useSelector((state) => state.user.isAuth);
+  const role = useSelector((state) => state.user.role);
+  const isAuth = useSelector((state) => state.user.isAuth);
   const location = useParams();
   //console.log(location);
 
@@ -67,7 +59,6 @@ const ItemPage = () => {
             query = filter;
           }
 
-      
           const response = await axios.get(
             `http://localhost:5000/api/posts/${query}`,
             {
@@ -76,7 +67,7 @@ const ItemPage = () => {
               },
             }
           );
-   
+
           setPosts(response.data.data);
         } catch (error) {
           console.log(error.response.data);
@@ -88,24 +79,22 @@ const ItemPage = () => {
     dispatch(fetchData());
   }, [filter, params]);
 
-
-	
-	
-
-
   return (
     <Container className={classes.root}>
       {/* //go to main page button */}
-      { !isAuth ? ( <Link to="/">
+      {!isAuth ? (
+        <Link to="/">
           <Button variant="outlined" size="small">
             Back
           </Button>
-        </Link>):(<Link to="/user">
-         <Button variant="outlined" size="small">
-           Back
-         </Button>
-       </Link>) 
-			 }
+        </Link>
+      ) : (
+        <Link to="/user">
+          <Button variant="outlined" size="small">
+            Back
+          </Button>
+        </Link>
+      )}
 
       {/* //Chosen bootcamp listening */}
       <Grid container spacing={2}>

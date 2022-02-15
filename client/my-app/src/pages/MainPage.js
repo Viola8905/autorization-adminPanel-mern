@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useState, useEffect } from "react";
 
 import axios from "axios";
@@ -12,31 +12,25 @@ import {
 } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
-import Filter from '../components/Filter';
-import PostGallery from '../components/PostGallery';
-
+import Filter from "../components/Filter";
+import PostGallery from "../components/PostGallery";
 
 const useStyles = makeStyles({
   root: {
     marginTop: 10,
   },
-  
- 
 });
 
 const MainPage = () => {
-	 const dispatch = useDispatch();
-   const classes = useStyles();
+  const dispatch = useDispatch();
+  const classes = useStyles();
 
-   //Component state
-   
-   //Posts filtering
+  //Component state
 
-   
-  
-  
-	return (
-    <div className='main-page'>
+  //Posts filtering
+
+  return (
+    <div className="main-page">
       <Container className={classes.root}>
         {/* //Filtering and sorting section */}
         <Filter />

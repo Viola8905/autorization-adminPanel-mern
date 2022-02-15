@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
-import Input from "../components/input/Input"
+import Input from "../components/input/Input";
 import { createPost, createReqPost } from "../api/apiRequests";
 import Filter from "../components/Filter";
 import PostGallery from "../components/PostGallery";
@@ -20,28 +20,23 @@ const useStyles = makeStyles({
   root: {
     marginTop: 10,
   },
-  
+
   paper: {
     marginBottom: "1rem",
     padding: 20,
   },
-  
 });
 
 const UserPage = () => {
   // Material ui styles
   const dispatch = useDispatch();
   const classes = useStyles();
-	const userName = useSelector((state) => state.user.currentUser.username);
+  const userName = useSelector((state) => state.user.currentUser.username);
   //Component state
- 
+
   //Side effects(loaded data to frontend network)
- 
 
   //Posts filtering
-
-
-  
 
   const [name1, setName1] = useState("");
   const [dangerLevel1, setDangerLevel1] = useState("");
@@ -61,7 +56,7 @@ const UserPage = () => {
     complexity: complexity1,
     links: links1,
     mainId: mainId,
-		user: userName,
+    user: userName,
   };
 
   const addPost = (arr) => {
@@ -119,7 +114,7 @@ const UserPage = () => {
         </Paper>
 
         {/* //Posts listening */}
-        <PostGallery/>
+        <PostGallery />
       </Container>
     </div>
   );

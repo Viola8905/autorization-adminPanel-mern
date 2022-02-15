@@ -27,17 +27,20 @@ const SeeUsers = () => {
     function Users() {
       return async (dispatch) => {
         try {
-					 let query;
-           if (params && !filter) {
-             query = params;
-           } else {
-             query = filter;
-           }
-          const response = await axios.get(`http://localhost:5000/api/users${query}`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          });
+          let query;
+          if (params && !filter) {
+            query = params;
+          } else {
+            query = filter;
+          }
+          const response = await axios.get(
+            `http://localhost:5000/api/users${query}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
           //console.log(response.data.data);
           setAllUsers(response.data);
         } catch (e) {
@@ -50,33 +53,27 @@ const SeeUsers = () => {
   }, [params, filter]);
 
   const navigate = useNavigate();
-	 const [username, setUserName] = useState("");
-	 const handleChange = (event) => {
-     setUserName(event.target.value);
-   };
-	 function Filtering() {
-     navigate(
-       `?username[regex]=${username}`
-     );
-   }
-		function showAllUsers() {
-			navigate(``);
-		}
+  const [username, setUserName] = useState("");
+  const handleChange = (event) => {
+    setUserName(event.target.value);
+  };
+  function Filtering() {
+    navigate(`?username[regex]=${username}`);
+  }
+  function showAllUsers() {
+    navigate(``);
+  }
 
-
-
-		function deleteChosenUser(user) {
-      dispatch(
-        deleteUser(
-          user._id,
-          () =>
-            setAllUsers([
-              ...allUsers.filter((user1) => user1._id !== user._id),
-            ]),
-          () => alert("ERRRROOOR")
-        )
-      );
-    }
+  function deleteChosenUser(user) {
+    dispatch(
+      deleteUser(
+        user._id,
+        () =>
+          setAllUsers([...allUsers.filter((user1) => user1._id !== user._id)]),
+        () => alert("ERRRROOOR")
+      )
+    );
+  }
   //For adding new post
 
   return (
@@ -116,7 +113,6 @@ const SeeUsers = () => {
               <div>{user.username}</div>
 
               <button className="button" onClick={() => deleteChosenUser(user)}>
-              
                 delete user
               </button>
             </Grid>
