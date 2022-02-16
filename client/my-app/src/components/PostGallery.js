@@ -74,7 +74,6 @@ const PostGallery = () => {
   const [danger9, setDanger9] = useState([]);
   const [danger10, setDanger10] = useState([]);
 
-  
   //Side effects(loaded data to frontend network)
   useEffect(() => {
     const Posts = () => {
@@ -116,20 +115,19 @@ const PostGallery = () => {
     dispatch(Posts());
   }, [params, filter]);
 
-  
-
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(4);
+  const [postsPerPage] = useState(6);
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPost = posts.slice(firstPostIndex, lastPostIndex);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-	function Percentage(danger, coutOfPosts){
-		return <>{Math.ceil((danger / coutOfPosts) * 100)}%</>;
-		
-	}
+  function Percentage(danger, coutOfPosts) {
+    return <>{Math.ceil((danger / coutOfPosts) * 100)}%</>;
+  }
 
   return (
     <>
@@ -147,7 +145,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#3ca64d" }}
+              style={{ backgroundColor: "#3ca64d", fontWeight: 700 }}
             >
               level of danger: 1
             </StyledTableCell>
@@ -159,7 +157,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#4dd663" }}
+              style={{ backgroundColor: "#4dd663", fontWeight: 700 }}
             >
               level of danger: 2
             </StyledTableCell>
@@ -171,7 +169,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#5df575" }}
+              style={{ backgroundColor: "#5df575", fontWeight: 700 }}
             >
               level of danger: 3
             </StyledTableCell>
@@ -183,7 +181,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#c7f55d" }}
+              style={{ backgroundColor: "#c7f55d", fontWeight: 700 }}
             >
               level of danger: 4
             </StyledTableCell>
@@ -195,7 +193,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#e3f55d" }}
+              style={{ backgroundColor: "#e3f55d", fontWeight: 700 }}
             >
               level of danger: 5
             </StyledTableCell>
@@ -207,7 +205,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5e15d" }}
+              style={{ backgroundColor: "#f5e15d", fontWeight: 700 }}
             >
               level of danger: 6
             </StyledTableCell>
@@ -219,7 +217,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5cc5d" }}
+              style={{ backgroundColor: "#f5cc5d", fontWeight: 700 }}
             >
               level of danger: 7
             </StyledTableCell>
@@ -231,7 +229,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5ac5d" }}
+              style={{ backgroundColor: "#f5ac5d", fontWeight: 700 }}
             >
               level of danger: 8
             </StyledTableCell>
@@ -243,7 +241,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5885d" }}
+              style={{ backgroundColor: "#f5885d", fontWeight: 700 }}
             >
               level of danger: 9
             </StyledTableCell>
@@ -255,7 +253,7 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f55d5d" }}
+              style={{ backgroundColor: "#f55d5d", fontWeight: 700 }}
             >
               level of danger: 10
             </StyledTableCell>
@@ -294,7 +292,6 @@ const PostGallery = () => {
           paginate={paginate}
         />
       </div>
-      <div>{danger1.length}</div>
     </>
   );
 };

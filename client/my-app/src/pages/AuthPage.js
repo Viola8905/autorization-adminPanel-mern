@@ -11,7 +11,7 @@ const Auth = () => {
   const [username, setName] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-	const role = useSelector((state) => state.user.role);
+  const role = useSelector((state) => state.user.role);
 
   //console.log(location)
   return (
@@ -52,16 +52,14 @@ const Auth = () => {
               </div>
             )}
             {isLogin ? (
-							 <div style={{ width: "100%" }}>
-										<Button
-											variant={"outline-dark"}
-											onClick={() => dispatch(login(username, password))}
-										>
-										
-												<NavLink to="/user">Login</NavLink>
-										
-										</Button>
-							 </div>
+              <div style={{ width: "100%" }}>
+                <Button
+                  variant={"outline-dark"}
+                  onClick={() => dispatch(login(username, password))}
+                >
+                  <NavLink to="/user">Login</NavLink>
+                </Button>
+              </div>
             ) : (
               <div
                 style={{ width: "100%" }}
