@@ -1,6 +1,6 @@
 import React from "react";
 import "./navbar.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../reducers/userReducer";
 
@@ -8,11 +8,13 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+
 const NavBar = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
 
   const dispatch = useDispatch();
   const role = useSelector((state) => state.user.role);
+  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -25,6 +27,7 @@ const NavBar = () => {
 
         {isAuth ? (
           <Nav className="ml-auto" style={{ color: "white" }}>
+            <Button>{user.username}</Button>
             <Button
               variant={"outline-light"}
               className="ml-2"
@@ -51,7 +54,7 @@ const NavBar = () => {
         ) : (
           <Nav className="ml-auto" style={{ color: "white" }}>
             <Button variant={"outline-light"}>
-              <NavLink to="/registration">Войти</NavLink>
+              <NavLink to="/login">Войти</NavLink>
             </Button>
           </Nav>
         )}

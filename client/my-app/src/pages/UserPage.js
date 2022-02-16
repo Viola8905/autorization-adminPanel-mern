@@ -1,18 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Paper,
-  Typography,
-  Container,
-  Grid,
-  makeStyles,
-} from "@material-ui/core";
-import PostCard from "../components/PostsCard";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Paper, Container, Grid, makeStyles } from "@material-ui/core";
 import Input from "../components/input/Input";
-import { createPost, createReqPost } from "../api/apiRequests";
+import { createReqPost } from "../api/apiRequests";
 import Filter from "../components/Filter";
 import PostGallery from "../components/PostGallery";
 

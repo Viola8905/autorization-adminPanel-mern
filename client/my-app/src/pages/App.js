@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/navbar/NavBar";
+import Navbar from "../components/navbar/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { useSelector } from "react-redux";
@@ -22,7 +22,7 @@ function App() {
       return (
         <Routes>
           <Route exact path="/registration" element={<AuthPage />} />
-          Ctrl + click on "Main" to reach a code of this page
+          {/* Ctrl + click on "Main" to reach a code of this page */}
           <Route exact path="/login" element={<AuthPage />} />
           <Route exact path="/" element={<MainPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
@@ -41,8 +41,8 @@ function App() {
     } else if (isAuth && role === 0) {
       return (
         <Routes>
-          <Route exact path="/user" element={<UserPage />} /> // Ctrl + click on
-          "Main" to reach a code of this page
+          <Route exact path="/user" element={<UserPage />} />
+          {/* Ctrl + click on "Main" to reach a code of this page */}
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/myPosts" element={<MyPosts />} />
         </Routes>

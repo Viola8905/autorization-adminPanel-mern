@@ -1,18 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Paper,
-  Typography,
-  Container,
-  Grid,
-  makeStyles,
-} from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
-import { useLocation, useNavigate } from "react-router-dom";
-import Filter from "../components/Filter";
+import { useLocation } from "react-router-dom";
 import Pagination from "./Pagination";
 
 const PostGallery = () => {
@@ -23,7 +15,6 @@ const PostGallery = () => {
   });
 
   const dispatch = useDispatch();
-  const classes = useStyles();
   const role = useSelector((state) => state.user.role);
   //Component state
   const [danger1, setDanger1] = useState([]);
@@ -45,66 +36,59 @@ const PostGallery = () => {
   const [danger9, setDanger9] = useState([]);
   const [danger10, setDanger10] = useState([]);
 
-  // for (let i = 0; i < posts.length; i++){
-  // 	if (posts[i].danger == 1) {
+  // for (let i = 0; i < posts.length; i++) {
+  //   if (posts[i].danger === 1) {
   //     setDanger1(posts[i]);
-  //   } else if (posts[i].danger == 2) {
+  //   } else if (posts[i].danger === 2) {
   //     setDanger2(posts[i]);
-  //   } else if (posts[i].danger == 3) {
+  //   } else if (posts[i].danger === 3) {
   //     setDanger3(posts[i]);
-  //   } else if (posts[i].danger == 4) {
+  //   } else if (posts[i].danger === 4) {
   //     setDanger4(posts[i]);
-  //   } else if (posts[i].danger == 5) {
+  //   } else if (posts[i].danger === 5) {
   //     setDanger5(posts[i]);
-  //   } else if (posts[i].danger == 6) {
+  //   } else if (posts[i].danger === 6) {
   //     setDanger6(posts[i]);
-  //   } else if (posts[i].danger == 7) {
+  //   } else if (posts[i].danger === 7) {
   //     setDanger7(posts[i]);
-  //   } else if (posts[i].danger == 8) {
+  //   } else if (posts[i].danger === 8) {
   //     setDanger8(posts[i]);
-  //   } else if (posts[i].danger == 9) {
+  //   } else if (posts[i].danger === 9) {
   //     setDanger9(posts[i]);
-  //   } else if (posts[i].danger == 10) {
+  //   } else if (posts[i].danger === 10) {
   //     setDanger10(posts[i]);
-  //   }else{
-
-  // 	}
-
+  //   } else {
+  //   }
   // }
 
   // console.log(danger2);
-  //  function Table (posts){
-
-  // 		let a = 	posts.map((post) => {
-
-  // 			if (post.danger == 1) {
-  // 				setDanger1(post);
-  // 			} else if (post.danger == 2) {
-  // 				setDanger2('hello');
-  // 			} else if (post.danger == 3) {
-  // 				setDanger3(post);
-  // 			} else if (post.danger == 4) {
-  // 				setDanger4(post);
-  // 			} else if (post.danger == 5) {
-  // 				setDanger5(post);
-  // 			} else if (post.danger == 6) {
-  // 				setDanger6(post);
-  // 			} else if (post.danger == 7) {
-  // 				setDanger7(post);
-  // 			} else if (post.danger == 8) {
-  // 				setDanger8(post);
-  // 			} else if (post.danger == 9) {
-  // 				setDanger9(post);
-  // 			} else if (post.danger == 10) {
-  // 				setDanger10(post);
-  // 			}else{
-
-  // 			}
-
-  // 			console.log(post.danger)
-  // 		})
-
-  //  console.log(danger2);
+  // function Table(posts) {
+  //   let a = posts.map((post) => {
+  //     if (post.danger === 1) {
+  //       setDanger1(post);
+  //     } else if (post.danger === 2) {
+  //       setDanger2("hello");
+  //     } else if (post.danger === 3) {
+  //       setDanger3(post);
+  //     } else if (post.danger === 4) {
+  //       setDanger4(post);
+  //     } else if (post.danger === 5) {
+  //       setDanger5(post);
+  //     } else if (post.danger === 6) {
+  //       setDanger6(post);
+  //     } else if (post.danger === 7) {
+  //       setDanger7(post);
+  //     } else if (post.danger === 8) {
+  //       setDanger8(post);
+  //     } else if (post.danger === 9) {
+  //       setDanger9(post);
+  //     } else if (post.danger === 10) {
+  //       setDanger10(post);
+  //     } else {
+  //     }
+  //     console.log(post.danger);
+  //   });
+  //   console.log(danger2);
   // }
 
   //Side effects(loaded data to frontend network)
@@ -128,16 +112,18 @@ const PostGallery = () => {
           );
           //console.log(response.data.data);
           setPosts(response.data.data);
-          setDanger1(response.data.data.filter((post) => post.danger == "1"));
-          setDanger2(response.data.data.filter((post) => post.danger == "2"));
-          setDanger3(response.data.data.filter((post) => post.danger == "3"));
-          setDanger4(response.data.data.filter((post) => post.danger == "4"));
-          setDanger5(response.data.data.filter((post) => post.danger == "5"));
-          setDanger6(response.data.data.filter((post) => post.danger == "6"));
-          setDanger7(response.data.data.filter((post) => post.danger == "7"));
-          setDanger8(response.data.data.filter((post) => post.danger == "8"));
-          setDanger9(response.data.data.filter((post) => post.danger == "9"));
-          setDanger10(response.data.data.filter((post) => post.danger == "10"));
+          setDanger1(response.data.data.filter((post) => post.danger === "1"));
+          setDanger2(response.data.data.filter((post) => post.danger === "2"));
+          setDanger3(response.data.data.filter((post) => post.danger === "3"));
+          setDanger4(response.data.data.filter((post) => post.danger === "4"));
+          setDanger5(response.data.data.filter((post) => post.danger === "5"));
+          setDanger6(response.data.data.filter((post) => post.danger === "6"));
+          setDanger7(response.data.data.filter((post) => post.danger === "7"));
+          setDanger8(response.data.data.filter((post) => post.danger === "8"));
+          setDanger9(response.data.data.filter((post) => post.danger === "9"));
+          setDanger10(
+            response.data.data.filter((post) => post.danger === "10")
+          );
         } catch (e) {
           console.log(e.response.data);
           localStorage.removeItem("token");
@@ -150,32 +136,32 @@ const PostGallery = () => {
 
   function Table(posts) {
     //  let a = posts.map((post) => {
-    //    if (post.danger == '1') {
+    //    if (post.danger === '1') {
     //      setDanger1(post);
-    //    } else if (post.danger == 2) {
+    //    } else if (post.danger === 2) {
     //      setDanger2(post);
-    //    } else if (post.danger == 3) {
+    //    } else if (post.danger === 3) {
     //      setDanger3(post);
-    //    } else if (post.danger == 4) {
+    //    } else if (post.danger === 4) {
     //      setDanger4(post);
-    //    } else if (post.danger == 5) {
+    //    } else if (post.danger === 5) {
     //      setDanger5(post);
-    //    } else if (post.danger == 6) {
+    //    } else if (post.danger === 6) {
     //      setDanger6(post);
-    //    } else if (post.danger == 7) {
+    //    } else if (post.danger === 7) {
     //      setDanger7(post);
-    //    } else if (post.danger == 8) {
+    //    } else if (post.danger === 8) {
     //      setDanger8(post);
-    //    } else if (post.danger == 9) {
+    //    } else if (post.danger === 9) {
     //      setDanger9(post);
-    //    } else if (post.danger == 10) {
+    //    } else if (post.danger === 10) {
     //      setDanger10(post);
     //    } else {
     //    }
     //  });
   }
 
-  //setDanger1([...danger1.filter((post) => post._id !== id)]);
+  //setDanger1([...danger1.filter((post) => post._id !=== id)]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);

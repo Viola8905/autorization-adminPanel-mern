@@ -1,13 +1,15 @@
 import {
-  Avatar,
   Card,
   CardContent,
   CardHeader,
   Typography,
+  Button,
 } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, functions }) => {
+  const role = useSelector((state) => state.user.role);
   const navigate = useNavigate();
   function showCard() {
     navigate(`/${post.mainId}`);
@@ -25,6 +27,26 @@ const PostCard = ({ post }) => {
         <Typography variant="h6" onClick={showCard}>
           show card
         </Typography>
+        {role === 1 ? (
+          <>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => functions.removePost(post._id)}
+            >
+              Delete
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => functions.updatePost(post)}
+            >
+              Update
+            </Button>
+          </>
+        ) : (
+          <></>
+        )}
       </CardContent>
     </Card>
   );

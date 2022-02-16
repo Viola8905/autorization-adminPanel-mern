@@ -29,7 +29,7 @@ export const login = (username, password) => {
       localStorage.setItem("token", response.data.token);
 
       //console.log(response.data.user.roles);
-      if (response.data.user.roles == "USER") {
+      if (response.data.user.roles === "USER") {
         dispatch(setUser(response.data.user));
       } else {
         dispatch(setAdmin(response.data.user));
@@ -51,7 +51,7 @@ export const deletePost = (id, success, failure) => {
         }
       );
 
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         success();
       } else {
         failure();
@@ -71,7 +71,7 @@ export const createPost = (arr, success, failure) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         arr,
       });
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         success();
         //alert("Post was  added");
       } else {
@@ -150,7 +150,7 @@ export const deleteReqPost = (id, success, failure) => {
         }
       );
 
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         success();
       } else {
         failure();
@@ -175,7 +175,7 @@ export const deleteUser = (id, success, failure) => {
         }
       );
 
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         success();
       } else {
         failure();

@@ -4,11 +4,8 @@ import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import {
-  Paper,
-  Typography,
   Container,
   Grid,
-  makeStyles,
 } from "@material-ui/core";
 
 import PostsCard from "../components/PostsCard";
@@ -41,7 +38,6 @@ const ReqPosts = () => {
               },
             }
           );
-          //console.log(response.data.data);
           setReqPosts(response.data.data);
         } catch (e) {
           console.log(e.response.data);

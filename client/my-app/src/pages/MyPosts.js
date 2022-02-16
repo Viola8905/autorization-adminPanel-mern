@@ -1,19 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
-  Paper,
-  Typography,
   Container,
   Grid,
-  makeStyles,
 } from "@material-ui/core";
 
 import PostsCard from "../components/PostsCard";
-import { deleteReqPost, moveReqPost, moveToRejected } from "../api/apiRequests";
 
 const MyPosts = () => {
   const user = useSelector((state) => state.user.currentUser.username);
@@ -47,7 +42,7 @@ const MyPosts = () => {
           );
           //console.log(response.data.data);
           setAllPosts([
-            ...response.data.data.filter((post) => post.user == user),
+            ...response.data.data.filter((post) => post.user === user),
           ]);
           //setAllPosts([...allPosts.filter((post) => post.username == user)] )
         } catch (e) {
@@ -76,7 +71,7 @@ const MyPosts = () => {
           );
           //console.log(response.data.data);
           setReqPosts([
-            ...response.data.data.filter((post) => post.user == user),
+            ...response.data.data.filter((post) => post.user === user),
           ]);
         } catch (e) {
           console.log(e.response.data);
@@ -103,7 +98,7 @@ const MyPosts = () => {
           );
           //console.log(response.data.data);
           setRejPosts([
-            ...response.data.data.filter((post) => post.user == user),
+            ...response.data.data.filter((post) => post.user === user),
           ]);
         } catch (e) {
           console.log(e.response.data);

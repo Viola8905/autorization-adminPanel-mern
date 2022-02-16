@@ -53,16 +53,8 @@ router.delete(
   roleMiddleware(["ADMIN"]),
   ReqPostController.deleteReqPostById
 );
-router.post(
-  "/reqPosts/move",
-
-  ReqPostController.moveReqPost
-);
-router.post(
-  "/reqPosts/reject",
-
-  ReqPostController.moveToRejected
-);
+router.post("/reqPosts/move", ReqPostController.moveReqPost);
+router.post("/reqPosts/reject", ReqPostController.moveToRejected);
 
 router
   .route("/reqPosts/", authMiddleware)
