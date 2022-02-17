@@ -15,6 +15,7 @@ import Input from "../components/input/Input"
 import { createPost, createReqPost } from "../api/apiRequests";
 import Filter from "../components/Filter";
 import PostGallery from "../components/PostGallery";
+import PostsTable from "../components/PostsTable";
 
 const useStyles = makeStyles({
   root: {
@@ -73,6 +74,7 @@ const UserPage = () => {
       <Container className={classes.root}>
         {/* //Filtering and sorting section */}
         <Filter />
+        <PostsTable/>
 
         <Paper className={classes.paper}>
           <Grid container>
@@ -119,7 +121,7 @@ const UserPage = () => {
         </Paper>
 
         {/* //Posts listening */}
-        <PostGallery/>
+        <PostGallery />
       </Container>
     </div>
   );

@@ -14,6 +14,7 @@ import PostCard from "../components/PostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import Filter from '../components/Filter';
 import PostGallery from '../components/PostGallery';
+import PostsTable from '../components/PostsTable';
 
 
 const useStyles = makeStyles({
@@ -36,11 +37,11 @@ const MainPage = () => {
   
   
 	return (
-    <div className='main-page'>
+    <div className="main-page">
       <Container className={classes.root}>
         {/* //Filtering and sorting section */}
         <Filter />
-
+        <PostsTable/>
         {/* //Posts listening */}
         <PostGallery />
       </Container>

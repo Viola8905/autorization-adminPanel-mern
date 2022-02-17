@@ -90,7 +90,7 @@ const PostGallery = () => {
   
   return (
     <>
-      <PostsTable/>
+   
       <Grid container spacing={2}>
         {currentPost.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={6}>

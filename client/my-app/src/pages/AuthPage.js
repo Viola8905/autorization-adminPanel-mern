@@ -13,6 +13,21 @@ const Auth = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.user.role);
 
+  const [success, setSuc] = useState(0);
+
+  const navigate = useNavigate();
+
+  function Login(username, password) {
+    dispatch(
+      login(
+        username,
+        password,
+        () => navigate("/user"),
+        () => navigate("/login")
+      )
+    );
+  }
+
   //console.log(location)
   return (
     <Container
@@ -48,22 +63,22 @@ const Auth = () => {
             ) : (
               <div>
                 Have an account?
-                <NavLink to="/login">Log in!</NavLink>
+                <NavLink to="/login">Login!</NavLink>
               </div>
             )}
             {isLogin ? (
               <div style={{ width: "100%" }}>
                 <Button
                   variant={"outline-dark"}
-                  onClick={() => dispatch(login(username, password))}
+                  onClick={() => Login(username, password)}
                 >
-                  <NavLink to="/user">Login</NavLink>
+                  Login
                 </Button>
               </div>
             ) : (
               <div
                 style={{ width: "100%" }}
-                onClick={() => registration(username, password)}
+                onClick={() => dispatch(registration(username, password))}
               >
                 <Button variant={"outline-dark"}>Register</Button>
               </div>
