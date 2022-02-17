@@ -1,33 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Paper,
-  Typography,
-  Container,
-  Grid,
-  makeStyles,
-} from "@material-ui/core";
+import { Paper, Typography, Grid, makeStyles } from "@material-ui/core";
 
-import Input from "@mui/material/Input";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+
 import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 const useStyles = makeStyles({
-  
-
   paper: {
     marginBottom: "1rem",
     padding: 20,
   },
   filter: {
-    display:'flex',
-		justifyContent:'center'
+    display: "flex",
+    justifyContent: "center",
   },
-	input:{
-		margin: " 0 0 0 20px",
-	},
-  
+  input: {
+    margin: " 0 0 0 20px",
+  },
 });
 
 const Filter = () => {
@@ -56,7 +46,6 @@ const Filter = () => {
     navigate(
       `?complexity[regex]=${level}&&name[regex]=${title}&&danger=${danger}`
     );
-		
   }
 
   return (
@@ -98,7 +87,8 @@ const Filter = () => {
                 onInput={handleChange3}
               />
               <SearchIcon
-                style={{ marginLeft: "10px" }}cd 
+                style={{ marginLeft: "10px" }}
+                cd
                 onClick={Filtering}
                 color="primary"
                 sx={{ fontSize: 35 }}

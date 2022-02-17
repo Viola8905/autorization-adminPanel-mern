@@ -3,34 +3,17 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Paper,
-  Typography,
-  Container,
-  Grid,
-  makeStyles,
-} from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
-import { useLocation, useNavigate } from "react-router-dom";
-import Filter from "../components/Filter";
+import { useLocation } from "react-router-dom";
+
 import Pagination from "./Pagination";
 
-
-import PostsTable from "./PostsTable";
-
 const PostGallery = () => {
-  
-  const useStyles = makeStyles({
-    root: {
-      marginTop: 10,
-    },
-  });
-
   const dispatch = useDispatch();
-  const classes = useStyles();
-  const role = useSelector((state) => state.user.role);
+
   //Component state
-  const [danger1, setDanger1] = useState([]);
+
   const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState("");
@@ -38,8 +21,6 @@ const PostGallery = () => {
   const location = useLocation();
 
   const params = location.search ? location.search : null;
-
-  
 
   //Side effects(loaded data to frontend network)
   useEffect(() => {
@@ -62,7 +43,6 @@ const PostGallery = () => {
           );
           //console.log(response.data.data);
           setPosts(response.data.data);
-         
         } catch (e) {
           console.log(e.response.data);
           localStorage.removeItem("token");
@@ -72,10 +52,6 @@ const PostGallery = () => {
 
     dispatch(Posts());
   }, [params, filter]);
-
-
-
-	
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
@@ -87,10 +63,8 @@ const PostGallery = () => {
     setCurrentPage(pageNumber);
   };
 
-  
   return (
     <>
-   
       <Grid container spacing={2}>
         {currentPost.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={6}>

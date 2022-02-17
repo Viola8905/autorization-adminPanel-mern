@@ -6,10 +6,10 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { green } from "@material-ui/core/colors";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { Paper } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 const PostsTable = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -84,6 +84,15 @@ const PostsTable = () => {
     return <>{Math.ceil((danger / coutOfPosts) * 100)}%</>;
   }
 
+	const navigate = useNavigate()
+
+	function Navigate(danger){
+		if(danger){
+			navigate(`/danger/${danger}`);
+		}
+	
+	}
+
   return (
     <TableContainer component={Paper} style={{ margin: "30px 0" }}>
       <Table sx={{}} aria-label="customized table">
@@ -103,7 +112,12 @@ const PostsTable = () => {
           >
             level of danger: 1
           </StyledTableCell>
-          <StyledTableCell align="center">{danger1.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger1[0].danger)}
+          >
+            <a href="#">{danger1.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger1.length, posts.length)}
           </StyledTableCell>
@@ -115,7 +129,12 @@ const PostsTable = () => {
           >
             level of danger: 2
           </StyledTableCell>
-          <StyledTableCell align="center">{danger2.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger2[0].danger)}
+          >
+            <a href="#">{danger2.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger2.length, posts.length)}
           </StyledTableCell>
@@ -127,7 +146,12 @@ const PostsTable = () => {
           >
             level of danger: 3
           </StyledTableCell>
-          <StyledTableCell align="center">{danger3.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger3[0].danger)}
+          >
+            <a href="#">{danger3.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger3.length, posts.length)}
           </StyledTableCell>
@@ -139,7 +163,12 @@ const PostsTable = () => {
           >
             level of danger: 4
           </StyledTableCell>
-          <StyledTableCell align="center">{danger4.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger4[0].danger)}
+          >
+            <a href="#">{danger4.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger4.length, posts.length)}
           </StyledTableCell>
@@ -151,7 +180,12 @@ const PostsTable = () => {
           >
             level of danger: 5
           </StyledTableCell>
-          <StyledTableCell align="center">{danger5.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger5[0].danger)}
+          >
+            <a href="#">{danger5.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger5.length, posts.length)}
           </StyledTableCell>
@@ -163,7 +197,12 @@ const PostsTable = () => {
           >
             level of danger: 6
           </StyledTableCell>
-          <StyledTableCell align="center">{danger6.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger6[0].danger)}
+          >
+            <a href="#">{danger6.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger6.length, posts.length)}
           </StyledTableCell>
@@ -175,7 +214,12 @@ const PostsTable = () => {
           >
             level of danger: 7
           </StyledTableCell>
-          <StyledTableCell align="center">{danger7.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger7[0].danger)}
+          >
+            <a href="#">{danger7.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger7.length, posts.length)}
           </StyledTableCell>
@@ -187,7 +231,12 @@ const PostsTable = () => {
           >
             level of danger: 8
           </StyledTableCell>
-          <StyledTableCell align="center">{danger8.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger8[0].danger)}
+          >
+            <a href="#">{danger8.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger8.length, posts.length)}
           </StyledTableCell>
@@ -199,7 +248,12 @@ const PostsTable = () => {
           >
             level of danger: 9
           </StyledTableCell>
-          <StyledTableCell align="center">{danger9.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger9[0].danger)}
+          >
+            <a href="#">{danger9.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger9.length, posts.length)}
           </StyledTableCell>
@@ -211,7 +265,12 @@ const PostsTable = () => {
           >
             level of danger: 10
           </StyledTableCell>
-          <StyledTableCell align="center">{danger10.length}</StyledTableCell>
+          <StyledTableCell
+            align="center"
+            onClick={() => Navigate(danger10[0].danger)}
+          >
+            <a href="#">{danger10.length}</a>
+          </StyledTableCell>
           <StyledTableCell align="right">
             {Percentage(danger10.length, posts.length)}
           </StyledTableCell>

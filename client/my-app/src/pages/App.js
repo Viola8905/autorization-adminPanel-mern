@@ -12,6 +12,7 @@ import AuthPage from './AuthPage';
 import ReqPosts from "./ReqPosts";
 import SeeUsers from "./SeeUsers";
 import MyPosts from './MyPosts';
+import LevelOfDPosts from "./LevelOfDPosts";
 function App() {
   
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -27,8 +28,9 @@ function App() {
           <Route exact path="/registration" element={<AuthPage />} />
           Ctrl + click on "Main" to reach a code of this page
           <Route exact path="/login" element={<AuthPage />} />
-          <Route exact path="/" element={<MainPage/>} />
+          <Route exact path="/" element={<MainPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
+          <Route exact path="/danger/:danger" element={<LevelOfDPosts/>} />
           <Route exact path="/user" element={<AuthPage />} />
         </Routes>
       );
