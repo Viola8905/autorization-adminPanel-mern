@@ -13,7 +13,6 @@ const Auth = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.user.role);
 
-  const [success, setSuc] = useState(0);
 
   const navigate = useNavigate();
 

@@ -33,10 +33,10 @@ export const login = (username, password, success, failure) => {
 
       //console.log(response.data.user.roles);
       success();
-      if (response.data.user.roles == "USER") {
-        dispatch(setUser(response.data.user));
+      if (response.data.user.roles.includes("ADMIN")) {
+				dispatch(setAdmin(response.data.user));
       } else {
-        dispatch(setAdmin(response.data.user));
+        dispatch(setUser(response.data.user));
       }
     } catch (e) {
       failure();

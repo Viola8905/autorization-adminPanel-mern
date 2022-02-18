@@ -59,7 +59,7 @@ const LevelOfDPosts = () => {
      dispatch(fetchData());
    }, [filter, params]);
 	return (
-    <div>
+    <div style={{overflow:"hidden"}}>
       
       <Grid container spacing={2}>
         {posts.map((post) => (
