@@ -45,10 +45,8 @@ const ItemPage = () => {
 	const role = useSelector((state) => state.user.role);
 	const isAuth = useSelector((state) => state.user.isAuth);
   const location = useParams();
-  //console.log(location);
 
   let params = parseInt(location.mainId);
-  //console.log(typeof params);
 
   //Component state
   const [posts, setPosts] = useState([]);

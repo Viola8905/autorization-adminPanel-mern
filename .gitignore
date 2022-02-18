@@ -3,3 +3,5 @@ client/my-app/node_modules
 /server/node_modules
 server/config.js
 .log
+DebugPage.js
+.vscode

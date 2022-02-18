@@ -4,7 +4,6 @@ const Post = require("../models/Posts");
 const asyncHandler = require("../middleware/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 
-
 exports.getAllReqPosts = asyncHandler(async (req, res, next) => {
   //..../api/v1/bootcamps&price[lte]=1000&sort=-price
   let query;
@@ -43,7 +42,6 @@ exports.getAllReqPosts = asyncHandler(async (req, res, next) => {
     data: posts,
   });
 });
-
 
 exports.getAllRejPosts = asyncHandler(async (req, res, next) => {
   //..../api/v1/bootcamps&price[lte]=1000&sort=-price
@@ -84,8 +82,6 @@ exports.getAllRejPosts = asyncHandler(async (req, res, next) => {
   });
 });
 
-
-
 exports.createNewReqPost = asyncHandler(async (req, res, next) => {
   const { arr } = req.body;
   const post = await ReqPost.create(arr);
@@ -97,31 +93,28 @@ exports.createNewReqPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.moveReqPost = asyncHandler(async (req, res, next) => {
-  
- const { arr } = req.body;
- const post = await Post.create(arr);
- const rejPost = await RejPost.create(arr);
-
- res.status(201).json({
-   success: true,
-   data: post,
- });
-});
-
-exports.moveToRejected = asyncHandler(async (req, res, next) => {
   const { arr } = req.body;
-  
+  const post = await Post.create(arr);
   const rejPost = await RejPost.create(arr);
 
   res.status(201).json({
     success: true,
-   
+    data: post,
   });
 });
 
+exports.moveToRejected = asyncHandler(async (req, res, next) => {
+  const { arr } = req.body;
+
+  const rejPost = await RejPost.create(arr);
+
+  res.status(201).json({
+    success: true,
+  });
+});
 
 exports.deleteReqPostById = asyncHandler(async (req, res, next) => {
-	let post = await ReqPost.findOneAndDelete({ _id: req.params._id });
+  let post = await ReqPost.findOneAndDelete({ _id: req.params._id });
 
   if (!post) {
     return next(new ErrorResponse("bootcamp with this id was not found", 404));
@@ -130,5 +123,4 @@ exports.deleteReqPostById = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
-	  
 });

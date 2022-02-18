@@ -94,7 +94,6 @@ const PostGallery = () => {
               },
             }
           );
-          //console.log(response.data.data);
           setPosts(response.data.data);
           setDanger1(response.data.data.filter((post) => post.danger == "1"));
           setDanger2(response.data.data.filter((post) => post.danger == "2"));

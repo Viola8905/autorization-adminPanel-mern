@@ -47,7 +47,6 @@ const user = useSelector((state) => state.user.currentUser.username);
               },
             }
           );
-          //console.log(response.data.data);
           setAllPosts([
             ...response.data.data.filter((post) => post.user == user),
           ]);
@@ -76,7 +75,6 @@ const user = useSelector((state) => state.user.currentUser.username);
               },
             }
           );
-          //console.log(response.data.data);
           setReqPosts([
             ...response.data.data.filter((post) => post.user == user),
           ]);
@@ -103,7 +101,6 @@ const user = useSelector((state) => state.user.currentUser.username);
               },
             }
           );
-          //console.log(response.data.data);
            setRejPosts([
              ...response.data.data.filter((post) => post.user == user),
            ]);

@@ -2,23 +2,20 @@ import axios from "axios";
 import { getUser, setAdmin, setUser } from "../reducers/userReducer";
 
 export const registration = async (username, password) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:5000/api/registration`,
+      {
+        username,
+        password,
+      }
+    );
 
-		try {
-      const response = await axios.post(
-        `http://localhost:5000/api/registration`,
-        {
-          username,
-          password,
-        }
-      );
-		
-      alert("User is registered");
-    } catch (e) {
-      //localStorage.removeItem("token");
-      alert(e.response.data.message);
-    }
-	
-  
+    alert("User is registered");
+  } catch (e) {
+    //localStorage.removeItem("token");
+    alert(e.response.data.message);
+  }
 };
 
 export const login = (username, password) => {
@@ -28,25 +25,22 @@ export const login = (username, password) => {
         username,
         password,
       });
-			
-      localStorage.setItem("token", response.data.token);
-			
 
-      //console.log(response.data.user.roles);
-      if (response.data.user.roles == "USER") {
+      localStorage.setItem("token", response.data.token);
+
+      if (response.data.user.roles === "USER") {
         dispatch(setUser(response.data.user));
-				
       } else {
         dispatch(setAdmin(response.data.user));
       }
     } catch (e) {
-			localStorage.removeItem("token");
+      localStorage.removeItem("token");
       alert(e.response.data.message);
     }
   };
 };
 
-export const deletePost = (id,success,failure) => {
+export const deletePost = (id, success, failure) => {
   return async () => {
     try {
       const response = await axios.delete(
@@ -56,19 +50,15 @@ export const deletePost = (id,success,failure) => {
         }
       );
 
-      if(response.data.success == true){
-				success();
-			}else{
-				failure();
-			}
-
-     
+      if (response.data.success === true) {
+        success();
+      } else {
+        failure();
+      }
     } catch (e) {
-		
       alert("You are not an admin");
       console.log(e.response.data + "post was not deleted");
       console.log(JSON.stringify(e.response));
-      
     }
   };
 };
@@ -80,15 +70,13 @@ export const createPost = (arr, success, failure) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         arr,
       });
-			if (response.data.success == true) {
+      if (response.data.success === true) {
         success();
-				//alert("Post was  added");
+        //alert("Post was added");
       } else {
-				alert("Title must be unique");
+        alert("Title must be unique");
         failure();
-				
       }
-      
     } catch (e) {
       alert("Post was not added");
       console.log(JSON.stringify(e.response));
@@ -97,6 +85,31 @@ export const createPost = (arr, success, failure) => {
   };
 };
 
+export const updatePost = (arr, success, failure) => {
+  return async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/posts/${arr._id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          arr,
+        }
+      );
+      if (response.data.success === true) {
+        success();
+        //alert("Post was added");
+      } else {
+        alert("Title must be unique");
+        failure();
+      }
+      success();
+    } catch (e) {
+      failure();
+      console.log(e.response.data);
+      console.log(JSON.stringify(e.response));
+    }
+  };
+};
 
 export const createReqPost = (arr) => {
   return async () => {
@@ -105,7 +118,7 @@ export const createReqPost = (arr) => {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         arr,
       });
-     alert("Post is waiting for confirm");
+      alert("Post is waiting for confirm");
     } catch (e) {
       alert("Title field must be unique");
       console.log(JSON.stringify(e.response));
@@ -114,15 +127,16 @@ export const createReqPost = (arr) => {
   };
 };
 
-
-
 export const moveReqPost = (arr) => {
   return async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/reqPosts/move`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        arr,
-      });
+      const response = await axios.post(
+        `http://localhost:5000/api/reqPosts/move`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          arr,
+        }
+      );
       //alert("Post was added into main db");
     } catch (e) {
       alert("Post was not added");
@@ -151,8 +165,6 @@ export const moveToRejected = (arr) => {
   };
 };
 
-
-
 export const deleteReqPost = (id, success, failure) => {
   return async () => {
     try {
@@ -163,7 +175,7 @@ export const deleteReqPost = (id, success, failure) => {
         }
       );
 
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         success();
       } else {
         failure();
@@ -188,7 +200,7 @@ export const deleteUser = (id, success, failure) => {
         }
       );
 
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         success();
       } else {
         failure();
@@ -202,5 +214,3 @@ export const deleteUser = (id, success, failure) => {
     }
   };
 };
-
-

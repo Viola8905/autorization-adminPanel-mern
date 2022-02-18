@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { createPost, deletePost} from "../api/apiRequests";
+import { createPost, deletePost } from "../api/apiRequests";
 import { Paper, Container, Grid, makeStyles } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
 import { useLocation } from "react-router-dom";
@@ -35,7 +35,8 @@ const useStyles = makeStyles({
 const Admin = () => {
   const classes = useStyles(); //for css styling
 
-  //Side effects(loaded posts to frontend network)
+  // Side effects(loaded posts to frontend network)
+
   const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState("");
@@ -44,37 +45,33 @@ const Admin = () => {
 
   const params = location.search ? location.search : null;
 
-
-
-    useEffect(() => {
-      function Posts() {
-        return async (dispatch) => {
-          try {
-            let query;
-            if (params && !filter) {
-              query = params;
-            } else {
-              query = filter;
-            }
-            const response = await axios.get(
-              `http://localhost:5000/api/posts${query}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              }
-            );
-            //console.log(response.data.data);
-            setPosts(response.data.data);
-          } catch (e) {
-            console.log(e.response.data);
-            localStorage.removeItem("token");
+  useEffect(() => {
+    function Posts() {
+      return async (dispatch) => {
+        try {
+          let query;
+          if (params && !filter) {
+            query = params;
+          } else {
+            query = filter;
           }
-        };
-      }
-      dispatch(Posts());
-    }, [params, filter]);
-  
+          const response = await axios.get(
+            `http://localhost:5000/api/posts${query}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+          setPosts(response.data.data);
+        } catch (e) {
+          console.log(e.response.data);
+          localStorage.removeItem("token");
+        }
+      };
+    }
+    dispatch(Posts());
+  }, [params, filter]);
 
   //For adding new post
   const dispatch = useDispatch();
@@ -84,6 +81,7 @@ const Admin = () => {
   const [description1, setDescription1] = useState("");
   const [complexity1, setComplexity1] = useState("");
   const [links1, setLinks1] = useState("");
+
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
@@ -97,36 +95,35 @@ const Admin = () => {
     complexity: complexity1,
     links: links1,
     mainId: mainId,
-		user:'none',
-
+    user: "none",
   };
 
   const addPost = (arr) => {
     let posts1 = posts.find((item) => item.name === arr.name);
 
     if (!posts1) {
-     
-
       dispatch(
         createPost(
           arr,
           () => setPosts([...posts, arr]),
-          () => alert("ERRRROOOR")
+          () => alert("Error")
         )
       );
-      
     } else {
       alert("title must be unique");
     }
   };
 
-	
   //removing post function
-	
+
   const removePost = (id) => {
-	
-    dispatch(deletePost(id, () => setPosts([...posts.filter((post) => post._id !== id)]), () => alert('ERRRROOOR')));
-		
+    dispatch(
+      deletePost(
+        id,
+        () => setPosts([...posts.filter((post) => post._id !== id)]),
+        () => alert("ERRRROOOR")
+      )
+    );
   };
 
   const [name, setName] = useState("");
@@ -155,11 +152,13 @@ const Admin = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(post),
-    }).then(() => {
-      console.log("post updated");
-    }).catch((error) => {
-		console.error('Error',error);
-		})
+    })
+      .then(() => {
+        console.log("post updated");
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      });
 
     for (let i = 0; i < posts.length; i++) {
       if (posts[i]._id == postId) {
@@ -199,7 +198,6 @@ const Admin = () => {
                 onChange={(e) => {
                   setDescription1(e.target.value);
                 }}
-             
                 type="text"
                 placeholder="enter description"
               />

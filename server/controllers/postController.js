@@ -51,14 +51,13 @@ exports.createNewPost = asyncHandler(async (req, res, next) => {
   });
 });
 exports.updatePostById = asyncHandler(async (req, res, next) => {
- 
   let post = await Post.findById(req.params.id);
 
   if (!post) {
     return next(new ErrorResponse("post with this id was not found", 404));
   }
 
-  post = await Post.findOneAndUpdate({ _id:req.params.id }, req.body, {
+  post = await Post.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true,
     runValidators: true,
   });
@@ -69,7 +68,7 @@ exports.updatePostById = asyncHandler(async (req, res, next) => {
   });
 });
 exports.deletePostById = asyncHandler(async (req, res, next) => {
-  let post = await Post.findOneAndDelete({ _id : req.params._id });
+  let post = await Post.findOneAndDelete({ _id: req.params._id });
 
   if (!post) {
     return next(new ErrorResponse("bootcamp with this id was not found", 404));

@@ -43,7 +43,6 @@ const ReqPosts = () => {
               },
             }
           );
-          //console.log(response.data.data);
           setReqPosts(response.data.data);
         } catch (e) {
           console.log(e.response.data);

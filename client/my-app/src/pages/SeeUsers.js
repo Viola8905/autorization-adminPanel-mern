@@ -38,7 +38,6 @@ const SeeUsers = () => {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           });
-          //console.log(response.data.data);
           setAllUsers(response.data);
         } catch (e) {
           console.log(e.response.data);

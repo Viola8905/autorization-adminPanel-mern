@@ -6,10 +6,9 @@ const ReqPostController = require("./controllers/reqPostsController");
 const { check } = require("express-validator");
 const authMiddleware = require("./middleware/authMiddleware");
 const roleMiddleware = require("./middleware/roleMiddleware");
-const Post= require("./models/Posts");
+const Post = require("./models/Posts");
 const User = require("./models/User");
 const { secret } = require("./config");
-
 
 router.post(
   "/registration",
@@ -24,13 +23,16 @@ router.post(
 );
 router.post("/login", AuthController.login);
 router.get("/users", roleMiddleware(["ADMIN"]), AuthController.getUsers);
-router.delete("/users/:_id", roleMiddleware(["ADMIN"]), AuthController.deleteUserById);
+router.delete(
+  "/users/:_id",
+  roleMiddleware(["ADMIN"]),
+  AuthController.deleteUserById
+);
 router.delete(
   "/posts/:_id",
-	roleMiddleware(["ADMIN"]),
+  roleMiddleware(["ADMIN"]),
   PostController.deletePostById
 );
-
 
 router.get("/posts/", PostController.getAllPosts);
 
@@ -40,21 +42,20 @@ router
 router
   .route("/posts/:id", roleMiddleware(["ADMIN"]))
   .put(PostController.updatePostById);
-  
 
 router.route("/posts/:mainId").get(PostController.getById);
-
 
 router.get("/reqPosts/", authMiddleware, ReqPostController.getAllReqPosts);
 router.get("/rejPosts/", authMiddleware, ReqPostController.getAllRejPosts);
 
 router.delete(
-  "/reqPosts/:_id",roleMiddleware(["ADMIN"]),
+  "/reqPosts/:_id",
+  roleMiddleware(["ADMIN"]),
   ReqPostController.deleteReqPostById
 );
 router.post(
   "/reqPosts/move",
-  
+
   ReqPostController.moveReqPost
 );
 router.post(
@@ -63,16 +64,8 @@ router.post(
   ReqPostController.moveToRejected
 );
 
-
 router
   .route("/reqPosts/", authMiddleware)
   .post(ReqPostController.createNewReqPost);
-
-
-
-
-
-
-
 
 module.exports = router;
