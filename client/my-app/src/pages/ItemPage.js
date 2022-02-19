@@ -1,49 +1,18 @@
-import { useState, useEffect } from "react";
-import {
- 
-  Container,
-  Grid,
-  makeStyles,
-	Button
-} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-
-import React from "react";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
- 
+import { useStyles } from "../styles/global";
+import { Container, Grid, Button } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: {
-    marginTop: 10,
-  },
-  loader: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  paper: {
-    marginBottom: "1rem",
-    padding: 20,
-  },
-  filters: {
-    padding: " 0 1.5rem",
-  },
-  priceRangeInputs: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-});
 const ItemPage = () => {
   // Material ui styles
   const dispatch = useDispatch();
   const classes = useStyles();
 
-	const role = useSelector((state) => state.user.role);
-	const isAuth = useSelector((state) => state.user.isAuth);
+  const role = useSelector((state) => state.user.role);
+  const isAuth = useSelector((state) => state.user.isAuth);
   const location = useParams();
 
   let params = parseInt(location.mainId);
@@ -65,7 +34,6 @@ const ItemPage = () => {
             query = filter;
           }
 
-      
           const response = await axios.get(
             `http://localhost:5000/api/posts/${query}`,
             {
@@ -74,7 +42,7 @@ const ItemPage = () => {
               },
             }
           );
-   
+
           setPosts(response.data.data);
         } catch (error) {
           console.log(error.response.data);
@@ -86,24 +54,22 @@ const ItemPage = () => {
     dispatch(fetchData());
   }, [filter, params]);
 
-
-	
-	
-
-
   return (
     <Container className={classes.root}>
       {/* //go to main page button */}
-      { !isAuth ? ( <Link to="/">
+      {!isAuth ? (
+        <Link to="/">
           <Button variant="outlined" size="small">
             Back
           </Button>
-        </Link>):(<Link to="/user">
-         <Button variant="outlined" size="small">
-           Back
-         </Button>
-       </Link>) 
-			 }
+        </Link>
+      ) : (
+        <Link to="/user">
+          <Button variant="outlined" size="small">
+            Back
+          </Button>
+        </Link>
+      )}
 
       {/* //Chosen bootcamp listening */}
       <Grid container spacing={2}>

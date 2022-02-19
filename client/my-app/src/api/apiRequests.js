@@ -27,11 +27,11 @@ export const login = (username, password) => {
       });
 
       localStorage.setItem("token", response.data.token);
-
-      if (response.data.user.roles === "USER") {
-        dispatch(setUser(response.data.user));
-      } else {
+      console.log(response.data.user.roles);
+      if (response.data.user.roles.includes("ADMIN")) {
         dispatch(setAdmin(response.data.user));
+      } else {
+        dispatch(setUser(response.data.user));
       }
     } catch (e) {
       localStorage.removeItem("token");

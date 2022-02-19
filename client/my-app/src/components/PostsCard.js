@@ -54,9 +54,9 @@ const PostCard = ({
             <Typography variant="h6">{post.danger}</Typography>
             <Typography variant="h6">{post.complexity}</Typography>
             <Typography variant="h6">{post.links}</Typography>
-            <Typography variant="h6" onClick={showCard}>
-              show card
-            </Typography>
+            <Button variant="outlined" color="primary" onClick={showCard}>
+              Details
+            </Button>
             {role ? (
               <>
                 <Button
@@ -82,7 +82,6 @@ const PostCard = ({
             ) : (
               <></>
             )}
-            <Button onClick={() => console.log(role)}>Log role</Button>
           </CardContent>
         </Card>
       );

@@ -74,8 +74,6 @@ const PostGallery = () => {
   const [danger9, setDanger9] = useState([]);
   const [danger10, setDanger10] = useState([]);
 
-  
-  //Side effects(loaded data to frontend network)
   useEffect(() => {
     const Posts = () => {
       return async () => {
@@ -115,8 +113,6 @@ const PostGallery = () => {
     dispatch(Posts());
   }, [params, filter]);
 
-  
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
   const lastPostIndex = currentPage * postsPerPage;
@@ -125,10 +121,9 @@ const PostGallery = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-	function Percentage(danger, coutOfPosts){
-		return <>{Math.ceil((danger / coutOfPosts) * 100)}%</>;
-		
-	}
+  function Percentage(danger, countOfPosts) {
+    return <>{Math.ceil((danger / countOfPosts) * 100)}%</>;
+  }
 
   return (
     <>
