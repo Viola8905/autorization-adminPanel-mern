@@ -45,8 +45,7 @@ function App() {
     } else if (isAuth && role === 0) {
       return (
         <Routes>
-          <Route exact path="/user" element={<UserPage />} /> // Ctrl + click on
-          "Main" to reach a code of this page
+          <Route exact path="/user" element={<UserPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/myPosts" element={<MyPosts />} />
           <Route exact path="/debug" element={<DebugPage />} />

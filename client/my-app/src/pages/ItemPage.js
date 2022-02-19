@@ -4,7 +4,14 @@ import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useStyles } from "../styles/global";
-import { Container, Grid, Button } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Button,
+  Paper,
+  Typography,
+  Link as MaterialLink,
+} from "@material-ui/core";
 
 const ItemPage = () => {
   // Material ui styles
@@ -59,7 +66,7 @@ const ItemPage = () => {
       {/* //go to main page button */}
       {!isAuth ? (
         <Link to="/">
-          <Button variant="outlined" size="small">
+          <Button className={classes.backButton} variant="outlined" size="small">
             Back
           </Button>
         </Link>
@@ -71,17 +78,64 @@ const ItemPage = () => {
         </Link>
       )}
 
-      {/* //Chosen bootcamp listening */}
-      <Grid container spacing={2}>
+      <Grid className={classes.flexColCenter} container spacing={2}>
         {posts.map((post) => (
-          <Grid item key={post._id} xs={12} sm={6} lg={3}>
-            Post number {post.mainId}
-            <div className="p"> name: {post.name}</div>
-            <div className="p"> description: {post.description}</div>
-            <div className="p"> danger: {post.danger}</div>
-            <div className="p"> complexity: {post.complexity}</div>
-            <div className="p"> links: {post.links}</div>
-            <div className="">hello</div>
+          <Grid
+            className={classes.fullWidthCenter}
+            item
+            key={post._id}
+            xs={12}
+            sm={6}
+            lg={3}
+          >
+            <Paper className={classes.fullWidth}>
+              <Typography className={classes.mainPageHeading} variant="h3">
+                {post.name}
+                <Typography className={classes.id}>
+                  #ID: {post.mainId}
+                </Typography>
+              </Typography>
+            </Paper>
+            <Paper className={classes.fullWidth}>
+              <div className={classes.cardInfoTileWrapper}>
+                <div className={classes.cardHeadingWrapper}>
+                  <Typography variant="h5">Description:</Typography>
+                </div>
+                <div className={classes.cardContentWrapper}>
+                  <Typography paragraph="true">{post.description}</Typography>
+                </div>
+              </div>
+              <div className={classes.flexRow}>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">CVSS Score:</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.danger}</Typography>
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">Complexity:</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.complexity}</Typography>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={classes.cardInfoTileWrapper}>
+                <div className={classes.cardHeadingWrapper}>
+                  <Typography variant="h5">References:</Typography>
+                </div>
+                <div className={classes.cardContentWrapper}>
+                  <MaterialLink href={post.links}>{post.links}</MaterialLink>
+                </div>
+              </div>
+            </Paper>
           </Grid>
         ))}
       </Grid>
