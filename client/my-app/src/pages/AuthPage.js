@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { login, registration } from "../api/apiRequests";
 import { useDispatch, useSelector } from "react-redux";
 

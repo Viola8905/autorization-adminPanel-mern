@@ -21,7 +21,11 @@ router.post(
   ],
   AuthController.registration
 );
-router.post("/login", AuthController.login);
+router.post(
+  "/login",
+  check("username", "Имя пользователя не может быть пустым").notEmpty(),
+  AuthController.login
+);
 router.get("/users", roleMiddleware(["ADMIN"]), AuthController.getUsers);
 router.delete(
   "/users/:_id",
