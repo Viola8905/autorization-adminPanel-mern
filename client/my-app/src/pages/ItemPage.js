@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,8 @@ const ItemPage = () => {
 
   const [filter, setFilter] = useState("");
 
-  //Side effects(loaded data to frontend network)
+  useLayoutEffect(() => {});
+
   useEffect(() => {
     const fetchData = () => {
       return async (dispatch) => {
@@ -66,13 +67,21 @@ const ItemPage = () => {
       {/* //go to main page button */}
       {!isAuth ? (
         <Link to="/">
-          <Button className={classes.backButton} variant="outlined" size="small">
+          <Button
+            className={classes.backButton}
+            variant="outlined"
+            size="small"
+          >
             Back
           </Button>
         </Link>
       ) : (
         <Link to="/user">
-          <Button variant="outlined" size="small">
+          <Button
+            className={classes.backButton}
+            variant="outlined"
+            size="small"
+          >
             Back
           </Button>
         </Link>
@@ -123,6 +132,16 @@ const ItemPage = () => {
                     </div>
                     <div className={classes.cardContentWrapper}>
                       <Typography>{post.complexity}</Typography>
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">Views:</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>17{post.views}</Typography>
                     </div>
                   </div>
                 </div>

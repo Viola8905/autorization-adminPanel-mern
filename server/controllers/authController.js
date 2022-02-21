@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const { secret } = require("../config");
-const asyncHandler = require("../middleware/asyncHandler");
 
 const generateAccessToken = (id, roles) => {
   const payload = {
@@ -38,8 +37,6 @@ class authController {
         roles: [userRole.value],
       });
       await user.save();
-
-      ////////
 
       return res.json({ message: "User is registered" });
     } catch (e) {

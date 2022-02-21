@@ -5,9 +5,11 @@ export const useStyles = makeStyles({
     display: "flex",
     gap: "10px",
     alignItems: "stretch",
+    justifyContent: "space-between",
   },
   rowItem: {
     flex: "1 1 auto",
+    minWidth: "100%",
   },
   flexColLeft: {
     display: "flex",
@@ -54,6 +56,7 @@ export const useStyles = makeStyles({
       "linear-gradient(0deg, rgba(100,142,190,1) 0%, rgba(138,190,250,1) 70%)",
     borderRadius: "0.5rem 0.5rem 0 0",
     padding: "10px",
+    minWidth: "100%",
   },
   cardContentWrapper: {
     padding: "10px",
@@ -63,6 +66,7 @@ export const useStyles = makeStyles({
     borderRadius: "0.5rem 0.5rem 0.5rem 0.5rem",
     boxShadow: "0px 0px 8px 0px rgba(34, 60, 80, 0.2)",
     marginBottom: "10px",
+    minWidth: "100%",
   },
   backButton: { margin: "10px 0", background: "white", textDecoration: "none" },
 });

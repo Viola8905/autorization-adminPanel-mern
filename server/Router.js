@@ -12,13 +12,11 @@ const { secret } = require("./config");
 
 router.post(
   "/registration",
-  [
-    check("username", "Имя пользователя не может быть пустым").notEmpty(),
-    check(
-      "password",
-      "Пароль должен быть больше 4 и меньше 10 символов"
-    ).isLength({ min: 4, max: 10 }),
-  ],
+  check("username", "Имя пользователя не может быть пустым").notEmpty(),
+  check(
+    "password",
+    ""
+  ).isLength({ min: 4, max: 10 }),
   AuthController.registration
 );
 router.post(
