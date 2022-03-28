@@ -12,7 +12,7 @@ app.use("/api", Router);
 const start = async () => {
   try {
     await mongoose.connect(
-      `mongodb+srv://adminPanel:adminPanel29@cluster0.hfhxt.mongodb.net/adminPanel?retryWrites=true&w=majority`
+      `mongodb+srv://artem:artem@cve-db.fktfh.mongodb.net/cve-db?retryWrites=true&w=majority`
     );
     app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
   } catch (e) {
@@ -21,3 +21,5 @@ const start = async () => {
 };
 
 start();
+
+// `mongodb+srv://adminPanel:adminPanel29@cluster0.hfhxt.mongodb.net/adminPanel?retryWrites=true&w=majority`

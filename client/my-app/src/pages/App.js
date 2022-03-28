@@ -35,7 +35,7 @@ function App() {
     } else if (isAuth && role === 1) {
       return (
         <Routes>
-          <Route exact path="/user" element={<Admin />} />
+          <Route exact path="/user" element={<DebugPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/reqPosts" element={<ReqPosts />} />
           <Route exact path="/seeUsers" element={<SeeUsers />} />

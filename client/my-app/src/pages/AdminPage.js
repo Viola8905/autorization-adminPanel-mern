@@ -8,6 +8,7 @@ import { Paper, Container, Grid, makeStyles } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
 import { useLocation } from "react-router-dom";
 import Input from "../components/input/Input";
+import { v4 } from "uuid";
 
 const useStyles = makeStyles({
   root: {
@@ -82,11 +83,11 @@ const Admin = () => {
   const [complexity1, setComplexity1] = useState("");
   const [links1, setLinks1] = useState("");
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
+  function generateID() {
+    return v4();
   }
 
-  const mainId = getRandomInt(10, 100);
+  const mainId = generateID();
 
   let arr = {
     name: name1,

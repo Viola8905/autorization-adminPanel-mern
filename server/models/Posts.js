@@ -25,7 +25,7 @@ const Post = new Schema({
     required: [true, "Please provide link to the post"],
   },
   mainId: {
-    type: Number,
+    type: String,
     required: [true, "Please provide link to the post"],
     unique: true,
   },

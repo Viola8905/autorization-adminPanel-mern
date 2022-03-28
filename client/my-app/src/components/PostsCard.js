@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useStyles } from "../styles/global";
+import { Rating } from "@mui/material";
 
 const PostCard = ({
   post,
@@ -49,12 +50,30 @@ const PostCard = ({
           <CardHeader
             title={<Typography variant="h6">{post.name}</Typography>}
           />
-          <CardContent>
+          <CardContent
+            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+          >
             <Typography variant="caption">{post.description}</Typography>
-            <Typography variant="h6">{post.danger}</Typography>
-            <Typography variant="h6">{post.complexity}</Typography>
-            <Typography variant="h6">{post.links}</Typography>
-            <Button variant="outlined" color="primary" onClick={showCard}>
+            <Typography variant="h6">CVSS Score: {post.danger}</Typography>
+            <Rating
+              value={post.danger}
+              readOnly
+              size="medium"
+              precision={0.1}
+              max={10}
+            />
+            <Typography variant="h6">
+              Access complexity: {post.complexity}
+            </Typography>
+            <Typography style={{ display: "block" }} variant="caption">
+              {post.links}
+            </Typography>
+            <Button
+              variant="outlined"
+              color="primary"
+              style={{ padding: "10px 0", marginBottom: "10px" }}
+              onClick={showCard}
+            >
               Details
             </Button>
             {role ? (
@@ -66,6 +85,7 @@ const PostCard = ({
                   }}
                   variant="contained"
                   color="primary"
+                  style={{ padding: "10px 0", marginBottom: "10px" }}
                 >
                   Update
                 </Button>
@@ -74,7 +94,8 @@ const PostCard = ({
                     removePost(post._id);
                   }}
                   variant="contained"
-                  color="primary"
+                  color="secondary"
+                  style={{ padding: "10px 0" }}
                 >
                   Delete
                 </Button>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { v4 } from "uuid";
 
 import { useDispatch } from "react-redux";
 import { createPost, deletePost } from "../api/apiRequests";
-import { Paper, Container, Grid, makeStyles } from "@material-ui/core";
+import { Paper, Container, Grid, makeStyles, Button } from "@material-ui/core";
 import PostCard from "../components/PostsCard";
 import { useLocation } from "react-router-dom";
 import Input from "../components/input/Input";
@@ -81,7 +82,7 @@ const DebugPage = () => {
   //For adding new post
   const dispatch = useDispatch();
 
-  const mainId = getRandomInt(10, 100);
+  const mainId = generateID();
   const [name, setName] = useState("");
   const [danger, setDangerLevel] = useState("");
   const [description, setDescription] = useState("");
@@ -95,8 +96,8 @@ const DebugPage = () => {
   const [complexityAdd, setComplexityAdd] = useState("");
   const [linksAdd, setLinksAdd] = useState("");
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
+  function generateID() {
+    return v4();
   }
 
   let postFields = {
@@ -187,6 +188,14 @@ const DebugPage = () => {
               />
               <br />
               <textarea
+                style={{
+                  padding: "10px",
+                  marginBottom: "10px",
+                  border: "1px solid gray",
+                  borderRadius: "5px",
+                  resize: "vertical",
+                  maxHeight: "200px",
+                }}
                 value={descriptionAdd}
                 onChange={(e) => {
                   setDescriptionAdd(e.target.value);
@@ -210,7 +219,13 @@ const DebugPage = () => {
               />
               <br />
 
-              <button onClick={() => addPost(postFields)}>Push</button>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={() => addPost(postFields)}
+              >
+                Push
+              </Button>
             </Grid>
           </Grid>
         </Paper>

@@ -6,17 +6,12 @@ const ReqPostController = require("./controllers/reqPostsController");
 const { check } = require("express-validator");
 const authMiddleware = require("./middleware/authMiddleware");
 const roleMiddleware = require("./middleware/roleMiddleware");
-const Post = require("./models/Posts");
-const User = require("./models/User");
 const { secret } = require("./config");
 
 router.post(
   "/registration",
   check("username", "Имя пользователя не может быть пустым").notEmpty(),
-  check(
-    "password",
-    ""
-  ).isLength({ min: 4, max: 10 }),
+  check("password", "").isLength({ min: 4, max: 10 }),
   AuthController.registration
 );
 router.post(
