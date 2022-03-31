@@ -1,0 +1,6 @@
+.navbar{
+	height:50px;
+	background-color: aqua;
+	display: flex;
+	justify-content: space-around;
+}
