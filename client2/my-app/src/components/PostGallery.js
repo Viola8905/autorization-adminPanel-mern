@@ -45,6 +45,7 @@ const PostGallery = () => {
     },
   }));
 
+
   const useStyles = makeStyles({
     root: {
       marginTop: 10,
@@ -125,6 +126,14 @@ const PostGallery = () => {
     return <>{Math.ceil((danger / countOfPosts) * 100)}%</>;
   }
 
+		const navigate = useNavigate();
+
+    function Navigate(danger) {
+      if (danger) {
+        navigate(`/danger/${danger}`);
+      }
+    }
+
   return (
     <>
       <TableContainer component={Paper} style={{ margin: "30px 0" }}>
@@ -141,11 +150,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#3ca64d" }}
+              style={{ backgroundColor: "#3ca64d", fontWeight: 700 }}
             >
               level of danger: 1
             </StyledTableCell>
-            <StyledTableCell align="center">{danger1.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger1[0].danger)}
+            >
+              <a href="#">{danger1.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger1.length, posts.length)}
             </StyledTableCell>
@@ -153,11 +167,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#4dd663" }}
+              style={{ backgroundColor: "#4dd663", fontWeight: 700 }}
             >
               level of danger: 2
             </StyledTableCell>
-            <StyledTableCell align="center">{danger2.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger2[0].danger)}
+            >
+              <a href="#">{danger2.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger2.length, posts.length)}
             </StyledTableCell>
@@ -165,11 +184,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#5df575" }}
+              style={{ backgroundColor: "#5df575", fontWeight: 700 }}
             >
               level of danger: 3
             </StyledTableCell>
-            <StyledTableCell align="center">{danger3.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger3[0].danger)}
+            >
+              <a href="#">{danger3.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger3.length, posts.length)}
             </StyledTableCell>
@@ -177,11 +201,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#c7f55d" }}
+              style={{ backgroundColor: "#c7f55d", fontWeight: 700 }}
             >
               level of danger: 4
             </StyledTableCell>
-            <StyledTableCell align="center">{danger4.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger4[0].danger)}
+            >
+              <a href="#">{danger4.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger4.length, posts.length)}
             </StyledTableCell>
@@ -189,11 +218,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#e3f55d" }}
+              style={{ backgroundColor: "#e3f55d", fontWeight: 700 }}
             >
               level of danger: 5
             </StyledTableCell>
-            <StyledTableCell align="center">{danger5.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger5[0].danger)}
+            >
+              <a href="#">{danger5.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger5.length, posts.length)}
             </StyledTableCell>
@@ -201,11 +235,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5e15d" }}
+              style={{ backgroundColor: "#f5e15d", fontWeight: 700 }}
             >
               level of danger: 6
             </StyledTableCell>
-            <StyledTableCell align="center">{danger6.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger6[0].danger)}
+            >
+              <a href="#">{danger6.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger6.length, posts.length)}
             </StyledTableCell>
@@ -213,11 +252,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5cc5d" }}
+              style={{ backgroundColor: "#f5cc5d", fontWeight: 700 }}
             >
               level of danger: 7
             </StyledTableCell>
-            <StyledTableCell align="center">{danger7.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger7[0].danger)}
+            >
+              <a href="#">{danger7.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger7.length, posts.length)}
             </StyledTableCell>
@@ -225,11 +269,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5ac5d" }}
+              style={{ backgroundColor: "#f5ac5d", fontWeight: 700 }}
             >
               level of danger: 8
             </StyledTableCell>
-            <StyledTableCell align="center">{danger8.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger8[0].danger)}
+            >
+              <a href="#">{danger8.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger8.length, posts.length)}
             </StyledTableCell>
@@ -237,11 +286,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f5885d" }}
+              style={{ backgroundColor: "#f5885d", fontWeight: 700 }}
             >
               level of danger: 9
             </StyledTableCell>
-            <StyledTableCell align="center">{danger9.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger9[0].danger)}
+            >
+              <a href="#">{danger9.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger9.length, posts.length)}
             </StyledTableCell>
@@ -249,11 +303,16 @@ const PostGallery = () => {
           <TableBody>
             <StyledTableCell
               align="center"
-              style={{ backgroundColor: "#f55d5d" }}
+              style={{ backgroundColor: "#f55d5d", fontWeight: 700 }}
             >
               level of danger: 10
             </StyledTableCell>
-            <StyledTableCell align="center">{danger10.length}</StyledTableCell>
+            <StyledTableCell
+              align="center"
+              onClick={() => Navigate(danger10[0].danger)}
+            >
+              <a href="#">{danger10.length}</a>
+            </StyledTableCell>
             <StyledTableCell align="right">
               {Percentage(danger10.length, posts.length)}
             </StyledTableCell>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useStyles } from "../styles/global";
@@ -12,6 +12,7 @@ import {
   Typography,
   Link as MaterialLink,
 } from "@material-ui/core";
+import BackBtn from "../components/backBtn/BackBtn";
 
 const ItemPage = () => {
   // Material ui styles
@@ -62,30 +63,12 @@ const ItemPage = () => {
     dispatch(fetchData());
   }, [filter, params]);
 
+  const navigate = useNavigate();
+
   return (
     <Container className={classes.root}>
       {/* //go to main page button */}
-      {!isAuth ? (
-        <Link to="/">
-          <Button
-            className={classes.backButton}
-            variant="outlined"
-            size="small"
-          >
-            Back
-          </Button>
-        </Link>
-      ) : (
-        <Link to="/user">
-          <Button
-            className={classes.backButton}
-            variant="outlined"
-            size="small"
-          >
-            Back
-          </Button>
-        </Link>
-      )}
+			<BackBtn/>
 
       <Grid className={classes.flexColCenter} container spacing={2}>
         {posts.map((post) => (

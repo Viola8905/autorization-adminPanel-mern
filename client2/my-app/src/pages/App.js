@@ -14,6 +14,8 @@ import SeeUsers from "./SeeUsers";
 import MyPosts from "./MyPosts";
 import DebugPage from './Debug';
 import NavBar from "../components/navbar/NavBar";
+import LevelOfPosts from "../components/LevelOfPosts";
+
 
 function App() {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -31,6 +33,7 @@ function App() {
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/user" element={<AuthPage />} />
           <Route exact path="/debug" element={<DebugPage />} />
+          <Route exact path="/danger/:danger" element={<LevelOfPosts/>} />
         </Routes>
       );
     } else if (isAuth && role === 1) {
