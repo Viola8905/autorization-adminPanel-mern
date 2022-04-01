@@ -5,7 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { createPost, deletePost } from "../api/apiRequests";
 import { Paper, Container, Grid, makeStyles } from "@material-ui/core";
-import PostCard from "../components/PostsCard";
+import PostCard from "../components/ConfirmedPostsCard";
 import { useLocation } from "react-router-dom";
 import Input from "../components/input/Input";
 import { v4 } from "uuid";

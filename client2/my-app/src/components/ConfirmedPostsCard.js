@@ -46,14 +46,22 @@ const PostCard = ({
   function renderCard(role, isEditing) {
     if (!isEditing) {
       return (
-        <Card>
+        <Card className="post-card">
           <CardHeader
             title={<Typography variant="h6">{post.name}</Typography>}
           />
           <CardContent
-            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+							height: "100%",
+              gap: "10px",
+              justifyContent: "space-between",
+            }}
           >
-            <Typography variant="caption">{post.description}</Typography>
+            <Typography variant="caption" className="description_block">
+              {post.description}
+            </Typography>
             <Typography variant="h6">CVSS Score: {post.danger}</Typography>
             <Rating
               value={post.danger}

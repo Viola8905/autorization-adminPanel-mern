@@ -6,6 +6,7 @@ const BackBtn = () => {
   return (
     <Button
     //  className={classes.backButton}
+			style={{margin:"10px 0",backgroundColor:"black",color:"white"}}
       variant="outlined"
       size="small"
       onClick={() => navigate(-1)}

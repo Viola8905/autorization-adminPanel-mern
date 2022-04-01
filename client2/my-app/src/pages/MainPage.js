@@ -10,7 +10,7 @@ import {
   Grid,
   makeStyles,
 } from "@material-ui/core";
-import PostCard from "../components/PostsCard";
+import PostCard from "../components/ConfirmedPostsCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import Filter from "../components/Filter";
 import PostGallery from "../components/PostGallery";

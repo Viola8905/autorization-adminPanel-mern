@@ -63,6 +63,8 @@ router.post(
   ReqPostController.moveToRejected
 );
 
+router.route("/requested/:mainId").get(ReqPostController.getReqPostById);
+
 
 router
   .route("/reqPosts/", authMiddleware)

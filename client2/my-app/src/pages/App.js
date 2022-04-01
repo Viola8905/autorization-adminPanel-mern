@@ -15,6 +15,7 @@ import MyPosts from "./MyPosts";
 import DebugPage from './Debug';
 import NavBar from "../components/navbar/NavBar";
 import LevelOfPosts from "../components/LevelOfPosts";
+import ReqPostDetails from "./ReqPostDetails";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/user" element={<DebugPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/reqPosts" element={<ReqPosts />} />
+          <Route exact path="/requested/:mainId" element={<ReqPostDetails />} />
           <Route exact path="/seeUsers" element={<SeeUsers />} />
           <Route exact path="/debug" element={<DebugPage />} />
         </Routes>

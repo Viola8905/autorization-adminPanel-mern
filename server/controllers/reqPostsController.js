@@ -132,3 +132,15 @@ exports.deleteReqPostById = asyncHandler(async (req, res, next) => {
   });
 	  
 });
+
+
+exports.getReqPostById = asyncHandler(async (req, res, next) => {
+  let post = await ReqPost.find({ mainId: req.params.mainId });
+  if (!post) {
+    return next(new ErrorResponse("bootcamp with this id was not found", 404));
+  }
+  res.status(200).json({
+    success: true,
+    data: post,
+  });
+});

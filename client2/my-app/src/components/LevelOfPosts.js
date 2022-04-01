@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid,Container } from "@material-ui/core";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import PostCard from "./PostsCard";
-
-// 
+import PostCard from "./ConfirmedPostsCard";
+import BackBtn from "./backBtn/BackBtn";
 
 
 
@@ -63,13 +62,16 @@ const LevelOfDPosts = () => {
     dispatch(fetchData());
   }, [filter, params]);
   return (
-    <Grid container spacing={2}>
-      {posts.map((post) => (
-        <Grid item key={post._id} xs={12} sm={6} lg={6}>
-          <PostCard post={post} posts={posts} />
-        </Grid>
-      ))}
-    </Grid>
+		<Container style={{marginTop:"10px"}}>
+			<BackBtn/>
+			<Grid container spacing={2}>
+				{posts.map((post) => (
+					<Grid item key={post._id} xs={12} sm={6} lg={6}>
+						<PostCard post={post} posts={posts} />
+					</Grid>
+				))}
+			</Grid>
+		</Container>
   );
 };
 

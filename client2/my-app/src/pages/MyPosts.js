@@ -1,21 +1,29 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Paper,
   Typography,
   Container,
   Grid,
   makeStyles,
+  Card,
+  CardContent,
+  CardHeader,
+	Button,
+	
 } from "@material-ui/core";
+import { Rating } from "@mui/material";
 
-import PostsCard from "../components/PostsCard";
+
+import PostsCard from "../components/ConfirmedPostsCard";
 import { deleteReqPost, moveReqPost, moveToRejected } from "../api/apiRequests";
 
 const MyPosts = () => {
+	
   const user = useSelector((state) => state.user.currentUser.username);
 
   const [reqPosts, setReqPosts] = useState([]);
@@ -25,6 +33,7 @@ const MyPosts = () => {
   const [filter, setFilter] = useState("");
 
   const location = useLocation();
+	const query = location.search
 
   const params = location.search ? location.search : null;
   useEffect(() => {
@@ -113,6 +122,11 @@ const MyPosts = () => {
     dispatch(RejPosts());
   }, [params, filter]);
 
+
+	const navigate = useNavigate();
+	function showRequestedPostDetails(post) {
+    navigate(`/requested/${post.mainId}`);
+  }
   //For adding new post
   const dispatch = useDispatch();
   return (
@@ -123,7 +137,8 @@ const MyPosts = () => {
           textAlign: "center",
           fontSize: "20px",
           padding: "20px 0",
-          color: "red",
+          color: "white",
+          backgroundColor: "green",
         }}
       >
         Confirmed
@@ -131,8 +146,7 @@ const MyPosts = () => {
       <Grid container spacing={2}>
         {allPosts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={3}>
-            <PostsCard post={post} posts={reqPosts} />
-            <div className="">{post.user} added this post</div>
+            <PostsCard post={post} posts={allPosts} />
           </Grid>
         ))}
       </Grid>
@@ -142,7 +156,8 @@ const MyPosts = () => {
           textAlign: "center",
           fontSize: "20px",
           padding: "20px 0",
-          color: "red",
+          color: "white",
+          backgroundColor: "red",
         }}
       >
         Rejected posts
@@ -150,8 +165,7 @@ const MyPosts = () => {
       <Grid container spacing={2}>
         {rejPosts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={3}>
-            <PostsCard post={post} posts={reqPosts} />
-            <div className="">{post.user} added this post</div>
+            <PostsCard post={post} posts={rejPosts} />
           </Grid>
         ))}
       </Grid>
@@ -160,7 +174,8 @@ const MyPosts = () => {
           textAlign: "center",
           fontSize: "20px",
           padding: "20px 0",
-          color: "red",
+          color: "white",
+          backgroundColor: "blue",
         }}
         className=""
       >
@@ -169,8 +184,50 @@ const MyPosts = () => {
       <Grid container spacing={2}>
         {reqPosts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={3}>
-            <PostsCard post={post} posts={reqPosts} />
-            <div className="">{post.user} added this post</div>
+            
+              <Card className="post-card">
+                <CardHeader
+                  title={<Typography variant="h6">{post.name}</Typography>}
+                />
+                <CardContent
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                    gap: "10px",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography variant="caption" className="description_block">
+                    {post.description}
+                  </Typography>
+                  <Typography variant="h6">
+                    CVSS Score: {post.danger}
+                  </Typography>
+                  <Rating
+                    value={post.danger}
+                    readOnly
+                    size="medium"
+                    precision={0.1}
+                    max={10}
+                  />
+                  <Typography variant="h6">
+                    Access complexity: {post.complexity}
+                  </Typography>
+                  <Typography style={{ display: "block" }} variant="caption">
+                    {post.links}
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    style={{ padding: "10px 0", marginBottom: "10px" }}
+										onClick={() => showRequestedPostDetails(post)}
+                  >
+                    Details
+                  </Button>
+                </CardContent>
+              </Card>
+            
           </Grid>
         ))}
       </Grid>
