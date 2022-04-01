@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import BackBtn from "../components/backBtn/BackBtn";
 
-const ReqPostDetails = () => {
+const RejPostDetails = () => {
   // Material ui styles
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -44,7 +44,7 @@ const ReqPostDetails = () => {
           }
 
           const response = await axios.get(
-            `http://localhost:5000/api/requested${query}`,
+            `http://localhost:5000/api/rejected${query}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -145,4 +145,4 @@ const ReqPostDetails = () => {
   );
 };
 
-export default ReqPostDetails;
+export default RejPostDetails;

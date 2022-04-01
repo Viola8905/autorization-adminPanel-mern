@@ -64,6 +64,7 @@ router.post(
 );
 
 router.route("/requested/:mainId").get(ReqPostController.getReqPostById);
+router.route("/rejected/:mainId").get(ReqPostController.getRejPostById);
 
 
 router

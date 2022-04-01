@@ -144,3 +144,15 @@ exports.getReqPostById = asyncHandler(async (req, res, next) => {
     data: post,
   });
 });
+
+
+exports.getRejPostById = asyncHandler(async (req, res, next) => {
+  let post = await RejPost.find({ mainId: req.params.mainId });
+  if (!post) {
+    return next(new ErrorResponse("bootcamp with this id was not found", 404));
+  }
+  res.status(200).json({
+    success: true,
+    data: post,
+  });
+});

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import axios from "axios";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useStyles } from "../styles/global";
@@ -21,9 +21,10 @@ const ItemPage = () => {
 
   const role = useSelector((state) => state.user.role);
   const isAuth = useSelector((state) => state.user.isAuth);
-  const location = useParams();
+  const location = useLocation();
 
-  let params = parseInt(location.mainId);
+  let params = location.pathname;
+	
 
   //Component state
   const [posts, setPosts] = useState([]);
@@ -31,6 +32,7 @@ const ItemPage = () => {
   const [filter, setFilter] = useState("");
 
   useLayoutEffect(() => {});
+
 
   useEffect(() => {
     const fetchData = () => {
@@ -44,7 +46,7 @@ const ItemPage = () => {
           }
 
           const response = await axios.get(
-            `http://localhost:5000/api/posts/${query}`,
+            `http://localhost:5000/api/posts${query}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
