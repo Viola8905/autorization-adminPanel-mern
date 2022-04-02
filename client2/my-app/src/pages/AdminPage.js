@@ -78,10 +78,12 @@ const Admin = () => {
   const dispatch = useDispatch();
 
   const [name1, setName1] = useState("");
-  const [dangerLevel1, setDangerLevel1] = useState("");
+  const [severity1, setSeverity1] = useState("");
   const [description1, setDescription1] = useState("");
   const [complexity1, setComplexity1] = useState("");
-  const [links1, setLinks1] = useState("");
+  const [fixes1, setFixes1] = useState("");
+	const [version1, setVersion1] = useState("");
+	const [operationSystem1, setOperationSystem1] = useState("");
 
   function generateID() {
     return v4();
@@ -91,11 +93,13 @@ const Admin = () => {
 
   let arr = {
     name: name1,
-    danger: dangerLevel1,
+    severity: severity1,
     description: description1,
     complexity: complexity1,
-    links: links1,
+    fixes: fixes1,
+		version:version1,
     mainId: mainId,
+		operationSystem: operationSystem1,
     user: "none",
   };
 
@@ -128,23 +132,27 @@ const Admin = () => {
   };
 
   const [name, setName] = useState("");
-  const [danger, setDangerLevel] = useState("");
+  const [severity, setSeverity] = useState("");
   const [description, setDescription] = useState("");
   const [complexity, setComplexity] = useState("");
-  const [links, setLinks] = useState("");
+  const [fixes, setFixes] = useState("");
   const [postId, setPostId] = useState("");
+  const [version, setVersion] = useState("");
+  const [operationSystem, setOperationSystem] = useState("");
 
   const selectPost = (post) => {
     setName(post.name);
-    setDangerLevel(post.danger);
+    setSeverity(post.severity);
     setDescription(post.description);
     setComplexity(post.complexity);
-    setLinks(post.links);
+    setFixes(post.fixes);
     setPostId(post._id);
+		setVersion(post.version);
+		setOperationSystem(post.operationSystem);
   };
 
   function updatePost() {
-    const post = { name, danger, description, complexity, links };
+    const post = { name, severity, description, complexity, fixes,version,operationSystem };
     fetch(`http://localhost:5000/api/posts/${postId}`, {
       method: "PUT",
       headers: {
@@ -164,10 +172,12 @@ const Admin = () => {
     for (let i = 0; i < posts.length; i++) {
       if (posts[i]._id == postId) {
         posts[i].name = name;
-        posts[i].danger = danger;
+        posts[i].severity = severity;
         posts[i].description = description;
         posts[i].complexity = complexity;
-        posts[i].links = links;
+        posts[i].fixes = fixes;
+				posts[i].version = version;
+				posts[i].operationSystem = operationSystem;
       }
     }
 
@@ -188,8 +198,8 @@ const Admin = () => {
               />
               <br />
               <Input
-                value={dangerLevel1}
-                setValue={setDangerLevel1}
+                value={severity1}
+                setValue={setSeverity1}
                 type="text"
                 placeholder="enter danger level"
               />
@@ -211,14 +221,29 @@ const Admin = () => {
               />
               <br />
               <Input
-                value={links1}
-                setValue={setLinks1}
+                value={fixes1}
+                setValue={setFixes1}
                 type="text"
-                placeholder="enter links"
+                placeholder="enter fixes"
               />
               <br />
+              <input
+                type="text"
+                value={version1}
+                onChange={(e) => {
+                  setVersion(e.target.value);
+                }}
+              />
+              <br />
+              <input
+                type="text"
+                value={operationSystem1}
+                onChange={(e) => {
+                  setOperationSystem(e.target.value);
+                }}
+              />
 
-              <button onClick={() => addPost(arr)}>Push</button>
+              <button onClick={() => addPost(arr)}>Pussssh</button>
             </Grid>
             <Grid item xs={12} sm={6}>
               <input
@@ -232,9 +257,9 @@ const Admin = () => {
 
               <input
                 type="text"
-                value={danger}
+                value={severity}
                 onChange={(e) => {
-                  setDangerLevel(e.target.value);
+                  setSeverity(e.target.value);
                 }}
               />
 
@@ -257,12 +282,27 @@ const Admin = () => {
               <br />
               <input
                 type="text"
-                value={links}
+                value={fixes}
                 onChange={(e) => {
-                  setLinks(e.target.value);
+                  setFixes(e.target.value);
                 }}
               />
               <br />
+              <input
+                type="text"
+                value={version}
+                onChange={(e) => {
+                  setVersion(e.target.value);
+                }}
+              />
+              <br />
+              <input
+                type="text"
+                value={operationSystem}
+                onChange={(e) => {
+                  setOperationSystem(e.target.value);
+                }}
+              />
 
               <button onClick={() => updatePost()}>Update Post</button>
             </Grid>

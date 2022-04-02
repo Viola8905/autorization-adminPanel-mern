@@ -84,17 +84,21 @@ const DebugPage = () => {
 
   const mainId = generateID();
   const [name, setName] = useState("");
-  const [danger, setDangerLevel] = useState("");
+  const [severity, setSeverityLevel] = useState("");
   const [description, setDescription] = useState("");
   const [complexity, setComplexity] = useState("");
-  const [links, setLinks] = useState("");
   const [postId, setPostId] = useState("");
+  const [fixes, setFixes] = useState("");
+	const [version, setVersion] = useState("");
+	const [operationSystem, setOperationSystem] = useState("");
 
   const [nameAdd, setNameAdd] = useState("");
-  const [dangerAdd, setDangerAdd] = useState("");
+  const [severityAdd, setSeverityAdd] = useState("");
   const [descriptionAdd, setDescriptionAdd] = useState("");
   const [complexityAdd, setComplexityAdd] = useState("");
-  const [linksAdd, setLinksAdd] = useState("");
+  const [fixesAdd, setFixesAdd] = useState("");
+	const [versionAdd, setVersionAdd] = useState("");
+	const [operationSystemAdd, setOperationSystemAdd] = useState("");
 
   function generateID() {
     return v4();
@@ -102,10 +106,12 @@ const DebugPage = () => {
 
   let postFields = {
     name: nameAdd,
-    danger: dangerAdd,
+    severity: severityAdd,
     description: descriptionAdd,
     complexity: complexityAdd,
-    links: linksAdd,
+    fixes: fixesAdd,
+		version:versionAdd,
+		operationSystem:operationSystemAdd,
     mainId: mainId,
     user: "none",
   };
@@ -137,7 +143,7 @@ const DebugPage = () => {
   };
 
   function updatePost() {
-    const post = { name, danger, description, complexity, links };
+    const post = { name, severity, description, complexity, fixes,version,operationSystem };
     fetch(`http://localhost:5000/api/posts/${postId}`, {
       method: "PUT",
       headers: {
@@ -158,10 +164,13 @@ const DebugPage = () => {
 
     if (Post._id === postId) {
       Post.name = name;
-      Post.danger = danger;
+      Post.severity = severity;
       Post.description = description;
       Post.complexity = complexity;
-      Post.links = links;
+      Post.fixes = fixes;
+			Post.version = version;
+			Post.operationSystem = operationSystem;
+			
     }
 
     setPosts([...posts]);
@@ -181,8 +190,8 @@ const DebugPage = () => {
               />
               <br />
               <Input
-                value={dangerAdd}
-                setValue={setDangerAdd}
+                value={severityAdd}
+                setValue={setSeverityAdd}
                 type="text"
                 placeholder="enter danger level"
               />
@@ -212,19 +221,33 @@ const DebugPage = () => {
               />
               <br />
               <Input
-                value={linksAdd}
-                setValue={setLinksAdd}
+                value={fixesAdd}
+                setValue={setFixesAdd}
                 type="text"
-                placeholder="enter links"
+                placeholder="enter fixes"
+              />
+
+              <br />
+              <Input
+                value={versionAdd}
+                setValue={setVersionAdd}
+                type="text"
+                placeholder="enter version"
               />
               <br />
+              <Input
+                value={operationSystemAdd}
+                setValue={setOperationSystemAdd}
+                type="text"
+                placeholder="enter operationSystem"
+              />
 
               <Button
                 color="primary"
                 variant="contained"
                 onClick={() => addPost(postFields)}
               >
-                Push
+                Pusssssh
               </Button>
             </Grid>
           </Grid>
@@ -235,9 +258,11 @@ const DebugPage = () => {
               <PostCard
                 setName={setName}
                 setDescription={setDescription}
-                setDangerLevel={setDangerLevel}
+                setSeverityLevel={setSeverityLevel}
                 setComplexity={setComplexity}
-                setLinks={setLinks}
+                setFixes={setFixes}
+								setVersion={setVersion}
+								setOperationSystem={operationSystem}
                 setPostId={setPostId}
                 removePost={removePost}
                 updatePost={updatePost}
