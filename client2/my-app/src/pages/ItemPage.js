@@ -70,7 +70,7 @@ const ItemPage = () => {
   return (
     <Container className={classes.root}>
       {/* //go to main page button */}
-			<BackBtn/>
+      <BackBtn />
 
       <Grid className={classes.flexColCenter} container spacing={2}>
         {posts.map((post) => (
@@ -106,7 +106,7 @@ const ItemPage = () => {
                       <Typography variant="h5">CVSS Score:</Typography>
                     </div>
                     <div className={classes.cardContentWrapper}>
-                      <Typography>{post.danger}</Typography>
+                      <Typography>{post.severity}</Typography>
                     </div>
                   </div>
                 </div>
@@ -123,10 +123,21 @@ const ItemPage = () => {
                 <div className={classes.rowItem}>
                   <div className={classes.cardInfoTileWrapper}>
                     <div className={classes.cardHeadingWrapper}>
-                      <Typography variant="h5">Views:</Typography>
+                      <Typography variant="h5">Version</Typography>
                     </div>
                     <div className={classes.cardContentWrapper}>
-                      <Typography>17{post.views}</Typography>
+                      <Typography>{post.version}</Typography>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">operationSystem</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.operationSystem}</Typography>
                     </div>
                   </div>
                 </div>
@@ -136,7 +147,7 @@ const ItemPage = () => {
                   <Typography variant="h5">References:</Typography>
                 </div>
                 <div className={classes.cardContentWrapper}>
-                  <MaterialLink href={post.links}>{post.links}</MaterialLink>
+                  <MaterialLink href={post.fixes}>{post.fixes}</MaterialLink>
                 </div>
               </div>
             </Paper>

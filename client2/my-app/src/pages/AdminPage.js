@@ -153,6 +153,7 @@ const Admin = () => {
 
   function updatePost() {
     const post = { name, severity, description, complexity, fixes,version,operationSystem };
+		console.log(post)
     fetch(`http://localhost:5000/api/posts/${postId}`, {
       method: "PUT",
       headers: {

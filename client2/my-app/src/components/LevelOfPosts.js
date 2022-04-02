@@ -21,7 +21,7 @@ const LevelOfDPosts = () => {
   const location = useParams();
   //console.log(location);
 
-  let params = parseInt(location.danger);
+  let params = parseInt(location.severity);
   //console.log("params"+ params)
   //console.log(typeof params);
 
@@ -43,7 +43,7 @@ const LevelOfDPosts = () => {
           }
 
           const response = await axios.get(
-            `http://localhost:5000/api/posts?danger=${query}`,
+            `http://localhost:5000/api/posts?severity=${query}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

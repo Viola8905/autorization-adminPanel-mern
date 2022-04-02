@@ -17,9 +17,11 @@ const PostCard = ({
   post,
   setDescription,
   setName,
-  setDangerLevel,
+  setSeverityLevel,
   setComplexity,
-  setLinks,
+  setFixes,
+	setVersion,
+	setOperationSystem,
   setPostId,
   updatePost,
   removePost,
@@ -37,10 +39,12 @@ const PostCard = ({
   const setEditDefault = () => {
     setPostId(post._id);
     setName(post.name);
-    setDangerLevel(post.danger);
+    setSeverityLevel(post.severity);
     setDescription(post.description);
     setComplexity(post.complexity);
-    setLinks(post.links);
+    setFixes(post.fixes);
+		setVersion(post.version);
+		setOperationSystem(post.operationSystem)
   };
 
   function renderCard(role, isEditing) {
@@ -62,9 +66,9 @@ const PostCard = ({
             <Typography variant="caption" className="description_block">
               {post.description}
             </Typography>
-            <Typography variant="h6">CVSS Score: {post.danger}</Typography>
+            <Typography variant="h6">CVSS Score: {post.severity}</Typography>
             <Rating
-              value={post.danger}
+              value={post.severity}
               readOnly
               size="medium"
               precision={0.1}
@@ -73,9 +77,9 @@ const PostCard = ({
             <Typography variant="h6">
               Access complexity: {post.complexity}
             </Typography>
-            <Typography style={{ display: "block" }} variant="caption">
-              {post.links}
-            </Typography>
+            {/* <Typography style={{ display: "block" }} variant="caption">
+              {post.fixes}
+            </Typography> */}
             <Button
               variant="outlined"
               color="primary"
@@ -143,11 +147,11 @@ const PostCard = ({
             <Input
               className={classes.colItem}
               onChange={(e) => {
-                setDangerLevel(e.target.value);
+                setSeverityLevel(e.target.value);
               }}
-              defaultValue={post.danger}
+              defaultValue={post.severity}
               type="text"
-              placeholder="danger"
+              placeholder="severity"
             />
             <Input
               className={classes.colItem}
@@ -162,12 +166,32 @@ const PostCard = ({
             <Input
               className={classes.colItem}
               onChange={(e) => {
-                setLinks(e.target.value);
+                setFixes(e.target.value);
               }}
-              defaultValue={post.links}
+              defaultValue={post.fixes}
               type="text"
-              placeholder="links"
-              name="complexity"
+              placeholder="fixes"
+              name="fixes"
+            />
+            <Input
+              className={classes.colItem}
+              onChange={(e) => {
+                setVersion(e.target.value);
+              }}
+              defaultValue={post.version}
+              type="text"
+              placeholder="version"
+              name="version"
+            />
+            <Input
+              className={classes.colItem}
+              onChange={(e) => {
+                setOperationSystem(e.target.value);
+              }}
+              defaultValue={post.operationSystem}
+              type="text"
+              placeholder="operationSystem"
+              name="operationSystem"
             />
             {role ? (
               <Button

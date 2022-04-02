@@ -25,7 +25,7 @@ const Filter = () => {
   const navigate = useNavigate();
   const [level, setLevel] = useState("");
   const [title, setTitle] = useState("");
-  const [danger, setDanger] = useState("");
+  const [severity, setSeverity] = useState("");
 
   const handleChange1 = (event) => {
     setLevel(event.target.value);
@@ -34,7 +34,7 @@ const Filter = () => {
     setTitle(event.target.value);
   };
   const handleChange3 = (event) => {
-    setDanger(event.target.value);
+    setSeverity(event.target.value);
   };
 
   function showAll() {
@@ -43,7 +43,7 @@ const Filter = () => {
 
   function Filtering() {
     navigate(
-      `?complexity[regex]=${level}&&name[regex]=${title}&&danger=${danger}`
+      `?complexity[regex]=${level}&&name[regex]=${title}&&severity=${severity}`
     );
   }
 
@@ -80,7 +80,7 @@ const Filter = () => {
               <TextField
                 style={{ marginLeft: "20px" }}
                 className={classes.input}
-                label="level of danger"
+                label="level of severity"
                 id="outlined-size-small"
                 size="small"
                 onInput={handleChange3}

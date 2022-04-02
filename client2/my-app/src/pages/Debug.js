@@ -144,6 +144,7 @@ const DebugPage = () => {
 
   function updatePost() {
     const post = { name, severity, description, complexity, fixes,version,operationSystem };
+		console.log(post)
     fetch(`http://localhost:5000/api/posts/${postId}`, {
       method: "PUT",
       headers: {
@@ -153,8 +154,9 @@ const DebugPage = () => {
       },
       body: JSON.stringify(post),
     })
-      .then(() => {
-        console.log("post updated");
+      .then((result) => {
+        console.log(result);
+				
       })
       .catch((error) => {
         console.error("Error", error);
@@ -262,7 +264,7 @@ const DebugPage = () => {
                 setComplexity={setComplexity}
                 setFixes={setFixes}
 								setVersion={setVersion}
-								setOperationSystem={operationSystem}
+								setOperationSystem={setOperationSystem}
                 setPostId={setPostId}
                 removePost={removePost}
                 updatePost={updatePost}

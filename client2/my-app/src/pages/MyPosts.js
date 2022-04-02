@@ -21,6 +21,7 @@ import { Rating } from "@mui/material";
 
 import PostsCard from "../components/ConfirmedPostsCard";
 import { deleteReqPost, moveReqPost, moveToRejected } from "../api/apiRequests";
+import BackBtn from "../components/backBtn/BackBtn";
 
 const MyPosts = () => {
 	
@@ -127,10 +128,14 @@ const MyPosts = () => {
 	function showRequestedPostDetails(post) {
     navigate(`/requested/${post.mainId}`);
   }
+	function showRejectedPostDetails(post) {
+      navigate(`/rejected/${post.mainId}`);
+  }
   //For adding new post
   const dispatch = useDispatch();
   return (
     <Container>
+			<BackBtn/>
       <div
         className=""
         style={{
@@ -165,7 +170,48 @@ const MyPosts = () => {
       <Grid container spacing={2}>
         {rejPosts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={3}>
-            <PostsCard post={post} posts={rejPosts} />
+            <Card className="post-card">
+              <CardHeader
+                title={<Typography variant="h6">{post.name}</Typography>}
+              />
+              <CardContent
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  gap: "10px",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography variant="caption" className="description_block">
+                  {post.description}
+                </Typography>
+                <Typography variant="h6">
+                  CVSS Score: {post.severity}
+                </Typography>
+                <Rating
+                  value={post.severity}
+                  readOnly
+                  size="medium"
+                  precision={0.1}
+                  max={10}
+                />
+                <Typography variant="h6">
+                  Access complexity: {post.complexity}
+                </Typography>
+                {/* <Typography style={{ display: "block" }} variant="caption">
+                  {post.fixes}
+                </Typography> */}
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  style={{ padding: "10px 0", marginBottom: "10px" }}
+                  onClick={() => showRejectedPostDetails(post)}
+                >
+                  Details
+                </Button>
+              </CardContent>
+            </Card>{" "}
           </Grid>
         ))}
       </Grid>
@@ -184,50 +230,48 @@ const MyPosts = () => {
       <Grid container spacing={2}>
         {reqPosts.map((post) => (
           <Grid item key={post._id} xs={12} sm={6} lg={3}>
-            
-              <Card className="post-card">
-                <CardHeader
-                  title={<Typography variant="h6">{post.name}</Typography>}
+            <Card className="post-card">
+              <CardHeader
+                title={<Typography variant="h6">{post.name}</Typography>}
+              />
+              <CardContent
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  gap: "10px",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography variant="caption" className="description_block">
+                  {post.description}
+                </Typography>
+                <Typography variant="h6">
+                  CVSS Score: {post.severity}
+                </Typography>
+                <Rating
+                  value={post.severity}
+                  readOnly
+                  size="medium"
+                  precision={0.1}
+                  max={10}
                 />
-                <CardContent
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    gap: "10px",
-                    justifyContent: "space-between",
-                  }}
+                <Typography variant="h6">
+                  Access complexity: {post.complexity}
+                </Typography>
+                {/* <Typography style={{ display: "block" }} variant="caption">
+                  {post.fixes}
+                </Typography> */}
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  style={{ padding: "10px 0", marginBottom: "10px" }}
+                  onClick={() => showRequestedPostDetails(post)}
                 >
-                  <Typography variant="caption" className="description_block">
-                    {post.description}
-                  </Typography>
-                  <Typography variant="h6">
-                    CVSS Score: {post.danger}
-                  </Typography>
-                  <Rating
-                    value={post.danger}
-                    readOnly
-                    size="medium"
-                    precision={0.1}
-                    max={10}
-                  />
-                  <Typography variant="h6">
-                    Access complexity: {post.complexity}
-                  </Typography>
-                  <Typography style={{ display: "block" }} variant="caption">
-                    {post.links}
-                  </Typography>
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    style={{ padding: "10px 0", marginBottom: "10px" }}
-										onClick={() => showRequestedPostDetails(post)}
-                  >
-                    Details
-                  </Button>
-                </CardContent>
-              </Card>
-            
+                  Details
+                </Button>
+              </CardContent>
+            </Card>{" "}
           </Grid>
         ))}
       </Grid>

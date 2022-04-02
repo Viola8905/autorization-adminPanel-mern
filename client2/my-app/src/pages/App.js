@@ -35,7 +35,7 @@ function App() {
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/user" element={<AuthPage />} />
           <Route exact path="/debug" element={<DebugPage />} />
-          <Route exact path="/danger/:danger" element={<LevelOfPosts/>} />
+          <Route exact path="/severity/:severity" element={<LevelOfPosts/>} />
         </Routes>
       );
     } else if (isAuth && role === 1) {

@@ -120,10 +120,10 @@ const ReqPosts = () => {
                     {post.description}
                   </Typography>
                   <Typography variant="h6">
-                    CVSS Score: {post.danger}
+                    CVSS Score: {post.severity}
                   </Typography>
                   <Rating
-                    value={post.danger}
+                    value={post.severity}
                     readOnly
                     size="medium"
                     precision={0.1}
@@ -133,7 +133,7 @@ const ReqPosts = () => {
                     Access complexity: {post.complexity}
                   </Typography>
                   <Typography style={{ display: "block" }} variant="caption">
-                    {post.links}
+                    {post.fixes}
                   </Typography>
                   <Typography
                     style={{ display: "block", color: "blue" }}

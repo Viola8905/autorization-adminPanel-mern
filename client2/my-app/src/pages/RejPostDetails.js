@@ -44,7 +44,7 @@ const RejPostDetails = () => {
           }
 
           const response = await axios.get(
-            `http://localhost:5000/api/rejected${query}`,
+            `http://localhost:5000/api/${query}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -104,7 +104,7 @@ const RejPostDetails = () => {
                       <Typography variant="h5">CVSS Score:</Typography>
                     </div>
                     <div className={classes.cardContentWrapper}>
-                      <Typography>{post.danger}</Typography>
+                      <Typography>{post.severity}</Typography>
                     </div>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ const RejPostDetails = () => {
                   <Typography variant="h5">References:</Typography>
                 </div>
                 <div className={classes.cardContentWrapper}>
-                  <MaterialLink href={post.links}>{post.links}</MaterialLink>
+                  <MaterialLink href={post.fixes}>{post.fixes}</MaterialLink>
                 </div>
               </div>
             </Paper>

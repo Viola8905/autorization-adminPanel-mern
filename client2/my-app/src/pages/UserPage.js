@@ -35,10 +35,13 @@ const UserPage = () => {
   const userName = useSelector((state) => state.user.currentUser.username);
 
   const [name1, setName1] = useState("");
-  const [dangerLevel1, setDangerLevel1] = useState("");
+  const [severityLevel1, setSeverityLevel1] = useState("");
   const [description1, setDescription1] = useState("");
   const [complexity1, setComplexity1] = useState("");
-  const [links1, setLinks1] = useState("");
+  const [fixes1, setFixes1] = useState("");
+	const [version1, setVersion1] = useState("");
+	const [operationSystem1, setOperationSystem1] = useState("");
+	
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
@@ -47,10 +50,12 @@ const UserPage = () => {
 
   let arr = {
     name: name1,
-    danger: dangerLevel1,
+    severity: severityLevel1,
     description: description1,
     complexity: complexity1,
-    links: links1,
+    fixes: fixes1,
+		version:version1,
+		operationSystem : operationSystem1,
     mainId: mainId,
     user: userName,
   };
@@ -76,10 +81,10 @@ const UserPage = () => {
               />
               <Input
                 className={classes.inputField}
-                value={dangerLevel1}
-                setValue={setDangerLevel1}
+                value={severityLevel1}
+                setValue={setSeverityLevel1}
                 type="text"
-                placeholder="enter danger level"
+                placeholder="enter severity level"
               />
               <Input
                 value={description1}
@@ -94,10 +99,22 @@ const UserPage = () => {
                 placeholder="enter complexity"
               />
               <Input
-                value={links1}
-                setValue={setLinks1}
+                value={fixes1}
+                setValue={setFixes1}
                 type="text"
-                placeholder="enter links"
+                placeholder="enter fixes"
+              />
+              <Input
+                value={version1}
+                setValue={setVersion1}
+                type="text"
+                placeholder="enter version"
+              />
+              <Input
+                value={operationSystem1}
+                setValue={setOperationSystem1}
+                type="text"
+                placeholder="enter operationSystem"
               />
               <Button
                 color="primary"

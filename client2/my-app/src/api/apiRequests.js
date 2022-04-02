@@ -95,9 +95,10 @@ export const updatePost = (arr, success, failure) => {
           arr,
         }
       );
+		
       if (response.data.success === true) {
         success();
-        //alert("Post was added");
+        alert("Post was added");
       } else {
         alert("Title must be unique");
         failure();
@@ -107,6 +108,7 @@ export const updatePost = (arr, success, failure) => {
       failure();
       console.log(e.response.data);
       console.log(JSON.stringify(e.response));
+			
     }
   };
 };
