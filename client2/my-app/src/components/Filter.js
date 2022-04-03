@@ -5,6 +5,15 @@ import { Paper, Typography, Grid, makeStyles } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+
+
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Input from "../components/input/Input";
+
 const useStyles = makeStyles({
   paper: {
     marginBottom: "1rem",
@@ -13,6 +22,8 @@ const useStyles = makeStyles({
   filter: {
     display: "flex",
     justifyContent: "center",
+		flexWrap:"wrap",
+		flexDirection:"column"
   },
   input: {
     margin: " 0 0 0 20px",
@@ -23,27 +34,27 @@ const Filter = () => {
   const classes = useStyles();
 
   const navigate = useNavigate();
-  const [level, setLevel] = useState("");
-  const [title, setTitle] = useState("");
+ 
   const [severity, setSeverity] = useState("");
+	const [developer, setDeveloper] = useState("");
+	const [platform, setPlatform] = useState("");
+	const [operationSystem, setOperationSystem] = useState("");
+	const [version, setVersion] = useState("");
+	const [fixes, setFixes] = useState("false");
+	console.log(fixes)
 
-  const handleChange1 = (event) => {
-    setLevel(event.target.value);
-  };
-  const handleChange2 = (event) => {
-    setTitle(event.target.value);
-  };
-  const handleChange3 = (event) => {
-    setSeverity(event.target.value);
-  };
 
+
+
+
+  
   function showAll() {
     navigate(``);
   }
 
   function Filtering() {
     navigate(
-      `?complexity[regex]=${level}&&name[regex]=${title}&&severity=${severity}`
+      `?severity[regex]=${severity}&&developer[regex]=${developer}&&platform[regex]=${platform}&&operationSystem[regex]=${operationSystem}&&version[regex]=${version}`
     );
   }
 
@@ -64,39 +75,97 @@ const Filter = () => {
             </Typography>
 
             <div className={classes.filter}>
+              <InputLabel id="demo-simple-select-label">Severity</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={severity}
+                label="Severity"
+                onChange={(e) => setSeverity(e.target.value)}
+              >
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={6}>6</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={9}>9</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+              </Select>
+              <br />
               <TextField
-                label="level of complexity"
+                label="developer"
                 id="outlined-size-small"
                 size="small"
-                onInput={handleChange1}
+                onInput={(e) => setDeveloper(e.target.value)}
               />
+              <br />
+
+              <InputLabel id="demo-simple-select-label">Platform</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={platform}
+                label="platform"
+                onChange={(e) => setPlatform(e.target.value)}
+              >
+                <MenuItem value={"windows"}>Windows</MenuItem>
+                <MenuItem value={"macos"}>Mac Os</MenuItem>
+                <MenuItem value={"linux"}>Linux</MenuItem>
+              </Select>
+              <br />
               <TextField
-                style={{ marginLeft: "20px" }}
-                label="title"
+                label="operation system"
                 id="outlined-size-small"
                 size="small"
-                onInput={handleChange2}
+                onInput={(e) => setOperationSystem(e.target.value)}
               />
+              <br />
               <TextField
-                style={{ marginLeft: "20px" }}
-                className={classes.input}
-                label="level of severity"
+                label="operation system"
                 id="outlined-size-small"
                 size="small"
-                onInput={handleChange3}
+                onInput={(e) => setOperationSystem(e.target.value)}
               />
-              <SearchIcon
-                style={{ marginLeft: "10px" }}
-                onClick={Filtering}
-                color="primary"
-                sx={{ fontSize: 35 }}
+              <br />
+              <TextField
+                label="version"
+                id="outlined-size-small"
+                size="small"
+                onInput={(e) => setVersion(e.target.value)}
               />
-              <CancelOutlinedIcon
-                style={{ marginLeft: "10px" }}
-                onClick={showAll}
-                color="primary"
-                sx={{ fontSize: 35 }}
-              />
+							<br/>
+
+
+              <div>
+                <input
+                  type="checkbox"
+                  id="fixes"
+                  name="fixes"
+                  value="true"
+									style={{marginRight:"10px"}}
+								
+                />
+                <label for="fixes"> contains fixes</label>
+               
+              </div>
+
+              <div style={{ alignSelf: "center", marginTop: "10px" }}>
+                <SearchIcon
+                  style={{ marginLeft: "10px" }}
+                  onClick={Filtering}
+                  color="primary"
+                  sx={{ fontSize: 35 }}
+                />
+                <CancelOutlinedIcon
+                  style={{ marginLeft: "10px" }}
+                  onClick={showAll}
+                  color="primary"
+                  sx={{ fontSize: 35 }}
+                />
+              </div>
             </div>
           </Grid>
         </Grid>

@@ -22,6 +22,8 @@ const PostCard = ({
   setFixes,
 	setVersion,
 	setOperationSystem,
+	setDeveloper,
+	setPlatform,
   setPostId,
   updatePost,
   removePost,
@@ -44,7 +46,9 @@ const PostCard = ({
     setComplexity(post.complexity);
     setFixes(post.fixes);
 		setVersion(post.version);
-		setOperationSystem(post.operationSystem)
+		setOperationSystem(post.operationSystem);
+		setDeveloper(post.developer);
+		setPlatform(post.platform);
   };
 
   function renderCard(role, isEditing) {
@@ -77,9 +81,7 @@ const PostCard = ({
             <Typography variant="h6">
               Access complexity: {post.complexity}
             </Typography>
-            {/* <Typography style={{ display: "block" }} variant="caption">
-              {post.fixes}
-            </Typography> */}
+           
             <Button
               variant="outlined"
               color="primary"
@@ -192,6 +194,26 @@ const PostCard = ({
               type="text"
               placeholder="operationSystem"
               name="operationSystem"
+            />
+            <Input
+              className={classes.colItem}
+              onChange={(e) => {
+                setDeveloper(e.target.value);
+              }}
+              defaultValue={post.developer}
+              type="text"
+              placeholder="developer"
+              name="developer"
+            />
+            <Input
+              className={classes.colItem}
+              onChange={(e) => {
+                setPlatform(e.target.value);
+              }}
+              defaultValue={post.platform}
+              type="text"
+              placeholder="platform"
+              name="platform"
             />
             {role ? (
               <Button

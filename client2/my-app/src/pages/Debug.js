@@ -8,6 +8,7 @@ import { Paper, Container, Grid, makeStyles, Button } from "@material-ui/core";
 import PostCard from "../components/ConfirmedPostsCard";
 import { useLocation } from "react-router-dom";
 import Input from "../components/input/Input";
+import Pagination from "../components/Pagination";
 
 const useStyles = makeStyles({
   root: {
@@ -91,6 +92,9 @@ const DebugPage = () => {
   const [fixes, setFixes] = useState("");
 	const [version, setVersion] = useState("");
 	const [operationSystem, setOperationSystem] = useState("");
+	const [developer, setDeveloper] = useState("");
+	const [platform, setPlatform] = useState("");
+
 
   const [nameAdd, setNameAdd] = useState("");
   const [severityAdd, setSeverityAdd] = useState("");
@@ -99,6 +103,8 @@ const DebugPage = () => {
   const [fixesAdd, setFixesAdd] = useState("");
 	const [versionAdd, setVersionAdd] = useState("");
 	const [operationSystemAdd, setOperationSystemAdd] = useState("");
+	const [developerAdd, setDeveloperAdd] = useState("");
+	const [platformAdd, setPlatformAdd] = useState("");
 
   function generateID() {
     return v4();
@@ -112,6 +118,8 @@ const DebugPage = () => {
     fixes: fixesAdd,
 		version:versionAdd,
 		operationSystem:operationSystemAdd,
+		developer:developerAdd,
+		platform:platformAdd,
     mainId: mainId,
     user: "none",
   };
@@ -143,7 +151,7 @@ const DebugPage = () => {
   };
 
   function updatePost() {
-    const post = { name, severity, description, complexity, fixes,version,operationSystem };
+    const post = { name, severity, description, complexity, fixes,version,operationSystem,developer,platform };
 		console.log(post)
     fetch(`http://localhost:5000/api/posts/${postId}`, {
       method: "PUT",
@@ -172,99 +180,43 @@ const DebugPage = () => {
       Post.fixes = fixes;
 			Post.version = version;
 			Post.operationSystem = operationSystem;
+			Post.developer = developer;
+			Post.platform = platform;
 			
     }
 
     setPosts([...posts]);
   }
 
+
+	const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(6);
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPost = posts.slice(firstPostIndex, lastPostIndex);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  function Percentage(severity, countOfPosts) {
+    return <>{Math.ceil((severity / countOfPosts) * 100)}%</>;
+  }
+
   return (
     <div>
       <Container className={classes.root}>
-        <Paper className={classes.paper}>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Input
-                value={nameAdd}
-                setValue={setNameAdd}
-                type="text"
-                placeholder="enter name"
-              />
-              <br />
-              <Input
-                value={severityAdd}
-                setValue={setSeverityAdd}
-                type="text"
-                placeholder="enter danger level"
-              />
-              <br />
-              <textarea
-                style={{
-                  padding: "10px",
-                  marginBottom: "10px",
-                  border: "1px solid gray",
-                  borderRadius: "5px",
-                  resize: "vertical",
-                  maxHeight: "200px",
-                }}
-                value={descriptionAdd}
-                onChange={(e) => {
-                  setDescriptionAdd(e.target.value);
-                }}
-                type="text"
-                placeholder="enter description"
-              />
-              <br />
-              <Input
-                value={complexityAdd}
-                setValue={setComplexityAdd}
-                type="text"
-                placeholder="enter complexity"
-              />
-              <br />
-              <Input
-                value={fixesAdd}
-                setValue={setFixesAdd}
-                type="text"
-                placeholder="enter fixes"
-              />
-
-              <br />
-              <Input
-                value={versionAdd}
-                setValue={setVersionAdd}
-                type="text"
-                placeholder="enter version"
-              />
-              <br />
-              <Input
-                value={operationSystemAdd}
-                setValue={setOperationSystemAdd}
-                type="text"
-                placeholder="enter operationSystem"
-              />
-
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={() => addPost(postFields)}
-              >
-                Pusssssh
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
         <Grid container spacing={2}>
-          {posts.map((post) => (
-            <Grid item key={post._id} xs={12} sm={6} lg={3}>
+          {currentPost.map((post) => (
+            <Grid item key={post._id} xs={12} sm={6} lg={4}>
               <PostCard
                 setName={setName}
                 setDescription={setDescription}
                 setSeverityLevel={setSeverityLevel}
                 setComplexity={setComplexity}
                 setFixes={setFixes}
-								setVersion={setVersion}
-								setOperationSystem={setOperationSystem}
+                setVersion={setVersion}
+                setOperationSystem={setOperationSystem}
+								setDeveloper={setDeveloper}
+								setPlatform={setPlatform}
                 setPostId={setPostId}
                 removePost={removePost}
                 updatePost={updatePost}
@@ -274,6 +226,11 @@ const DebugPage = () => {
             </Grid>
           ))}
         </Grid>
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
       </Container>
     </div>
   );

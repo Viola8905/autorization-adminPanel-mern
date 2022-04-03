@@ -30,28 +30,36 @@ const NavBar = () => {
               className="ml-2"
               onClick={() => dispatch(logout())}
             >
-              <NavLink to="/">Выйти</NavLink>
+              <NavLink to="/">Вийти</NavLink>
             </Button>
             {role === 1 ? (
               <>
                 <Button variant={"outline-light"} className="ml-2">
-                  <NavLink to="/reqPosts">Подтвердить посты</NavLink>
+                  <NavLink to="/reqPosts">Підтвердити пости</NavLink>
                 </Button>
 
                 <Button variant={"outline-light"} className="ml-2">
-                  <NavLink to="/seeUsers">Пользователи</NavLink>
+                  <NavLink to="/seeUsers">Користувачі</NavLink>
+                </Button>
+                <Button variant={"outline-light"} className="ml-2">
+                  <NavLink to="/createPostA">Додати пост</NavLink>
                 </Button>
               </>
             ) : (
-              <Button variant={"outline-light"} className="ml-2">
-                <NavLink to="/myPosts">Мои посты</NavLink>
-              </Button>
+              <>
+                <Button variant={"outline-light"} className="ml-2">
+                  <NavLink to="/myPosts">МоЇ пости</NavLink>
+                </Button>
+                <Button variant={"outline-light"} className="ml-2">
+                  <NavLink to="/createPostU">Додати пост</NavLink>
+                </Button>
+              </>
             )}
           </Nav>
         ) : (
           <Nav className="ml-auto" style={{ color: "white" }}>
             <Button variant={"outline-light"}>
-              <NavLink to="/login">Войти</NavLink>
+              <NavLink to="/login">Ввійти</NavLink>
             </Button>
           </Nav>
         )}

@@ -103,22 +103,7 @@ const Admin = () => {
     user: "none",
   };
 
-  const addPost = (arr) => {
-    let posts1 = posts.find((item) => item.name === arr.name);
-
-    if (!posts1) {
-      dispatch(
-        createPost(
-          arr,
-          () => setPosts([...posts, arr]),
-          () => alert("Error")
-        )
-      );
-    } else {
-      alert("title must be unique");
-    }
-  };
-
+  
   //removing post function
 
   const removePost = (id) => {
@@ -188,127 +173,7 @@ const Admin = () => {
   return (
     <div>
       <Container className={classes.root}>
-        <Paper className={classes.paper}>
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Input
-                value={name1}
-                setValue={setName1}
-                type="text"
-                placeholder="enter name"
-              />
-              <br />
-              <Input
-                value={severity1}
-                setValue={setSeverity1}
-                type="text"
-                placeholder="enter danger level"
-              />
-              <br />
-              <textarea
-                value={description1}
-                onChange={(e) => {
-                  setDescription1(e.target.value);
-                }}
-                type="text"
-                placeholder="enter description"
-              />
-              <br />
-              <Input
-                value={complexity1}
-                setValue={setComplexity1}
-                type="text"
-                placeholder="enter complexity"
-              />
-              <br />
-              <Input
-                value={fixes1}
-                setValue={setFixes1}
-                type="text"
-                placeholder="enter fixes"
-              />
-              <br />
-              <input
-                type="text"
-                value={version1}
-                onChange={(e) => {
-                  setVersion(e.target.value);
-                }}
-              />
-              <br />
-              <input
-                type="text"
-                value={operationSystem1}
-                onChange={(e) => {
-                  setOperationSystem(e.target.value);
-                }}
-              />
-
-              <button onClick={() => addPost(arr)}>Pussssh</button>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
-              <br />
-
-              <input
-                type="text"
-                value={severity}
-                onChange={(e) => {
-                  setSeverity(e.target.value);
-                }}
-              />
-
-              <br />
-              <input
-                type="text"
-                value={description}
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
-              />
-              <br />
-              <input
-                type="text"
-                value={complexity}
-                onChange={(e) => {
-                  setComplexity(e.target.value);
-                }}
-              />
-              <br />
-              <input
-                type="text"
-                value={fixes}
-                onChange={(e) => {
-                  setFixes(e.target.value);
-                }}
-              />
-              <br />
-              <input
-                type="text"
-                value={version}
-                onChange={(e) => {
-                  setVersion(e.target.value);
-                }}
-              />
-              <br />
-              <input
-                type="text"
-                value={operationSystem}
-                onChange={(e) => {
-                  setOperationSystem(e.target.value);
-                }}
-              />
-
-              <button onClick={() => updatePost()}>Update Post</button>
-            </Grid>
-          </Grid>
-        </Paper>
+        
         <Grid container spacing={2}>
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={6} lg={3}>

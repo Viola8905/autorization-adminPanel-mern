@@ -33,6 +33,14 @@ const ReqPost = new Schema(
       type: String,
       required: [true, "Please provide operationSystem to the post"],
     },
+    developer: {
+      type: String,
+      required: [true, "Please provide developer to the post"],
+    },
+    platform: {
+      type: String,
+      required: [true, "Please provide developer to the post"],
+    },
     mainId: {
       type: String,
       required: [true, "Please provide mainId to the post"],

@@ -121,17 +121,47 @@ const RejPostDetails = () => {
                 <div className={classes.rowItem}>
                   <div className={classes.cardInfoTileWrapper}>
                     <div className={classes.cardHeadingWrapper}>
-                      <Typography variant="h5">Views:</Typography>
+                      <Typography variant="h5">Version:</Typography>
                     </div>
                     <div className={classes.cardContentWrapper}>
-                      <Typography>17{post.views}</Typography>
+                      <Typography>{post.version}</Typography>
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">Operation System:</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.operationSystem}</Typography>
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">Developer</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.developer}</Typography>
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">Platform</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.platform}</Typography>
                     </div>
                   </div>
                 </div>
               </div>
               <div className={classes.cardInfoTileWrapper}>
                 <div className={classes.cardHeadingWrapper}>
-                  <Typography variant="h5">References:</Typography>
+                  <Typography variant="h5">Fixes:</Typography>
                 </div>
                 <div className={classes.cardContentWrapper}>
                   <MaterialLink href={post.fixes}>{post.fixes}</MaterialLink>

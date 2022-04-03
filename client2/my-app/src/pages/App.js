@@ -17,6 +17,8 @@ import NavBar from "../components/navbar/NavBar";
 import LevelOfPosts from "../components/LevelOfPosts";
 import ReqPostDetails from "./ReqPostDetails";
 import RejPostDetails from "./RejPostDetails";
+import CreatePostU from "./CreatePostU";
+import CreatePostA from "./CreatePostA";
 
 
 function App() {
@@ -48,6 +50,7 @@ function App() {
           <Route exact path="/rejected/:mainId" element={<RejPostDetails />} />
           <Route exact path="/seeUsers" element={<SeeUsers />} />
           <Route exact path="/debug" element={<DebugPage />} />
+          <Route exact path="/createPostA" element={<CreatePostA />} />
         </Routes>
       );
     } else if (isAuth && role === 0) {
@@ -59,6 +62,8 @@ function App() {
           <Route exact path="/debug" element={<DebugPage />} />
           <Route exact path="/requested/:mainId" element={<ReqPostDetails />} />
           <Route exact path="/rejected/:mainId" element={<RejPostDetails />} />
+          <Route exact path="/createPostU" element={<CreatePostU />} />
+         
         </Routes>
       );
     } else {

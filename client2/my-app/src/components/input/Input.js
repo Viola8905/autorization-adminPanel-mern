@@ -8,6 +8,7 @@ const Input = (props) => {
         marginBottom: "10px",
         border: "1px solid gray",
         borderRadius: "5px",
+        minWidth: "70%",
       }}
       onChange={(event) => props.setValue(event.target.value)}
       value={props.value}

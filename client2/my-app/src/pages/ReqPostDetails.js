@@ -139,6 +139,26 @@ const ReqPostDetails = () => {
                     </div>
                   </div>
                 </div>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">Developer:</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.developer}</Typography>
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.rowItem}>
+                  <div className={classes.cardInfoTileWrapper}>
+                    <div className={classes.cardHeadingWrapper}>
+                      <Typography variant="h5">Platform:</Typography>
+                    </div>
+                    <div className={classes.cardContentWrapper}>
+                      <Typography>{post.platform}</Typography>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className={classes.cardInfoTileWrapper}>
