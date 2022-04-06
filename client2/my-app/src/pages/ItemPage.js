@@ -67,6 +67,7 @@ const ItemPage = () => {
 
   const navigate = useNavigate();
 
+	console.log(posts)
   return (
     <Container className={classes.root}>
       {/* //go to main page button */}

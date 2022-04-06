@@ -9,6 +9,7 @@ import PostCard from "../components/ConfirmedPostsCard";
 import { useLocation } from "react-router-dom";
 import Input from "../components/input/Input";
 import Pagination from "../components/Pagination";
+import Filter from "../components/Filter";
 
 const useStyles = makeStyles({
   root: {
@@ -163,7 +164,7 @@ const DebugPage = () => {
       body: JSON.stringify(post),
     })
       .then((result) => {
-        console.log(result);
+        
 				
       })
       .catch((error) => {
@@ -204,6 +205,7 @@ const DebugPage = () => {
   return (
     <div>
       <Container className={classes.root}>
+        <Filter />
         <Grid container spacing={2}>
           {currentPost.map((post) => (
             <Grid item key={post._id} xs={12} sm={6} lg={4}>
@@ -215,8 +217,8 @@ const DebugPage = () => {
                 setFixes={setFixes}
                 setVersion={setVersion}
                 setOperationSystem={setOperationSystem}
-								setDeveloper={setDeveloper}
-								setPlatform={setPlatform}
+                setDeveloper={setDeveloper}
+                setPlatform={setPlatform}
                 setPostId={setPostId}
                 removePost={removePost}
                 updatePost={updatePost}
@@ -226,11 +228,20 @@ const DebugPage = () => {
             </Grid>
           ))}
         </Grid>
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={posts.length}
-          paginate={paginate}
-        />
+        <div
+          className=""
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "30px",
+          }}
+        >
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={paginate}
+          />
+        </div>
       </Container>
     </div>
   );

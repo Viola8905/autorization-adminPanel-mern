@@ -71,6 +71,15 @@ const CreatePostU = () => {
 
   const addPost = (arr) => {
     dispatch(createReqPost(arr));
+			setName1("");
+      setSeverityLevel1("");
+      setDescription1("");
+      setComplexity1("");
+      setFixes1("");
+      setVersion1("");
+      setOperationSystem1("");
+      setDeveloper1("");
+      setPlatform1("");
   };
 
   return (

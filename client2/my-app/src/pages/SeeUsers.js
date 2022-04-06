@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+
 import {
   Paper,
   Typography,
   Container,
   Grid,
   makeStyles,
+	Card,
+	CardHeader,
+	Button,
 } from "@material-ui/core";
 import { deleteUser } from "../api/apiRequests";
+import BackBtn from "../components/backBtn/BackBtn";
 
 const SeeUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
@@ -78,42 +82,89 @@ const SeeUsers = () => {
   return (
     <div className="">
       <Container>
-        <Link to="/user">
-          <Button variant={"outline-dark"} size="small">
-            Back
-          </Button>
-        </Link>
+        <BackBtn />
         <div
           style={{ textAlign: "center", fontSize: "20px", padding: "20px 0" }}
         >
-          All Users
+          Усі користувачі
         </div>
 
         <Paper className="">
-          <Grid container>
-            <Grid item xs={12} sm={6}>
-              <Typography gutterBottom>Find user</Typography>
+          <Grid
+            container
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography gutterBottom style={{ marginTop: "20px" }}>
+                Знайти користувача
+              </Typography>
+              <div
+                className=""
+                style={{ display: "flex", flexDirection: "row" }}
+              >
+                <input
+                  type="text"
+                  onInput={handleChange}
+                  placeholder="введіть ім'я користувача"
+                  style={{ borderRadius: "10px", marginRight: "10px" }}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={Filtering}
+                  style={{ borderRadius: "10px", marginRight: "10px" }}
+                >
+                  Шукати
+                </Button>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={showAllUsers}
+                  style={{ borderRadius: "10px", marginRight: "10px" }}
+                >
+                  Показати Всіх
+                </Button>
+              </div>
 
-              <input
-                type="text"
-                onInput={handleChange}
-                placeholder="type username"
-              />
-              <button onClick={Filtering}> Push</button>
               <br />
-
-              <button onClick={showAllUsers}> Show All</button>
             </Grid>
           </Grid>
         </Paper>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ marginTop: "30px" }}>
           {allUsers.map((user) => (
             <Grid item key={user._id} xs={12} sm={6} lg={3}>
-              <div>{user.username}</div>
-
-              <button className="button" onClick={() => deleteChosenUser(user)}>
-                delete user
-              </button>
+              <Card
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <CardHeader
+                  title={<Typography variant="h6">{user.username}</Typography>}
+                />
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => deleteChosenUser(user)}
+                  style={{}}
+                >
+                  Видалити Користувача
+                </Button>
+              </Card>
             </Grid>
           ))}
         </Grid>

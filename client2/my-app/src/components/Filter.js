@@ -41,21 +41,35 @@ const Filter = () => {
 	const [operationSystem, setOperationSystem] = useState("");
 	const [version, setVersion] = useState("");
 	const [fixes, setFixes] = useState("false");
-	console.log(fixes)
+	
 
-
+	let query = "";
+	let hasFixes = fixes == "false" ? (query = `&&fixes=`) : (query = `&&fixes[regex]=`);
 
 
 
   
   function showAll() {
     navigate(``);
+		setSeverity("");
+    setDeveloper("");
+    setPlatform("");
+    setOperationSystem("");
+    setVersion("");
+		setFixes("true")
+		
   }
 
   function Filtering() {
     navigate(
-      `?severity[regex]=${severity}&&developer[regex]=${developer}&&platform[regex]=${platform}&&operationSystem[regex]=${operationSystem}&&version[regex]=${version}`
+      `?severity[regex]=${severity}&&developer[regex]=${developer}&&platform[regex]=${platform}&&operationSystem[regex]=${operationSystem}&&version[regex]=${version}${hasFixes}`
     );
+		setSeverity("")
+		setDeveloper("")
+		setPlatform("")
+		setOperationSystem("")
+		setVersion("")
+		
   }
 
   return (
@@ -68,7 +82,7 @@ const Filter = () => {
               style={{
                 textAlign: "center",
                 fontSize: "20px",
-                padding: "20px 0",
+                padding: "10px 0",
               }}
             >
               Find post you need!
@@ -144,8 +158,9 @@ const Filter = () => {
                   type="checkbox"
                   id="fixes"
                   name="fixes"
-                  value="true"
+                  value={fixes}
 									style={{marginRight:"10px"}}
+									onChange={() => fixes == "false" ? setFixes("true") : setFixes("false") }
 								
                 />
                 <label for="fixes"> contains fixes</label>

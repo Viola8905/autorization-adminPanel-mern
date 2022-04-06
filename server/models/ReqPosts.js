@@ -23,7 +23,7 @@ const ReqPost = new Schema(
     },
     fixes: {
       type: String,
-      required: [true, "Please provide fixes to the post"],
+      
     },
     version: {
       type: String,
