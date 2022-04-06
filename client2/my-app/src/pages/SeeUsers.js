@@ -84,7 +84,13 @@ const SeeUsers = () => {
       <Container>
         <BackBtn />
         <div
-          style={{ textAlign: "center", fontSize: "20px", padding: "20px 0" }}
+          style={{
+            textAlign: "center",
+            fontSize: "20px",
+            padding: "20px 0",
+            backgroundColor: "#d0dbdb",
+            fontWeight: "700",
+          }}
         >
           Усі користувачі
         </div>

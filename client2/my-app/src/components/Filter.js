@@ -85,7 +85,7 @@ const Filter = () => {
                 padding: "10px 0",
               }}
             >
-              Find post you need!
+              Знайдіть пост, який вам потрібен!
             </Typography>
 
             <div className={classes.filter}>

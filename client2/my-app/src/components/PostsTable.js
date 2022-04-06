@@ -58,37 +58,37 @@ const PostsTable = () => {
             },
           });
           //console.log(response.data.data);
-           setPosts(response.data.data);
-           setSeverity1(
-             response.data.data.filter((post) => post.severity == "1")
-           );
-           setSeverity2(
-             response.data.data.filter((post) => post.severity == "2")
-           );
-           setSeverity3(
-             response.data.data.filter((post) => post.severity == "3")
-           );
-           setSeverity4(
-             response.data.data.filter((post) => post.severity == "4")
-           );
-           setSeverity5(
-             response.data.data.filter((post) => post.severity == "5")
-           );
-           setSeverity6(
-             response.data.data.filter((post) => post.severity == "6")
-           );
-           setSeverity7(
-             response.data.data.filter((post) => post.severity == "7")
-           );
-           setSeverity8(
-             response.data.data.filter((post) => post.severity == "8")
-           );
-           setSeverity9(
-             response.data.data.filter((post) => post.severity == "9")
-           );
-           setSeverity10(
-             response.data.data.filter((post) => post.severity == "10")
-           );
+          setPosts(response.data.data);
+          setSeverity1(
+            response.data.data.filter((post) => post.severity == "1")
+          );
+          setSeverity2(
+            response.data.data.filter((post) => post.severity == "2")
+          );
+          setSeverity3(
+            response.data.data.filter((post) => post.severity == "3")
+          );
+          setSeverity4(
+            response.data.data.filter((post) => post.severity == "4")
+          );
+          setSeverity5(
+            response.data.data.filter((post) => post.severity == "5")
+          );
+          setSeverity6(
+            response.data.data.filter((post) => post.severity == "6")
+          );
+          setSeverity7(
+            response.data.data.filter((post) => post.severity == "7")
+          );
+          setSeverity8(
+            response.data.data.filter((post) => post.severity == "8")
+          );
+          setSeverity9(
+            response.data.data.filter((post) => post.severity == "9")
+          );
+          setSeverity10(
+            response.data.data.filter((post) => post.severity == "10")
+          );
         } catch (e) {
           console.log(e.response.data);
           localStorage.removeItem("token");
@@ -103,13 +103,13 @@ const PostsTable = () => {
     return <>{Math.ceil((severity / coutOfPosts) * 100)}%</>;
   }
 
-	const navigate = useNavigate()
+  const navigate = useNavigate();
 
-function Navigate(severity) {
-  if (severity) {
-    navigate(`/severity/${severity}`);
+  function Navigate(severity) {
+    if (severity) {
+      navigate(`/severity/${severity}`);
+    }
   }
-}
 
   return (
     <TableContainer component={Paper} style={{ margin: "30px 0" }}>
