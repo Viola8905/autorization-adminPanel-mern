@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./pages/App";
 import { store } from "./reducers";
-import { Persistor } from "./reducers";
 import { Provider } from "react-redux";
+import { Persistor } from "./reducers";
 import { PersistGate } from "redux-persist/integration/react";
 
 console.log()

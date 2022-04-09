@@ -22,4 +22,3 @@ const start = async () => {
 
 start();
 
-// `mongodb+srv://adminPanel:adminPanel29@cluster0.hfhxt.mongodb.net/adminPanel?retryWrites=true&w=majority`

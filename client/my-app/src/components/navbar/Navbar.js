@@ -1,24 +1,20 @@
-import React from 'react'
-import './navbar.css'
-import {NavLink, useNavigate} from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../reducers/userReducer';
+import React from "react";
+import "./navbar.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../reducers/userReducer";
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 const NavBar = () => {
-	const isAuth = useSelector((state) => state.user.isAuth);
-	
-	const dispatch = useDispatch()
-	const role = useSelector((state) => state.user.role);
+  const isAuth = useSelector((state) => state.user.isAuth);
 
+  const dispatch = useDispatch();
+  const role = useSelector((state) => state.user.role);
 
-   
-	return (
-   
-
+  return (
     <Navbar bg="dark" variant="dark">
       <Container>
         <div onClick={() => dispatch(logout())}>
@@ -29,7 +25,6 @@ const NavBar = () => {
 
         {isAuth ? (
           <Nav className="ml-auto" style={{ color: "white" }}>
-           
             <Button
               variant={"outline-light"}
               className="ml-2"
@@ -63,6 +58,6 @@ const NavBar = () => {
       </Container>
     </Navbar>
   );
-}
+};
 
-export default NavBar
+export default NavBar;
