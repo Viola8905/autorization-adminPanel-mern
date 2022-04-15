@@ -18,8 +18,8 @@ const NavBar = () => {
   return (
     <Navbar bg="dark" variant="dark" style={{padding:"30px 0 30px 0",overflow:"hidden"}}>
       <Container>
-        <div onClick={() => dispatch(logout())}>
-          <NavLink style={{ color: "white", textDecoration: "none" }} to="/">
+        <div >
+          <NavLink style={{ color: "white", textDecoration: "none" }} to="/user">
             CVE Posts
           </NavLink>
         </div>

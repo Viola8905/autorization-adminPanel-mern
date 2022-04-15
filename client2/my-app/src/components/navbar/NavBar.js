@@ -14,6 +14,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const role = useSelector((state) => state.user.role);
 
+	const [toggleMenu, setToggleMenu] = useState(false);
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -63,6 +65,8 @@ const NavBar = () => {
             </Button>
           </Nav>
         )}
+
+       
       </Container>
     </Navbar>
   );
