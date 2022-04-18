@@ -90,7 +90,7 @@ const PostsTable = () => {
             response.data.data.filter((post) => post.severity == "10")
           );
         } catch (e) {
-          console.log(e.response.data);
+          console.log(e);
           localStorage.removeItem("token");
         }
       };

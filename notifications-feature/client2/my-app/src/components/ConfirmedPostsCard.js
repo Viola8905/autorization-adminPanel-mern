@@ -20,10 +20,10 @@ const PostCard = ({
   setSeverityLevel,
   setComplexity,
   setFixes,
-	setVersion,
-	setOperationSystem,
-	setDeveloper,
-	setPlatform,
+  setVersion,
+  setOperationSystem,
+  setDeveloper,
+  setPlatform,
   setPostId,
   updatePost,
   removePost,
@@ -45,10 +45,10 @@ const PostCard = ({
     setDescription(post.description);
     setComplexity(post.complexity);
     setFixes(post.fixes);
-		setVersion(post.version);
-		setOperationSystem(post.operationSystem);
-		setDeveloper(post.developer);
-		setPlatform(post.platform);
+    setVersion(post.version);
+    setOperationSystem(post.operationSystem);
+    setDeveloper(post.developer);
+    setPlatform(post.platform);
   };
 
   function renderCard(role, isEditing) {

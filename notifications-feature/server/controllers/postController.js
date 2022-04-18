@@ -84,6 +84,46 @@ exports.handleNotification = async (res, platform, user, postId) => {
   }
 };
 
+exports.deleteNotification = async (req, res, next) => {
+  const { id, user } = req.body;
+  // const foundUser = await User.findOne();
+
+  const foundUser = await User.findById(user);
+
+  const deleteCandidate = foundUser.notifications.find(
+    (notif) => (notif._id = id)
+  );
+
+  console.log(deleteCandidate);
+
+  if (deleteCandidate) {
+    const candidateIndex = foundUser.notifications.indexOf(deleteCandidate);
+
+    if (candidateIndex > -1) {
+      foundUser.notifications.splice(candidateIndex, 1);
+      foundUser.save();
+
+      res.status(201).json({
+        success: true,
+        data: deleteCandidate,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Notification was not found",
+      });
+    }
+  }
+
+  // for ([key, value] of Object.entries(foundUser.notifications)) {
+  //   console.log(`Key: ${key}, Value: ${value._id}`);
+  //   if (value._id == id) {
+  //     console.log(`This: ${value}`);
+
+  //   }
+  // }
+};
+
 exports.updatePostById = asyncHandler(async (req, res, next) => {
   let post = await Post.findById(req.params.id);
 

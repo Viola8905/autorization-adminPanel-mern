@@ -23,7 +23,6 @@ const ReqPost = new Schema(
     },
     fixes: {
       type: String,
-      
     },
     version: {
       type: String,

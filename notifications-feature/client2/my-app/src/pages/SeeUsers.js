@@ -9,9 +9,9 @@ import {
   Container,
   Grid,
   makeStyles,
-	Card,
-	CardHeader,
-	Button,
+  Card,
+  CardHeader,
+  Button,
 } from "@material-ui/core";
 import { deleteUser } from "../api/apiRequests";
 import BackBtn from "../components/backBtn/BackBtn";
@@ -73,7 +73,7 @@ const SeeUsers = () => {
         user._id,
         () =>
           setAllUsers([...allUsers.filter((user1) => user1._id !== user._id)]),
-        () => alert("ERRRROOOR")
+        () => alert("Error")
       )
     );
   }
@@ -119,7 +119,12 @@ const SeeUsers = () => {
               </Typography>
               <div
                 className=""
-                style={{ display: "flex", flexDirection: "row" , flexWrap:"wrap",padding:"0 10px 0 10px"}}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  padding: "0 10px 0 10px",
+                }}
               >
                 <input
                   type="text"

@@ -1,6 +1,11 @@
 import React from "react";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
@@ -12,7 +17,7 @@ import AuthPage from "./AuthPage";
 import ReqPosts from "./ReqPosts";
 import SeeUsers from "./SeeUsers";
 import MyPosts from "./MyPosts";
-import DebugPage from './Debug';
+import DebugPage from "./Debug";
 import NavBar from "../components/navbar/NavBar";
 import LevelOfPosts from "../components/LevelOfPosts";
 import ReqPostDetails from "./ReqPostDetails";
@@ -20,7 +25,6 @@ import RejPostDetails from "./RejPostDetails";
 import CreatePostU from "./CreatePostU";
 import CreatePostA from "./CreatePostA";
 import NotificationsPage from "./NotificationsPage";
-
 
 function App() {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -38,12 +42,13 @@ function App() {
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/user" element={<AuthPage />} />
           <Route exact path="/debug" element={<DebugPage />} />
-          <Route exact path="/severity/:severity" element={<LevelOfPosts/>} />
+          <Route exact path="/severity/:severity" element={<LevelOfPosts />} />
         </Routes>
       );
     } else if (isAuth && role === 1) {
       return (
         <Routes>
+          <Route exact path="/" element={<Navigate to="/user" replace />} />
           <Route exact path="/user" element={<DebugPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/reqPosts" element={<ReqPosts />} />
@@ -57,6 +62,7 @@ function App() {
     } else if (isAuth && role === 0) {
       return (
         <Routes>
+          <Route exact path="/" element={<Navigate to="/user" replace />} />
           <Route exact path="/user" element={<UserPage />} />
           <Route exact path="/:mainId" element={<ItemPage />} />
           <Route exact path="/myPosts" element={<MyPosts />} />
@@ -76,7 +82,7 @@ function App() {
   return (
     <div className="app">
       <Router>
-        <NavBar/>
+        <NavBar />
         <div className="wrap">{renderElement(isAuth, role)}</div>
       </Router>
     </div>

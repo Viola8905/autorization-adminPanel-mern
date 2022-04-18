@@ -71,4 +71,6 @@ router
   .route("/reqPosts/", authMiddleware)
   .post(ReqPostController.createNewReqPost);
 
+router.route("/notifications").delete(PostController.deleteNotification);
+
 module.exports = router;

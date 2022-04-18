@@ -157,7 +157,7 @@ const Filter = () => {
                     fixes == "false" ? setFixes("true") : setFixes("false")
                   }
                 />
-                <label for="fixes"> contains fixes</label>
+                <label> contains fixes</label>
               </div>
 
               <div style={{ alignSelf: "center", marginTop: "10px" }}>

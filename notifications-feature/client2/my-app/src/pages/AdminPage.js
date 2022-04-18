@@ -82,8 +82,8 @@ const Admin = () => {
   const [description1, setDescription1] = useState("");
   const [complexity1, setComplexity1] = useState("");
   const [fixes1, setFixes1] = useState("");
-	const [version1, setVersion1] = useState("");
-	const [operationSystem1, setOperationSystem1] = useState("");
+  const [version1, setVersion1] = useState("");
+  const [operationSystem1, setOperationSystem1] = useState("");
 
   function generateID() {
     return v4();
@@ -97,13 +97,12 @@ const Admin = () => {
     description: description1,
     complexity: complexity1,
     fixes: fixes1,
-		version:version1,
+    version: version1,
     mainId: mainId,
-		operationSystem: operationSystem1,
+    operationSystem: operationSystem1,
     user: "none",
   };
 
-  
   //removing post function
 
   const removePost = (id) => {
@@ -132,13 +131,21 @@ const Admin = () => {
     setComplexity(post.complexity);
     setFixes(post.fixes);
     setPostId(post._id);
-		setVersion(post.version);
-		setOperationSystem(post.operationSystem);
+    setVersion(post.version);
+    setOperationSystem(post.operationSystem);
   };
 
   function updatePost() {
-    const post = { name, severity, description, complexity, fixes,version,operationSystem };
-		console.log(post)
+    const post = {
+      name,
+      severity,
+      description,
+      complexity,
+      fixes,
+      version,
+      operationSystem,
+    };
+    console.log(post);
     fetch(`http://localhost:5000/api/posts/${postId}`, {
       method: "PUT",
       headers: {
@@ -162,8 +169,8 @@ const Admin = () => {
         posts[i].description = description;
         posts[i].complexity = complexity;
         posts[i].fixes = fixes;
-				posts[i].version = version;
-				posts[i].operationSystem = operationSystem;
+        posts[i].version = version;
+        posts[i].operationSystem = operationSystem;
       }
     }
 
@@ -173,7 +180,6 @@ const Admin = () => {
   return (
     <div>
       <Container className={classes.root}>
-        
         <Grid container spacing={2}>
           {posts.map((post) => (
             <Grid item key={post._id} xs={12} sm={6} lg={3}>

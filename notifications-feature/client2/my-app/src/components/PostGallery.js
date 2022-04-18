@@ -79,7 +79,6 @@ const PostGallery = () => {
           );
           setPosts(response.data.data);
         } catch (e) {
-          console.log(e.response.data);
           localStorage.removeItem("token");
         }
       };

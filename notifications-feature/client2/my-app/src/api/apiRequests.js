@@ -140,7 +140,7 @@ export const moveReqPost = (arr) => {
           arr,
         }
       );
-			
+
       //alert("Post was added into main db");
     } catch (e) {
       alert("Post was not added");
@@ -218,3 +218,23 @@ export const deleteUser = (id, success, failure) => {
     }
   };
 };
+
+// moved logic to NotificationsPage
+// export const deleteNotification = (id, success, failure) => {
+//   return async () => {
+//     try {
+//       const response = await axios.delete(
+//         `http://localhost:5000/api/notifications/${id}`
+//       );
+
+//       if (response.data.success === true) {
+//         success();
+//       } else {
+//         failure();
+//       }
+//     } catch (e) {
+//       console.log(e.response.data + "post was not deleted");
+//       console.log(JSON.stringify(e.response));
+//     }
+//   };
+// };

@@ -41,7 +41,7 @@ const Auth = () => {
           {!isLogin ? (
             <Form.Select
               className="mt-2"
-              value={platform}
+              // defaultValue={platform}
               onChange={(e) => {
                 setPlatform(e.target.value);
               }}
