@@ -26,7 +26,6 @@ export const useStyles = makeStyles({
   colItem: {
     marginBottom: "10px",
   },
-  rowItem: {},
   fullWidthCenter: {
     minWidth: "100%",
     display: "flex",

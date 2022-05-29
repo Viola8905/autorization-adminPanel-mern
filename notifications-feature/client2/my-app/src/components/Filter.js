@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Paper, Typography, Grid, makeStyles } from "@material-ui/core";
+import { Paper, Typography, Grid, makeStyles, Button } from "@material-ui/core";
 
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Input from "../components/input/Input";
+import { styled } from "@mui/material/styles";
+import {
+  InputLabel,
+  MenuItem,
+  Select,
+  Slider,
+  Stack,
+  Radio,
+} from "@mui/material";
 
 const useStyles = makeStyles({
   paper: {
@@ -29,42 +32,78 @@ const useStyles = makeStyles({
   },
 });
 
+const SeveritySlider = styled(Slider)({
+  color: "white",
+  background:
+    "linear-gradient(90deg, rgba(60,166,77,1) 10%, rgba(77,214,99,1) 20%, rgba(93,245,117,1) 30%, rgba(199,245,93,1) 40%, rgba(227,245,93,1) 50%, rgba(245,225,93,1) 60%, rgba(245,204,93,1) 70%, rgba(245,172,93,1) 80%, rgba(245,136,93,1) 90%, rgba(245,93,93,1) 100%)",
+});
+
 const Filter = () => {
   const classes = useStyles();
 
   const navigate = useNavigate();
 
-  const [severity, setSeverity] = useState("");
-  const [developer, setDeveloper] = useState("");
-  const [platform, setPlatform] = useState("");
-  const [operationSystem, setOperationSystem] = useState("");
-  const [version, setVersion] = useState("");
-  const [fixes, setFixes] = useState("false");
+  const defaultSearchingPost = {
+    name: "",
+    complexity: "",
+    severity: 0,
+    developer: "",
+    platform: "",
+    operationSystem: "",
+    version: "1",
+    fixes: "",
+  };
 
-  let query = "";
-  let hasFixes =
-    fixes == "false" ? (query = `&&fixes=`) : (query = `&&fixes[regex]=`);
+  const [searchingPost, setSearchingPost] = useState(defaultSearchingPost);
+  const [sliderType, setSliderType] = useState({ type: "gte" });
 
   function showAll() {
     navigate(``);
-    setSeverity("");
-    setDeveloper("");
-    setPlatform("");
-    setOperationSystem("");
-    setVersion("");
-    setFixes("true");
+    setSearchingPost(defaultSearchingPost);
   }
 
+  const formNavigationString = (post) => {
+    let navString = "";
+
+    for (let [key, value] of Object.entries(post)) {
+      let firstOrConsequent = navString.includes("?") ? "&&" : "?";
+
+      if (key === "severity" && value !== defaultSearchingPost[`${key}`])
+        navString += `${firstOrConsequent}${key}[${sliderType.type}]=${value}`;
+
+      if (value !== defaultSearchingPost[key] && key !== "severity")
+        navString += `${firstOrConsequent}${key}[regex]=${value}`;
+    }
+
+    return navString;
+  };
+
+  console.log(formNavigationString(searchingPost));
+
   function Filtering() {
-    navigate(
-      `?severity[regex]=${severity}&&developer[regex]=${developer}&&platform[regex]=${platform}&&operationSystem[regex]=${operationSystem}&&version[regex]=${version}${hasFixes}`
-    );
-    setSeverity("");
-    setDeveloper("");
-    setPlatform("");
-    setOperationSystem("");
-    setVersion("");
+    navigate(formNavigationString(searchingPost));
+    setSearchingPost(defaultSearchingPost);
   }
+
+  const handleRadioInput = (e) => {
+    setSliderType(e.target.value);
+  };
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setSearchingPost({ ...searchingPost, [name]: value });
+  };
+
+  const marks = [
+    {
+      value: 0,
+      label: "0",
+    },
+    {
+      value: 10,
+      label: "10",
+    },
+  ];
 
   return (
     <div>
@@ -83,41 +122,69 @@ const Filter = () => {
             </Typography>
 
             <div className={classes.filter}>
-              <InputLabel id="demo-simple-select-label">Severity</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={severity}
-                label="Severity"
-                onChange={(e) => setSeverity(e.target.value)}
+              <TextField
+                name="name"
+                label="Post name"
+                id="outlined-size-small"
+                size="small"
+                onInput={handleChangeInput}
+              />
+              <br />
+              <Stack
+                spacing={2}
+                direction="row"
+                sx={{ mb: 1 }}
+                alignItems="center"
               >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={6}>6</MenuItem>
-                <MenuItem value={7}>7</MenuItem>
-                <MenuItem value={8}>8</MenuItem>
-                <MenuItem value={9}>9</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-              </Select>
+                <InputLabel>
+                  Severity: <strong>{searchingPost.severity}</strong>
+                </InputLabel>
+                <Radio
+                  name="type"
+                  checked={sliderType.type === "gte"}
+                  onChange={handleRadioInput}
+                  value="gte"
+                />
+                <Radio
+                  name="type"
+                  checked={sliderType.type === "lte"}
+                  onChange={handleRadioInput}
+                  value="lte"
+                />
+                <Radio
+                  name="type"
+                  checked={sliderType.type === "equals"}
+                  onChange={handleRadioInput}
+                  value="exact"
+                />
+              </Stack>
+              <SeveritySlider
+                name="severity"
+                value={searchingPost.severity}
+                onChange={handleChangeInput}
+                valueLabelDisplay="auto"
+                step={0.1}
+                min={0}
+                max={10}
+                marks={marks}
+              ></SeveritySlider>
               <br />
               <TextField
+                name="developer"
                 label="developer"
                 id="outlined-size-small"
                 size="small"
-                onInput={(e) => setDeveloper(e.target.value)}
+                onInput={handleChangeInput}
               />
               <br />
-
               <InputLabel id="demo-simple-select-label">Platform</InputLabel>
               <Select
+                name="platform"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={platform}
+                value={searchingPost.platform}
                 label="platform"
-                onChange={(e) => setPlatform(e.target.value)}
+                onChange={handleChangeInput}
               >
                 <MenuItem value={"windows"}>Windows</MenuItem>
                 <MenuItem value={"macos"}>Mac Os</MenuItem>
@@ -125,48 +192,41 @@ const Filter = () => {
               </Select>
               <br />
               <TextField
-                label="operation system"
+                name="operationSystem"
+                label="Operating system"
                 id="outlined-size-small"
                 size="small"
-                onInput={(e) => setOperationSystem(e.target.value)}
+                onInput={handleChangeInput}
               />
               <br />
               <TextField
-                label="operation system"
-                id="outlined-size-small"
-                size="small"
-                onInput={(e) => setOperationSystem(e.target.value)}
-              />
-              <br />
-              <TextField
+                name="version"
                 label="version"
                 id="outlined-size-small"
                 size="small"
-                onInput={(e) => setVersion(e.target.value)}
+                onInput={handleChangeInput}
               />
               <br />
-
               <div>
                 <input
                   type="checkbox"
                   id="fixes"
                   name="fixes"
-                  value={fixes}
+                  value={searchingPost.fixes}
                   style={{ marginRight: "10px" }}
-                  onChange={() =>
-                    fixes == "false" ? setFixes("true") : setFixes("false")
-                  }
+                  onChange={handleChangeInput}
                 />
                 <label> contains fixes</label>
               </div>
-
               <div style={{ alignSelf: "center", marginTop: "10px" }}>
-                <SearchIcon
-                  style={{ marginLeft: "10px" }}
-                  onClick={Filtering}
-                  color="primary"
-                  sx={{ fontSize: 35 }}
-                />
+                <Button variant="contained" onClick={Filtering}>
+                  Search
+                  <SearchIcon
+                    style={{ marginLeft: "10px" }}
+                    color="primary"
+                    sx={{ fontSize: 35 }}
+                  />
+                </Button>
                 <CancelOutlinedIcon
                   style={{ marginLeft: "10px" }}
                   onClick={showAll}

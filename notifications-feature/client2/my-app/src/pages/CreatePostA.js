@@ -40,6 +40,21 @@ const CreatePostA = () => {
   const classes = useStyles();
   const userName = useSelector((state) => state.user.currentUser.username);
 
+  const defaultPost = {
+    name: "",
+    severity: "",
+    description: "",
+    complexity: "",
+    fixes: "",
+    version: "",
+    operationSystem: "",
+    developer: "",
+    platform: "",
+    mainId: "",
+  };
+
+  const [postCandidate, setPostCandidate] = useState();
+
   const [name1, setName1] = useState("");
   const [severityLevel1, setSeverityLevel1] = useState("");
   const [description1, setDescription1] = useState("");
@@ -47,9 +62,8 @@ const CreatePostA = () => {
   const [fixes1, setFixes1] = useState("");
   const [version1, setVersion1] = useState("");
   const [operationSystem1, setOperationSystem1] = useState("");
-	const [developer1, setDeveloper1] = useState("");
-	const [platform1, setPlatform1] = useState("");
-
+  const [developer1, setDeveloper1] = useState("");
+  const [platform1, setPlatform1] = useState("");
 
   const [posts, setPosts] = useState([]);
 
@@ -72,8 +86,8 @@ const CreatePostA = () => {
     fixes: fixes1,
     version: version1,
     operationSystem: operationSystem1,
-		developer:developer1,
-		platform:platform1,
+    developer: developer1,
+    platform: platform1,
     mainId: mainId,
     user: userName,
   };
@@ -118,16 +132,15 @@ const CreatePostA = () => {
         )
       );
 
-
-			setName1("")
-			setSeverityLevel1("")
-			setDescription1("")
-			setComplexity1("")
-			setFixes1("")
-			setVersion1("")
-			setOperationSystem1("")
-			setDeveloper1("")
-			setPlatform1("")
+      setName1("");
+      setSeverityLevel1("");
+      setDescription1("");
+      setComplexity1("");
+      setFixes1("");
+      setVersion1("");
+      setOperationSystem1("");
+      setDeveloper1("");
+      setPlatform1("");
     } else {
       alert("title must be unique");
     }

@@ -25,7 +25,6 @@ export default function userReducer(state = defaultState, action) {
       };
 
     case SET_ADMIN:
-      S;
       return {
         ...state,
         currentUser: action.payload,

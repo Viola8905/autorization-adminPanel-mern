@@ -2,14 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Router = require("./Router");
 const PORT = process.env.PORT || 5000;
-const corsMiddleware = require('./middleware/cors.middleware')
+const corsMiddleware = require("./middleware/cors.middleware");
 const app = express();
-
 
 app.use(corsMiddleware);
 app.use(express.json());
 app.use("/api", Router);
-
 
 const start = async () => {
   try {
