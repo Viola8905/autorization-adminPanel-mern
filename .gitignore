@@ -1,6 +1,5 @@
 .env
-client/my-app/node_modules
-client2/my-app/node_modules
+client/node_modules
 /server/node_modules
 server/config.js
 .log

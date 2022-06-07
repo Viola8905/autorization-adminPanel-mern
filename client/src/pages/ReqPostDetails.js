@@ -23,7 +23,6 @@ const ReqPostDetails = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
   const location = useLocation();
 
-
   let params = location.pathname;
 
   //Component state
@@ -43,7 +42,7 @@ const ReqPostDetails = () => {
           } else {
             query = filter;
           }
-					console.log(query)
+          console.log(query);
           const response = await axios.get(
             `http://localhost:5000/api${query}`,
             {

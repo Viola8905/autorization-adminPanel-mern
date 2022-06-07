@@ -1,21 +1,22 @@
-import React from "react";
+// import React from "react";
 
-const Input = (props) => {
-  return (
-    <input
-      style={{
-        padding: "10px",
-        marginBottom: "10px",
-        border: "1px solid gray",
-        borderRadius: "5px",
-        minWidth: "70%",
-      }}
-      onChange={(event) => props.setValue(event.target.value)}
-      value={props.value}
-      type={props.type}
-      placeholder={props.placeholder}
-    />
-  );
-};
+// const Input = ({ name, value, type, placeholder, setValue }) => {
+//   return (
+//     <input
+//       name={name}
+//       style={{
+//         padding: "10px",
+//         marginBottom: "10px",
+//         border: "1px solid gray",
+//         borderRadius: "5px",
+//         minWidth: "70%",
+//       }}
+//       onChange={(event) => setValue(event.target.value)}
+//       value={value}
+//       type={type}
+//       placeholder={placeholder}
+//     />
+//   );
+// };
 
-export default Input;
+// export default Input;

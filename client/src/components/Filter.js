@@ -14,6 +14,10 @@ import {
   Slider,
   Stack,
   Radio,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
 } from "@mui/material";
 
 const useStyles = makeStyles({
@@ -54,9 +58,13 @@ const Filter = () => {
     fixes: "",
   };
 
-  const [searchingPost, setSearchingPost] = useState(defaultSearchingPost);
-  const [sliderType, setSliderType] = useState({ type: "gte" });
+  const defaultSlider = {
+    type: "gte",
+  };
 
+  const [searchingPost, setSearchingPost] = useState(defaultSearchingPost);
+  const [sliderType, setSliderType] = useState(defaultSlider);
+  console.log("this is type " + sliderType.type);
   function showAll() {
     navigate(``);
     setSearchingPost(defaultSearchingPost);
@@ -68,25 +76,30 @@ const Filter = () => {
     for (let [key, value] of Object.entries(post)) {
       let firstOrConsequent = navString.includes("?") ? "&&" : "?";
 
+      let customKeys = ["severity", "name"];
+
       if (key === "severity" && value !== defaultSearchingPost[`${key}`])
         navString += `${firstOrConsequent}${key}[${sliderType.type}]=${value}`;
 
-      if (value !== defaultSearchingPost[key] && key !== "severity")
+      if (key === "name" && value !== defaultSearchingPost[`${key}`])
+        navString += `${firstOrConsequent}${key}[regex]=${value}&&[options]=i`;
+
+      if (value !== defaultSearchingPost[key] && !customKeys.includes(key))
         navString += `${firstOrConsequent}${key}[regex]=${value}`;
     }
 
     return navString;
   };
-
+  console.log("Slider: " + sliderType.type);
   console.log(formNavigationString(searchingPost));
 
   function Filtering() {
     navigate(formNavigationString(searchingPost));
-    setSearchingPost(defaultSearchingPost);
   }
 
   const handleRadioInput = (e) => {
-    setSliderType(e.target.value);
+    console.log("Radio Valued: " + e.target.value);
+    setSliderType({ ...sliderType, type: e.target.value });
   };
 
   const handleChangeInput = (e) => {
@@ -124,6 +137,7 @@ const Filter = () => {
             <div className={classes.filter}>
               <TextField
                 name="name"
+                value={searchingPost.name}
                 label="Post name"
                 id="outlined-size-small"
                 size="small"
@@ -136,27 +150,28 @@ const Filter = () => {
                 sx={{ mb: 1 }}
                 alignItems="center"
               >
-                <InputLabel>
-                  Severity: <strong>{searchingPost.severity}</strong>
-                </InputLabel>
-                <Radio
-                  name="type"
-                  checked={sliderType.type === "gte"}
-                  onChange={handleRadioInput}
-                  value="gte"
-                />
-                <Radio
-                  name="type"
-                  checked={sliderType.type === "lte"}
-                  onChange={handleRadioInput}
-                  value="lte"
-                />
-                <Radio
-                  name="type"
-                  checked={sliderType.type === "equals"}
-                  onChange={handleRadioInput}
-                  value="exact"
-                />
+                <FormControl>
+                  <FormLabel>
+                    Severity: <strong>{searchingPost.severity}</strong>
+                  </FormLabel>
+                  <RadioGroup
+                    value={sliderType.type}
+                    onChange={(e) => handleRadioInput(e)}
+                  >
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Greater then (or equals)"
+                      name="type"
+                      value="gte"
+                    />
+                    <FormControlLabel
+                      control={<Radio />}
+                      label="Less then (or equals)"
+                      name="type"
+                      value="lte"
+                    />
+                  </RadioGroup>
+                </FormControl>
               </Stack>
               <SeveritySlider
                 name="severity"
@@ -171,22 +186,23 @@ const Filter = () => {
               <br />
               <TextField
                 name="developer"
-                label="developer"
+                label="Developer"
                 id="outlined-size-small"
                 size="small"
                 onInput={handleChangeInput}
               />
               <br />
-              <InputLabel id="demo-simple-select-label">Platform</InputLabel>
               <Select
                 name="platform"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={searchingPost.platform}
-                label="platform"
+                label="Windows"
                 onChange={handleChangeInput}
               >
-                <MenuItem value={"windows"}>Windows</MenuItem>
+                <MenuItem selected value={"windows"}>
+                  Windows
+                </MenuItem>
                 <MenuItem value={"macos"}>Mac Os</MenuItem>
                 <MenuItem value={"linux"}>Linux</MenuItem>
               </Select>
@@ -201,7 +217,7 @@ const Filter = () => {
               <br />
               <TextField
                 name="version"
-                label="version"
+                label="Version"
                 id="outlined-size-small"
                 size="small"
                 onInput={handleChangeInput}

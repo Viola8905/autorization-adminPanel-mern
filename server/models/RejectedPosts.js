@@ -23,7 +23,6 @@ const RejPost = new Schema(
     },
     fixes: {
       type: String,
-      
     },
     version: {
       type: String,

@@ -2,12 +2,14 @@ const Post = require("../models/Posts");
 const asyncHandler = require("../middleware/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
 const User = require("../models/User");
+const { log } = console;
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
   //..../api/v1/bootcamps&price[lte]=1000&sort=-price
   let query;
 
   const reqQuery = { ...req.query }; //spread into a new one query
+  log(req.query);
 
   const removeFields = ["sort"]; //you can add here more fields(specified what fields to remove)
 
@@ -20,9 +22,12 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
     /\b(gt|gte|lt|lte|in|regex)\b/g,
     (match) => `$${match}`
   ); //gt-grater than ..../mongodb logical operators(manipulate string if it contain any of following instructions)
-  console.log(queryStr);
 
-  query = Post.find(JSON.parse(queryStr));
+  log(queryStr);
+  let parsedString = JSON.parse(queryStr);
+  log(parsedString);
+  query = Post.find(parsedString);
+
   if (req.query.sort) {
     //sorting by price and rating
     const sortByArr = req.query.sort.split(",");
@@ -34,7 +39,6 @@ exports.getAllPosts = asyncHandler(async (req, res, next) => {
     query = query.sort("name");
   }
 
-  //                 {"price":{"$lte":"900"}}
   const posts = await query; //it will show bootcamps where price is less than 1000
   res.status(200).json({
     success: true,

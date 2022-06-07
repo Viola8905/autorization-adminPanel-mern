@@ -2,47 +2,48 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+
+import { styled } from "@mui/material/styles";
 import {
   Paper,
   Typography,
   Container,
   Grid,
-  makeStyles,
   Button,
-} from "@material-ui/core";
+  InputLabel,
+  Slider,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+  Stack,
+} from "@mui/material";
 
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Input from "../components/input/Input";
 import { createPost } from "../api/apiRequests";
 import BackBtn from "../components/backBtn/BackBtn";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-const useStyles = makeStyles({
-  root: {
-    marginTop: 10,
-  },
-  paper: {
-    marginBottom: "1rem",
-    padding: 20,
-  },
-  inputField: {
-    padding: "5px",
-    marginBottom: "10px",
-  },
+const SeveritySlider = styled(Slider)({
+  color: "white",
+  background:
+    "linear-gradient(90deg, rgba(60,166,77,1) 10%, rgba(77,214,99,1) 20%, rgba(93,245,117,1) 30%, rgba(199,245,93,1) 40%, rgba(227,245,93,1) 50%, rgba(245,225,93,1) 60%, rgba(245,204,93,1) 70%, rgba(245,172,93,1) 80%, rgba(245,136,93,1) 90%, rgba(245,93,93,1) 100%)",
 });
+
 const CreatePostA = () => {
   const dispatch = useDispatch();
-  const classes = useStyles();
   const userName = useSelector((state) => state.user.currentUser.username);
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  const mainId = getRandomInt(10, 1000000);
 
   const defaultPost = {
     name: "",
-    severity: "",
+    severity: 0,
     description: "",
     complexity: "",
     fixes: "",
@@ -50,20 +51,27 @@ const CreatePostA = () => {
     operationSystem: "",
     developer: "",
     platform: "",
-    mainId: "",
+    mainId: mainId,
+    user: userName,
   };
 
-  const [postCandidate, setPostCandidate] = useState();
+  const marks = [
+    {
+      value: 0,
+      label: "0",
+    },
+    {
+      value: 10,
+      label: "10",
+    },
+  ];
 
-  const [name1, setName1] = useState("");
-  const [severityLevel1, setSeverityLevel1] = useState("");
-  const [description1, setDescription1] = useState("");
-  const [complexity1, setComplexity1] = useState("");
-  const [fixes1, setFixes1] = useState("");
-  const [version1, setVersion1] = useState("");
-  const [operationSystem1, setOperationSystem1] = useState("");
-  const [developer1, setDeveloper1] = useState("");
-  const [platform1, setPlatform1] = useState("");
+  const [postCandidate, setPostCandidate] = useState(defaultPost);
+
+  const handleStateChange = (e) => {
+    const { name, value } = e.target;
+    setPostCandidate({ ...postCandidate, [name]: value, mainId: mainId });
+  };
 
   const [posts, setPosts] = useState([]);
 
@@ -72,25 +80,6 @@ const CreatePostA = () => {
   const location = useLocation();
 
   const params = location.search ? location.search : null;
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
-  const mainId = getRandomInt(10, 100);
-
-  let arr = {
-    name: name1,
-    severity: severityLevel1,
-    description: description1,
-    complexity: complexity1,
-    fixes: fixes1,
-    version: version1,
-    operationSystem: operationSystem1,
-    developer: developer1,
-    platform: platform1,
-    mainId: mainId,
-    user: userName,
-  };
 
   useEffect(() => {
     function Posts() {
@@ -120,38 +109,30 @@ const CreatePostA = () => {
     dispatch(Posts());
   }, [params, filter]);
 
-  const addPost = (arr) => {
-    let posts1 = posts.find((item) => item.name === arr.name);
+  console.log(postCandidate);
 
-    if (!posts1) {
+  const addPost = (postCandidate) => {
+    let existingPost = posts.find((item) => item.name === postCandidate.name);
+
+    if (!existingPost) {
       dispatch(
         createPost(
-          arr,
-          () => setPosts([...posts, arr]),
-          () => alert("Error")
+          postCandidate,
+          () => setPosts([...posts, postCandidate]),
+          () => alert("Error occured!")
         )
       );
 
-      setName1("");
-      setSeverityLevel1("");
-      setDescription1("");
-      setComplexity1("");
-      setFixes1("");
-      setVersion1("");
-      setOperationSystem1("");
-      setDeveloper1("");
-      setPlatform1("");
-    } else {
-      alert("title must be unique");
+      // setPostCandidate(defaultPost);
     }
   };
 
   return (
-    <Container className={classes.root}>
+    <Container>
       {/* //Filtering and sorting section */}
       <BackBtn />
 
-      <Paper className={classes.paper}>
+      <Paper>
         <Grid
           container
           style={{
@@ -160,7 +141,7 @@ const CreatePostA = () => {
             alignItems: "center",
           }}
         >
-          <span
+          <Typography
             style={{
               fontSize: "20px",
               fontWeight: "700",
@@ -169,118 +150,198 @@ const CreatePostA = () => {
             }}
           >
             Форма для додавання поста в систему
-          </span>
-          <Input
-            value={name1}
-            setValue={setName1}
+          </Typography>
+          <TextField
+            name="name"
+            sx={{ minWidth: "70%" }}
+            label="Назва"
+            variant="outlined"
+            value={postCandidate.name}
+            onChange={handleStateChange}
             type="text"
-            placeholder="enter name"
+            placeholder="Введіть назву вразливості..."
           />
 
           <br />
-          <InputLabel id="demo-simple-select-label">Severity</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={severityLevel1}
-            label="Severity"
-            onChange={(e) => setSeverityLevel1(e.target.value)}
-            style={{ minWidth: "70%" }}
-          >
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={4}>4</MenuItem>
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={6}>6</MenuItem>
-            <MenuItem value={7}>7</MenuItem>
-            <MenuItem value={8}>8</MenuItem>
-            <MenuItem value={9}>9</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-          </Select>
-          <br />
+          <InputLabel sx={{ pb: 1 }}>
+            Оберіть небезпечність вразливості
+          </InputLabel>
+          <SeveritySlider
+            name="severity"
+            sx={{ maxWidth: "70%" }}
+            value={postCandidate.severity}
+            onChange={handleStateChange}
+            valueLabelDisplay="auto"
+            step={0.1}
+            min={0}
+            max={10}
+            marks={marks}
+          ></SeveritySlider>
+          <Typography variant="h6">Оцінка: {postCandidate.severity}</Typography>
           <br />
 
-          <textarea
-            value={description1}
-            onChange={(e) => {
-              setDescription1(e.target.value);
-            }}
+          <TextField
+            sx={{ minWidth: "70%" }}
+            multiline
+            rows={4}
+            name="description"
+            label="Опис"
+            value={postCandidate.description}
+            onChange={handleStateChange}
             type="text"
-            placeholder="enter description"
-            style={{
-              width: "210px",
-              padding: "10px",
-              marginBottom: "10px",
-              border: "1px solid gray",
-              borderRadius: "5px",
-              minWidth: "70%",
-            }}
+            placeholder="Введіть опис вразливості..."
           />
           <br />
 
-          <InputLabel id="demo-simple-select-label">Complexity</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={complexity1}
-            label="Complexity"
-            onChange={(e) => setComplexity1(e.target.value)}
-            style={{ minWidth: "70%" }}
-          >
-            <MenuItem value={"low"}>Low</MenuItem>
-            <MenuItem value={"middle"}>Middle</MenuItem>
-            <MenuItem value={"hard"}>Hard</MenuItem>
-          </Select>
+          <InputLabel sx={{ pb: 1 }}>Доступність вразливості</InputLabel>
+          <FormControl>
+            <RadioGroup name="complexity" onChange={handleStateChange}>
+              <Stack direction="row">
+                <FormControlLabel
+                  sx={{
+                    minWidth: "150px",
+                    background: "rgba(60,166,77,1)",
+                    color: "white",
+                    padding: "20px",
+                    borderRadius: "10px",
+                    "& .MuiSvgIcon-root": {
+                      fontSize: 28,
+                    },
+                  }}
+                  value="low"
+                  control={<Radio size="" />}
+                  label="Низька"
+                />
+                <FormControlLabel
+                  sx={{
+                    minWidth: "150px",
+                    background: "rgba(245,225,93,1)",
+                    color: "white",
+                    padding: "20px",
+                    borderRadius: "10px",
+                    "& .MuiSvgIcon-root": {
+                      fontSize: 28,
+                    },
+                  }}
+                  value="middle"
+                  control={<Radio />}
+                  label="Середня"
+                />
+                <FormControlLabel
+                  sx={{
+                    minWidth: "150px",
+                    background: "rgba(245,93,93,1)",
+                    color: "white",
+                    padding: "20px",
+                    borderRadius: "10px",
+                    "& .MuiSvgIcon-root": {
+                      fontSize: 28,
+                    },
+                  }}
+                  value="high"
+                  control={<Radio />}
+                  label="Висока"
+                />
+              </Stack>
+            </RadioGroup>
+          </FormControl>
 
           <br />
-          <br />
 
-          <Input
-            value={fixes1}
-            setValue={setFixes1}
+          <TextField
+            sx={{ minWidth: "70%" }}
+            name="fixes"
+            label="Рішення"
+            value={postCandidate.fixes}
+            onChange={handleStateChange}
             type="text"
-            placeholder="enter fixes"
+            placeholder="Ввдеіть рішення до вразливості..."
           />
 
           <br />
 
-          <Input
-            value={version1}
-            setValue={setVersion1}
+          <TextField
+            sx={{ minWidth: "70%" }}
+            name="version"
+            label="Версія"
+            value={postCandidate.version}
+            onChange={handleStateChange}
             type="text"
-            placeholder="enter version"
+            placeholder="Введіть версію вразливості..."
           />
           <br />
 
-          <Input
-            value={operationSystem1}
-            setValue={setOperationSystem1}
+          <TextField
+            sx={{ minWidth: "70%" }}
+            name="operationSystem"
+            label="Операційна система"
+            value={postCandidate.operationSystem}
+            onChange={handleStateChange}
             type="text"
-            placeholder="enter operation system"
+            placeholder="Операційна система..."
           />
           <br />
-          <Input
-            value={developer1}
-            setValue={setDeveloper1}
+          <TextField
+            sx={{ minWidth: "70%" }}
+            name="developer"
+            label="Розробник"
+            value={postCandidate.developer}
+            onChange={handleStateChange}
             type="text"
-            placeholder="enter developer"
+            placeholder="Розробник ОС..."
           />
           <br />
 
-          <InputLabel id="demo-simple-select-label">Platform</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={platform1}
-            label="Platform"
-            onChange={(e) => setPlatform1(e.target.value)}
-            style={{ minWidth: "70%" }}
-          >
-            <MenuItem value={"windows"}>Windows</MenuItem>
-            <MenuItem value={"macos"}>Mac Os</MenuItem>
-            <MenuItem value={"linux"}>Linux</MenuItem>
-          </Select>
+          <InputLabel sx={{ pb: 1 }}>Платформа</InputLabel>
+          <FormControl>
+            <RadioGroup row name="platform" onChange={handleStateChange}>
+              <FormControlLabel
+                sx={{
+                  minWidth: "150px",
+                  color: "black",
+                  padding: "20px",
+                  borderRadius: "10px",
+                  "& .MuiSvgIcon-root": {
+                    fontSize: 28,
+                  },
+                  border: "1px solid lightgray",
+                }}
+                value="windows"
+                control={<Radio />}
+                label="Windows"
+              />
+              <FormControlLabel
+                sx={{
+                  minWidth: "150px",
+                  color: "black",
+                  padding: "20px",
+                  borderRadius: "10px",
+                  "& .MuiSvgIcon-root": {
+                    fontSize: 28,
+                  },
+                  border: "1px solid lightgray",
+                }}
+                value="linux"
+                control={<Radio />}
+                label="Linux"
+              />
+              <FormControlLabel
+                sx={{
+                  minWidth: "150px",
+                  color: "black",
+                  padding: "20px",
+                  borderRadius: "10px",
+                  "& .MuiSvgIcon-root": {
+                    fontSize: 28,
+                  },
+                  border: "1px solid lightgray",
+                }}
+                value="macos"
+                control={<Radio />}
+                label="Mac OS"
+              />
+            </RadioGroup>
+          </FormControl>
 
           <br />
           <br />
@@ -288,7 +349,10 @@ const CreatePostA = () => {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => addPost(arr)}
+            onClick={(e) => {
+              e.preventDefault();
+              addPost(postCandidate);
+            }}
             style={{ alignSelf: "center" }}
           >
             Add Post
