@@ -8,22 +8,21 @@ const Post = new Schema(
       unique: true,
     },
     severity: {
-      type: String,
+      type: Number,
       required: [true, "Please provide a severity to the post"],
+      min: 0,
+      max: 10,
     },
-
     description: {
       type: String,
       required: [true, "Please provide a description to the post"],
     },
-
     complexity: {
       type: String,
       required: [true, "Please provide levelOfSecurity to the post"],
     },
     fixes: {
       type: String,
-      
     },
     version: {
       type: String,

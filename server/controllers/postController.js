@@ -1,6 +1,7 @@
 const Post = require("../models/Posts");
 const asyncHandler = require("../middleware/asyncHandler");
 const ErrorResponse = require("../utils/errorResponse");
+const User = require("../models/User");
 
 exports.getAllPosts = asyncHandler(async (req, res, next) => {
   //..../api/v1/bootcamps&price[lte]=1000&sort=-price
@@ -49,16 +50,88 @@ exports.createNewPost = asyncHandler(async (req, res, next) => {
     success: true,
     data: post,
   });
+
+  this.handleNotification(res, arr.platform, arr.user, arr.mainId);
 });
+
+exports.handleNotification = async (res, platform, user, postId) => {
+  if (platform == "windows") {
+    const winUsers = await User.where("platform").equals("windows");
+
+    for (user of winUsers) {
+      user.notifications.push({ content: `The new Windows post!`, postId });
+      await user.save();
+    }
+    console.log(winUsers);
+  } else if (platform == "linux") {
+    const linUsers = await User.where("platform").equals("linux");
+
+    for (user of linUsers) {
+      user.notifications.push({ content: `The new Linux post!`, postId });
+      await user.save();
+    }
+
+    console.log(linUsers);
+  } else if (platform == "macos") {
+    const macUsers = await User.where("platform").equals("macos");
+
+    for (user of macUsers) {
+      user.notifications.push({ content: `The new MacOS post!`, postId });
+      await user.save();
+    }
+
+    console.log(macUsers);
+  }
+};
+
+exports.deleteNotification = async (req, res, next) => {
+  const { id, user } = req.body;
+  // const foundUser = await User.findOne();
+
+  const foundUser = await User.findById(user);
+
+  const deleteCandidate = foundUser.notifications.find(
+    (notif) => (notif._id = id)
+  );
+
+  console.log(deleteCandidate);
+
+  if (deleteCandidate) {
+    const candidateIndex = foundUser.notifications.indexOf(deleteCandidate);
+
+    if (candidateIndex > -1) {
+      foundUser.notifications.splice(candidateIndex, 1);
+      foundUser.save();
+
+      res.status(201).json({
+        success: true,
+        data: deleteCandidate,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Notification was not found",
+      });
+    }
+  }
+
+  // for ([key, value] of Object.entries(foundUser.notifications)) {
+  //   console.log(`Key: ${key}, Value: ${value._id}`);
+  //   if (value._id == id) {
+  //     console.log(`This: ${value}`);
+
+  //   }
+  // }
+};
+
 exports.updatePostById = asyncHandler(async (req, res, next) => {
- 
   let post = await Post.findById(req.params.id);
 
   if (!post) {
     return next(new ErrorResponse("post with this id was not found", 404));
   }
 
-  post = await Post.findOneAndUpdate({ _id:req.params.id }, req.body, {
+  post = await Post.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true,
     runValidators: true,
   });
@@ -68,8 +141,9 @@ exports.updatePostById = asyncHandler(async (req, res, next) => {
     data: post,
   });
 });
+
 exports.deletePostById = asyncHandler(async (req, res, next) => {
-  let post = await Post.findOneAndDelete({ _id : req.params._id });
+  let post = await Post.findOneAndDelete({ _id: req.params._id });
 
   if (!post) {
     return next(new ErrorResponse("bootcamp with this id was not found", 404));
